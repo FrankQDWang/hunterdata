@@ -14,9 +14,9 @@ You receive a prompt pointing to:
 - an output JSONL path, usually under `data/runs/<run_id>/agents/results/`
 - a raw read directory, usually under `data/runs/<run_id>/raw/agents/`
 
-For each input job, find a public business email for the exact company if confidently available. If no email is confidently available, find the exact company's public `お問い合わせ` / contact / inquiry form URL. If neither can be confirmed, return `not_found`.
+For each input job, find a public business email for the exact company if confidently available. If no email is confidently available, find the exact company's public `お問い合わせ` / contact / inquiry form URL. If neither can be confirmed, return `not_found`. Also judge whether the company looks like a headhunter/executive-search target.
 
-Input jobs include deterministic context from the earlier pipeline: company name, phone, MHLW license/source URL, prefecture, deterministic static status, any static official URL/form candidate, any static evidence URL/raw path, and a short deterministic summary. Use this as starting evidence, not as a script. You own the final judgment.
+Input jobs include deterministic context from the earlier pipeline: company name, phone, MHLW license/source URL, prefecture, deterministic static status, any static official URL/form candidate, any static evidence URL/raw path, current `hunter_likelihood`, current `hunter_likelihood_reason`, and a short deterministic summary. Use this as starting evidence, not as a script. You own the final judgment.
 
 Rules:
 - Write exactly one JSON object per input job to the requested output JSONL.
@@ -33,6 +33,12 @@ Rules:
 - Record the public source URL where the email/form/company URL was confirmed.
 - Set `source_text_path` to the raw text file created by `scripts.dokobot_local_read`.
 - For Japanese companies, a confirmed `お問い合わせ` form is acceptable when no public email is available.
+- Set `hunter_likelihood` to one of `high`, `medium`, `low`, or `exclude`:
+  - `high`: clear headhunting/executive-search/high-class signal such as `ヘッドハンティング`, `エグゼクティブサーチ`, `Executive Search`, `CxO`, `役員`, `経営幹部`, `管理職`, or `ハイクラス転職`.
+  - `medium`: general recruitment/placement or career-agent signal such as `人材紹介`, `転職支援`, `正社員紹介`, `中途採用`, or `転職エージェント`.
+  - `low`: MHLW license or generic HR evidence only; no clear hunter positioning.
+  - `exclude`: official/public evidence mainly indicates non-headhunter verticals such as nursing/care, childcare, dispatch/temp staffing, specified skilled worker, technical intern, cleaning, driving, security, housekeeper, event serving, or part-time staffing.
+- Write `hunter_likelihood_reason` as one short evidence-based reason, ideally naming the strongest keyword or exclusion signal.
 - Write the result JSON line immediately once you have enough evidence for a valid status. Do not do optional extra reads after a confirmed email/form/site/no-contact decision.
 - Keep the search bounded and judgment-led. Use your own reasoning to choose likely official evidence pages; stop when the best public evidence supports a clear result.
 
@@ -49,6 +55,8 @@ Return schema, one JSON object per line:
   "source_text_path": "raw page text path if saved, or empty string",
   "status": "email_found | contact_form_found | official_site_found_no_contact | not_found | error",
   "confidence": "high | medium | low",
+  "hunter_likelihood": "high | medium | low | exclude",
+  "hunter_likelihood_reason": "short reason based on official/public evidence",
   "notes": "short reason, including why candidates were accepted or rejected"
 }
 ```

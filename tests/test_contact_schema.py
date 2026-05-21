@@ -24,6 +24,8 @@ def make_row(**overrides):
             "company_url": "https://example.com",
             "source_url": "https://example.com/contact",
             "classification": "recruitment_agency",
+            "hunter_likelihood": "medium",
+            "hunter_likelihood_reason": "Official site describes recruitment services.",
             "evidence_keywords": "人材紹介",
             "verification_status": "mhlw_verified",
             "confidence": "high",
@@ -48,6 +50,11 @@ def test_validate_row_rejects_missing_contact_channel():
         validate_row(make_row(email="", phone="", contact_form_url=""))
 
 
+def test_validate_row_rejects_invalid_hunter_likelihood():
+    with pytest.raises(ValidationError, match="hunter_likelihood"):
+        validate_row(make_row(hunter_likelihood="maybe"))
+
+
 def test_write_outputs_preserves_field_order_and_jsonl(tmp_path):
     row = ContactRow(make_row())
     csv_path = tmp_path / "contacts.csv"
@@ -58,7 +65,9 @@ def test_write_outputs_preserves_field_order_and_jsonl(tmp_path):
     with csv_path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         assert reader.fieldnames == FIELDNAMES
-        assert list(reader)[0]["company_name"] == "Sample Recruiting"
+        written = list(reader)[0]
+        assert written["company_name"] == "Sample Recruiting"
+        assert written["hunter_likelihood"] == "medium"
 
     json_rows = [json.loads(line) for line in jsonl_path.read_text(encoding="utf-8").splitlines()]
     assert json_rows[0]["record_id"] == "sample-recruiting-12345678"

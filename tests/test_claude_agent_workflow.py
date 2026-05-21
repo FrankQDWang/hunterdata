@@ -36,6 +36,8 @@ def enriched_row(record_id="sample", email="", status="not_found"):
             "license_type": "有料職業紹介事業",
             "city_or_prefecture": "東京都",
             "classification": "recruitment_agency",
+            "hunter_likelihood": "low",
+            "hunter_likelihood_reason": "MHLW license only.",
             "evidence_keywords": "職業紹介",
             "verification_status": "mhlw_verified",
             "confidence": "high",
@@ -67,6 +69,7 @@ def test_build_agent_jobs_skips_rows_that_already_have_email():
     assert [job.record_id for job in jobs] == ["needs-agent"]
     assert jobs[0].candidate_urls[0]["url"] == "https://sample.co.jp/"
     assert "Conservative static enrichment status" in jobs[0].deterministic_summary
+    assert jobs[0].hunter_likelihood == "low"
 
 
 def test_default_candidate_provider_skips_search_when_limit_is_zero(monkeypatch):
@@ -299,6 +302,8 @@ def test_merge_agent_results_updates_by_record_id_and_preserves_order(tmp_path):
                 "source_text_path": str(raw_file),
                 "status": "email_found",
                 "confidence": "high",
+                "hunter_likelihood": "high",
+                "hunter_likelihood_reason": "Official site says Executive Search.",
                 "notes": "official site",
             },
             ensure_ascii=False,
@@ -318,8 +323,40 @@ def test_merge_agent_results_updates_by_record_id_and_preserves_order(tmp_path):
     assert [row["record_id"] for row in merged] == ["first", "second"]
     assert merged[0]["email"] == ""
     assert merged[1]["email"] == "info@second.co.jp"
+    assert merged[1]["hunter_likelihood"] == "high"
+    assert merged[1]["hunter_likelihood_reason"] == "Official site says Executive Search."
     assert merged[1]["enrichment_status"] == "agent_email_found"
     assert zh_output_csv.exists()
+
+
+def test_merge_agent_results_rejects_invalid_hunter_likelihood(tmp_path):
+    base_csv = tmp_path / "base.csv"
+    result_dir = tmp_path / "results"
+    result_dir.mkdir()
+    write_csv(base_csv, [enriched_row("known")])
+    (result_dir / "agent-results.jsonl").write_text(
+        json.dumps(
+            {
+                "record_id": "known",
+                "status": "not_found",
+                "confidence": "low",
+                "hunter_likelihood": "maybe",
+                "hunter_likelihood_reason": "unclear",
+                "source_text_path": "",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="hunter_likelihood"):
+        merge_agent_results(
+            base_csv=base_csv,
+            result_dir=result_dir,
+            raw_dir=tmp_path / "raw",
+            output_csv=tmp_path / "out.csv",
+            zh_output_csv=tmp_path / "out_zh.csv",
+        )
 
 
 def test_merge_agent_results_rejects_missing_raw_evidence(tmp_path):
@@ -333,6 +370,8 @@ def test_merge_agent_results_rejects_missing_raw_evidence(tmp_path):
                 "record_id": "known",
                 "status": "not_found",
                 "confidence": "low",
+                "hunter_likelihood": "low",
+                "hunter_likelihood_reason": "No official evidence found.",
                 "source_text_path": "",
             }
         )
@@ -356,7 +395,16 @@ def test_merge_agent_results_rejects_unknown_record_id(tmp_path):
     result_dir.mkdir()
     write_csv(base_csv, [enriched_row("known")])
     (result_dir / "agent-results.jsonl").write_text(
-        json.dumps({"record_id": "unknown", "status": "not_found", "confidence": "low"}) + "\n",
+        json.dumps(
+            {
+                "record_id": "unknown",
+                "status": "not_found",
+                "confidence": "low",
+                "hunter_likelihood": "low",
+                "hunter_likelihood_reason": "No official evidence found.",
+            }
+        )
+        + "\n",
         encoding="utf-8",
     )
 

@@ -21,6 +21,7 @@ from scripts.extract_contacts import (
     extract_keywords,
     extract_phones,
 )
+from scripts.enrich_contacts import classify_hunter_likelihood
 from scripts.qa_report import build_report, has_critical_failures
 from scripts.verify_sources import verify_sources
 
@@ -85,6 +86,7 @@ def candidate_to_contact_row(item: dict[str, str], *, line_number: int) -> Conta
         business_text=source_text,
     )
     classification = classify_business([source_text, mhlw_text, association_text])
+    hunter = classify_hunter_likelihood("\n".join([source_text, mhlw_text, association_text]))
     keywords = extract_keywords("\n".join([source_text, mhlw_text, association_text]))
     if _is_mhlw_occupational_placement_page(source_url, verification.license_type):
         classification = "recruitment_agency"
@@ -106,6 +108,8 @@ def candidate_to_contact_row(item: dict[str, str], *, line_number: int) -> Conta
         "city_or_prefecture": item.get("city_or_prefecture", "").strip(),
         "specialization": item.get("specialization", "").strip(),
         "classification": classification,
+        "hunter_likelihood": hunter.likelihood,
+        "hunter_likelihood_reason": hunter.reason,
         "evidence_keywords": ";".join(keywords),
         "verification_status": verification.verification_status,
         "confidence": verification.confidence,

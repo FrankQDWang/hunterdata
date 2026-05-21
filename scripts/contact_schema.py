@@ -25,6 +25,8 @@ FIELDNAMES = [
     "city_or_prefecture",
     "specialization",
     "classification",
+    "hunter_likelihood",
+    "hunter_likelihood_reason",
     "evidence_keywords",
     "verification_status",
     "confidence",
@@ -39,6 +41,7 @@ VALID_VERIFICATION_STATUSES = {
     "needs_manual_review",
 }
 VALID_CONFIDENCES = {"high", "medium", "low"}
+VALID_HUNTER_LIKELIHOODS = {"high", "medium", "low", "exclude"}
 VALID_CLASSIFICATIONS = {
     "executive_search",
     "recruitment_agency",
@@ -118,6 +121,8 @@ def validate_row(row: dict[str, str]) -> None:
         raise ValidationError("confidence is invalid or empty")
     if row["classification"] not in VALID_CLASSIFICATIONS:
         raise ValidationError("classification is invalid or empty")
+    if row["hunter_likelihood"] not in VALID_HUNTER_LIKELIHOODS:
+        raise ValidationError("hunter_likelihood is invalid or empty")
     if not row["source_accessed_at"].strip():
         raise ValidationError("source_accessed_at is required")
 

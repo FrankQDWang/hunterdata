@@ -1,6 +1,7 @@
 import csv
 
 from scripts.enrich_contacts import ENRICHED_FIELDNAMES
+from scripts.mhlw_manifest import ManifestResult
 from scripts.hunter_resume import (
     prepare_next_batch,
     upsert_master_and_export,
@@ -28,6 +29,47 @@ def test_prepare_next_batch_skips_master_records_and_writes_contact_csv(tmp_path
         written = list(csv.DictReader(handle))
     assert written[0]["company_name"] == "Next Co"
     assert written[0]["verification_status"] == "mhlw_verified"
+    assert written[0]["hunter_likelihood"] == "low"
+    assert "MHLW" in written[0]["hunter_likelihood_reason"]
+
+
+def test_prepare_next_batch_can_incrementally_fill_manifest(tmp_path, monkeypatch):
+    manifest = tmp_path / "manifest.csv"
+    manifest_jsonl = tmp_path / "manifest.jsonl"
+    checkpoint = tmp_path / "checkpoint.json"
+    raw_dir = tmp_path / "raw"
+    master = tmp_path / "master.csv"
+    batch = tmp_path / "run" / "batch.csv"
+    _write_manifest(manifest, [{"record_id": "done", "company_name": "Done Co", "phone": "011-000-0000"}])
+    _write_enriched(master, [{"record_id": "done", "company_name": "Done Co", "phone": "011-000-0000"}])
+
+    def fake_append_next_mhlw_records(**kwargs):
+        existing = list(csv.DictReader(manifest.open(newline="", encoding="utf-8")))
+        _write_manifest(
+            kwargs["manifest_csv"],
+            existing
+            + [
+                {"record_id": "next", "company_name": "Next Co", "phone": "011-111-1111"},
+                {"record_id": "later", "company_name": "Later Co", "phone": "011-222-2222"},
+            ][: kwargs["limit"]],
+        )
+        return ManifestResult(kwargs["manifest_csv"], kwargs["manifest_jsonl"], kwargs["checkpoint_path"], 3, 2)
+
+    monkeypatch.setattr("scripts.hunter_resume.append_next_mhlw_records", fake_append_next_mhlw_records)
+
+    rows = prepare_next_batch(
+        manifest_csv=manifest,
+        manifest_jsonl=manifest_jsonl,
+        manifest_checkpoint=checkpoint,
+        mhlw_raw_dir=raw_dir,
+        master_csv=master,
+        batch_csv=batch,
+        limit=2,
+        ensure_mhlw=True,
+        mhlw_sleep_seconds=0,
+    )
+
+    assert [row["record_id"] for row in rows] == ["next", "later"]
 
 
 def test_upsert_master_and_export_updates_existing_and_writes_root_csv(tmp_path):

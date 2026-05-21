@@ -41,6 +41,8 @@ CHINESE_HEADERS = [
     ("city_or_prefecture", "城市或都道府县"),
     ("specialization", "专业领域"),
     ("classification", "业务分类"),
+    ("hunter_likelihood", "猎头匹配度"),
+    ("hunter_likelihood_reason", "猎头匹配理由"),
     ("evidence_keywords", "证据关键词"),
     ("verification_status", "验证状态"),
     ("confidence", "可信度"),
@@ -115,12 +117,62 @@ BROWSER_USER_AGENT = (
 SEARCH_TIMEOUT_SECONDS = 8
 PAGE_TIMEOUT_SECONDS = 10
 
+HIGH_HUNTER_KEYWORDS = [
+    "Executive Search",
+    "executive search",
+    "エグゼクティブサーチ",
+    "ヘッドハンティング",
+    "ヘッドハンター",
+    "CxO",
+    "ＣxＯ",
+    "役員紹介",
+    "経営幹部",
+    "幹部人材",
+    "管理職紹介",
+    "ハイクラス転職",
+]
+
+MEDIUM_HUNTER_KEYWORDS = [
+    "人材紹介",
+    "転職支援",
+    "正社員採用",
+    "正社員紹介",
+    "中途採用",
+    "採用支援",
+    "キャリア支援",
+    "転職エージェント",
+]
+
+EXCLUDE_HUNTER_KEYWORDS = [
+    "介護",
+    "看護",
+    "保育",
+    "家政婦",
+    "配ぜん",
+    "配膳",
+    "技能実習",
+    "特定技能",
+    "派遣スタッフ",
+    "人材派遣",
+    "清掃",
+    "警備",
+    "ドライバー",
+    "運転手",
+    "アルバイト",
+]
+
 
 @dataclass(frozen=True)
 class SearchResult:
     title: str
     url: str
     description: str
+
+
+@dataclass(frozen=True)
+class HunterLikelihood:
+    likelihood: str
+    reason: str
 
 
 @dataclass(frozen=True)
@@ -131,6 +183,8 @@ class EnrichmentResult:
     source_url: str
     source_text_path: str
     status: str
+    hunter_likelihood: str
+    hunter_likelihood_reason: str
 
 
 class LinkParser(HTMLParser):
@@ -455,8 +509,33 @@ def _is_allowed_external_form_host(host: str) -> bool:
     )
 
 
+def classify_hunter_likelihood(text: str) -> HunterLikelihood:
+    normalized = normalize_text(text)
+    if match := _first_keyword(normalized, HIGH_HUNTER_KEYWORDS):
+        return HunterLikelihood("high", f"Official/public evidence contains strong hunter signal: {match}.")
+    if match := _first_keyword(normalized, EXCLUDE_HUNTER_KEYWORDS):
+        return HunterLikelihood("exclude", f"Official/public evidence is mainly non-headhunter vertical: {match}.")
+    if match := _first_keyword(normalized, MEDIUM_HUNTER_KEYWORDS):
+        return HunterLikelihood("medium", f"Official/public evidence describes recruitment/placement service: {match}.")
+    return HunterLikelihood("low", "No explicit headhunter or recruiting-positioning signal found in available official/public evidence.")
+
+
+def _first_keyword(text: str, keywords: list[str]) -> str:
+    haystack = text.casefold()
+    for keyword in keywords:
+        if keyword.casefold() in haystack:
+            return keyword
+    return ""
+
+
 def enrich_row_from_pages(row: dict[str, str], pages: list[tuple[str, Path]]) -> EnrichmentResult:
     first_company_url = pages[0][0] if pages else row.get("company_url", "")
+    evidence_text = "\n".join(path.read_text(encoding="utf-8", errors="replace") for _page_url, path in pages)
+    hunter = classify_hunter_likelihood(evidence_text) if evidence_text else HunterLikelihood(
+        row.get("hunter_likelihood", "low") or "low",
+        row.get("hunter_likelihood_reason", "MHLW license only; no official site evidence evaluated yet.")
+        or "MHLW license only; no official site evidence evaluated yet.",
+    )
     best_form = ""
     best_source = ""
     best_path = ""
@@ -476,6 +555,8 @@ def enrich_row_from_pages(row: dict[str, str], pages: list[tuple[str, Path]]) ->
                 source_url=page_url,
                 source_text_path=str(path),
                 status="email_found",
+                hunter_likelihood=hunter.likelihood,
+                hunter_likelihood_reason=hunter.reason,
             )
     if best_form:
         return EnrichmentResult(
@@ -485,6 +566,8 @@ def enrich_row_from_pages(row: dict[str, str], pages: list[tuple[str, Path]]) ->
             source_url=best_source,
             source_text_path=best_path,
             status="contact_form_found",
+            hunter_likelihood=hunter.likelihood,
+            hunter_likelihood_reason=hunter.reason,
         )
     return EnrichmentResult(
         email="",
@@ -493,6 +576,8 @@ def enrich_row_from_pages(row: dict[str, str], pages: list[tuple[str, Path]]) ->
         source_url=first_company_url,
         source_text_path=str(pages[0][1]) if pages else "",
         status="official_site_found_no_contact" if pages else "not_found",
+        hunter_likelihood=hunter.likelihood,
+        hunter_likelihood_reason=hunter.reason,
     )
 
 
@@ -614,6 +699,8 @@ def static_enrich_row(row: dict[str, str], raw_dir: Path) -> dict[str, str]:
             "email_source_url": result.source_url,
             "email_source_text_path": result.source_text_path,
             "enrichment_status": result.status,
+            "hunter_likelihood": result.hunter_likelihood,
+            "hunter_likelihood_reason": result.hunter_likelihood_reason,
         }
     )
     return updated

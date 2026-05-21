@@ -7,21 +7,66 @@ from typing import Sequence
 
 from scripts.contact_schema import FIELDNAMES
 from scripts.enrich_contacts import ENRICHED_FIELDNAMES, write_chinese_csv, write_enriched_csv
+from scripts.mhlw_manifest import append_next_mhlw_records
 
 
 def prepare_next_batch(
     *,
     manifest_csv: Path = Path("data/manifest/mhlw_manifest.csv"),
+    manifest_jsonl: Path = Path("data/manifest/mhlw_manifest.jsonl"),
+    manifest_checkpoint: Path = Path("data/manifest/checkpoint.json"),
+    mhlw_raw_dir: Path = Path("data/raw/mhlw"),
     master_csv: Path = Path("data/processed/master.csv"),
     batch_csv: Path,
     limit: int = 100,
+    ensure_mhlw: bool = False,
+    mhlw_sleep_seconds: float = 0.1,
 ) -> list[dict[str, str]]:
+    if ensure_mhlw:
+        ensure_manifest_capacity(
+            manifest_csv=manifest_csv,
+            manifest_jsonl=manifest_jsonl,
+            manifest_checkpoint=manifest_checkpoint,
+            mhlw_raw_dir=mhlw_raw_dir,
+            master_csv=master_csv,
+            limit=limit,
+            sleep_seconds=mhlw_sleep_seconds,
+        )
     manifest_rows = _load_csv(manifest_csv)
     completed_ids = _completed_record_ids(master_csv)
     selected = [row for row in manifest_rows if row.get("record_id", "") not in completed_ids][:limit]
     contact_rows = [manifest_to_contact_row(row) for row in selected]
     _write_contact_csv(contact_rows, batch_csv)
     return contact_rows
+
+
+def ensure_manifest_capacity(
+    *,
+    manifest_csv: Path = Path("data/manifest/mhlw_manifest.csv"),
+    manifest_jsonl: Path = Path("data/manifest/mhlw_manifest.jsonl"),
+    manifest_checkpoint: Path = Path("data/manifest/checkpoint.json"),
+    mhlw_raw_dir: Path = Path("data/raw/mhlw"),
+    master_csv: Path = Path("data/processed/master.csv"),
+    limit: int = 100,
+    sleep_seconds: float = 0.1,
+) -> int:
+    while True:
+        unprocessed = _unprocessed_manifest_rows(manifest_csv, master_csv)
+        if len(unprocessed) >= limit:
+            return len(unprocessed)
+        needed = limit - len(unprocessed)
+        before = len(_load_csv(manifest_csv))
+        result = append_next_mhlw_records(
+            manifest_csv=manifest_csv,
+            manifest_jsonl=manifest_jsonl,
+            checkpoint_path=manifest_checkpoint,
+            raw_dir=mhlw_raw_dir,
+            limit=needed,
+            sleep_seconds=sleep_seconds,
+        )
+        after = len(_load_csv(manifest_csv))
+        if result.appended_records == 0 or after <= before:
+            return len(_unprocessed_manifest_rows(manifest_csv, master_csv))
 
 
 def manifest_to_contact_row(row: dict[str, str]) -> dict[str, str]:
@@ -41,6 +86,8 @@ def manifest_to_contact_row(row: dict[str, str]) -> dict[str, str]:
         "city_or_prefecture": row.get("city_or_prefecture", ""),
         "specialization": "全行业",
         "classification": "recruitment_agency",
+        "hunter_likelihood": "low",
+        "hunter_likelihood_reason": "MHLW only proves a paid occupational placement license; headhunter positioning is not confirmed yet.",
         "evidence_keywords": "有料職業紹介事業; 厚生労働省",
         "verification_status": "mhlw_verified",
         "confidence": "high",
@@ -76,6 +123,11 @@ def normalize_enriched_row(row: dict[str, str]) -> dict[str, str]:
     return {field: row.get(field, "") for field in ENRICHED_FIELDNAMES}
 
 
+def _unprocessed_manifest_rows(manifest_csv: Path, master_csv: Path) -> list[dict[str, str]]:
+    completed_ids = _completed_record_ids(master_csv)
+    return [row for row in _load_csv(manifest_csv) if row.get("record_id", "") not in completed_ids]
+
+
 def _completed_record_ids(master_csv: Path) -> set[str]:
     if not master_csv.exists():
         return set()
@@ -103,9 +155,14 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     subparsers = parser.add_subparsers(dest="command", required=True)
     prepare = subparsers.add_parser("prepare-next-batch")
     prepare.add_argument("--manifest-csv", type=Path, default=Path("data/manifest/mhlw_manifest.csv"))
+    prepare.add_argument("--manifest-jsonl", type=Path, default=Path("data/manifest/mhlw_manifest.jsonl"))
+    prepare.add_argument("--manifest-checkpoint", type=Path, default=Path("data/manifest/checkpoint.json"))
+    prepare.add_argument("--mhlw-raw-dir", type=Path, default=Path("data/raw/mhlw"))
     prepare.add_argument("--master-csv", type=Path, default=Path("data/processed/master.csv"))
     prepare.add_argument("--batch-csv", type=Path, required=True)
     prepare.add_argument("--limit", type=int, default=100)
+    prepare.add_argument("--ensure-mhlw", action="store_true")
+    prepare.add_argument("--mhlw-sleep-seconds", type=float, default=0.1)
 
     upsert = subparsers.add_parser("upsert-master")
     upsert.add_argument("--batch-csv", type=Path, required=True)
@@ -120,9 +177,14 @@ def main() -> None:
     if args.command == "prepare-next-batch":
         rows = prepare_next_batch(
             manifest_csv=args.manifest_csv,
+            manifest_jsonl=args.manifest_jsonl,
+            manifest_checkpoint=args.manifest_checkpoint,
+            mhlw_raw_dir=args.mhlw_raw_dir,
             master_csv=args.master_csv,
             batch_csv=args.batch_csv,
             limit=args.limit,
+            ensure_mhlw=args.ensure_mhlw,
+            mhlw_sleep_seconds=args.mhlw_sleep_seconds,
         )
         print(args.batch_csv)
         print(f"rows={len(rows)}")

@@ -3,6 +3,7 @@ import csv
 from scripts.enrich_contacts import (
     CHINESE_HEADERS,
     EnrichmentResult,
+    classify_hunter_likelihood,
     choose_official_result,
     contact_links,
     enrich_row_from_pages,
@@ -120,6 +121,7 @@ def test_enrich_row_from_pages_prefers_email_over_contact_form(tmp_path):
     assert result.email == "recruit@sample-recruit.co.jp"
     assert result.contact_form_url == "https://example.co.jp/contact/"
     assert result.status == "email_found"
+    assert result.hunter_likelihood == "low"
 
 
 def test_enrich_row_from_pages_falls_back_to_contact_form(tmp_path):
@@ -156,6 +158,30 @@ def test_enrich_row_from_pages_filters_placeholder_and_telemetry_emails(tmp_path
 
     assert result.email == ""
     assert result.status == "official_site_found_no_contact"
+
+
+def test_classify_hunter_likelihood_detects_executive_search_and_exclusions():
+    high = classify_hunter_likelihood("エグゼクティブサーチとCxO採用、ヘッドハンティングに特化")
+    exclude = classify_hunter_likelihood("介護 看護 特定技能 技能実習 派遣スタッフを紹介")
+    medium = classify_hunter_likelihood("人材紹介と転職支援、正社員採用を支援")
+    low = classify_hunter_likelihood("会社概要とアクセス")
+
+    assert high.likelihood == "high"
+    assert "エグゼクティブサーチ" in high.reason
+    assert exclude.likelihood == "exclude"
+    assert medium.likelihood == "medium"
+    assert low.likelihood == "low"
+
+
+def test_enrich_row_from_pages_updates_hunter_likelihood_from_official_text(tmp_path):
+    raw_path = tmp_path / "official.html"
+    raw_path.write_text("Executive Search CxO 役員 管理職紹介 info@sample.co.jp", encoding="utf-8")
+    row = {"record_id": "sample", "company_name": "Sample", "email": "", "contact_form_url": ""}
+
+    result = enrich_row_from_pages(row, [("https://sample.co.jp/", raw_path)])
+
+    assert result.hunter_likelihood == "high"
+    assert "Executive Search" in result.hunter_likelihood_reason
 
 
 def test_contact_links_ignores_non_http_api_and_external_non_form_provider_urls():
@@ -199,6 +225,8 @@ def test_write_chinese_csv_uses_chinese_headers(tmp_path):
             "license_type": "有料職業紹介事業",
             "city_or_prefecture": "東京都",
             "classification": "recruitment_agency",
+            "hunter_likelihood": "medium",
+            "hunter_likelihood_reason": "Official site describes recruitment services.",
             "verification_status": "mhlw_verified",
             "confidence": "high",
             "source_accessed_at": "2026-05-21T11:00:00+08:00",
@@ -213,4 +241,6 @@ def test_write_chinese_csv_uses_chinese_headers(tmp_path):
     with output.open(newline="", encoding="utf-8-sig") as handle:
         reader = csv.DictReader(handle)
         assert reader.fieldnames == [header for _field, header in CHINESE_HEADERS]
-        assert list(reader)[0]["公司名称"] == "Sample"
+        written = list(reader)[0]
+        assert written["公司名称"] == "Sample"
+        assert written["猎头匹配度"] == "medium"

@@ -5,12 +5,13 @@ This repository builds a local, source-traceable dataset of Japan recruitment/he
 ## Main Output
 
 - `hunter_contacts.csv`: human-facing final CSV with Chinese headers.
+  - Includes `猎头匹配度` (`high`, `medium`, `low`, `exclude`) and `猎头匹配理由`.
 
 ## Machine Outputs
 
-- `data/manifest/mhlw_manifest.csv`: full MHLW manifest baseline.
-- `data/manifest/mhlw_manifest.jsonl`: machine-readable manifest.
-- `data/manifest/checkpoint.json`: manifest refresh checkpoint/status.
+- `data/manifest/mhlw_manifest.csv`: incremental MHLW official row cache discovered so far.
+- `data/manifest/mhlw_manifest.jsonl`: machine-readable manifest cache.
+- `data/manifest/checkpoint.json`: incremental MHLW crawl cursor/status.
 - `data/processed/master.csv`: canonical machine-readable enriched master.
 - `data/processed/master_zh.csv`: canonical enriched master with Chinese headers.
 - `data/runs/<run_id>/`: per-run batch, logs, static enrichment, agent prompts/results, raw evidence, and QA report.
@@ -38,6 +39,7 @@ uv run python --version
 
 MHLW `人材サービス総合サイト` is the primary business verification source.
 Company websites are the preferred source for email, phone, and contact form URLs.
+MHLW proves occupational-placement licensing, but does not by itself prove a company is a headhunter. The pipeline keeps all official rows and classifies `hunter_likelihood` from official/public business evidence.
 
 Do not collect private social profiles, login-only data, paid database data, inferred email patterns, or personal non-business contact details.
 
@@ -49,27 +51,22 @@ Open Claude Code from the repository root:
 claude
 ```
 
-First refresh the full official manifest:
-
-```text
-/hunter-manifest-refresh
-```
-
-Then process the next unprocessed batch of 100 rows:
+Process the next unprocessed batch of 100 rows:
 
 ```text
 /hunter-contact-backfill
 ```
 
-Run `/hunter-contact-backfill` again on the next day/session to continue from the next unprocessed manifest rows. Completed rows are determined by `record_id` values already present in `data/processed/master.csv`; new batches are upserted by `record_id`, not appended blindly. The default batch size is 100, and the final remaining batch may be smaller.
+Run `/hunter-contact-backfill` again on the next day/session to continue. The command first ensures the local MHLW cache has 100 unprocessed official rows, then processes those rows. Completed rows are determined by `record_id` values already present in `data/processed/master.csv`; new batches are upserted by `record_id`, not appended blindly. The default batch size is 100, and the final remaining batch may be smaller.
 
 ## Pipeline
 
 ```mermaid
 flowchart TD
-    A["/hunter-manifest-refresh"] --> B["data/manifest/mhlw_manifest.csv"]
-    B --> C["/hunter-contact-backfill"]
+    A["/hunter-contact-backfill"] --> B{"100 unprocessed MHLW rows cached?"}
+    B -- "No" --> C["Incrementally crawl official MHLW search/detail pages"]
     C --> D["Prepare next 100 unprocessed rows"]
+    B -- "Yes" --> D
     D --> E["Deterministic static email/form enrichment"]
     E --> F{"Email or form found?"}
     F -- "Yes" --> H["Batch final merge"]
@@ -87,15 +84,20 @@ Manifest smoke:
 uv run python -m scripts.mhlw_manifest --limit 5 --sleep-seconds 0
 ```
 
-Prepare a small resumable batch from an existing manifest:
+Prepare a small resumable batch, fetching official MHLW rows if needed:
 
 ```bash
 mkdir -p data/runs/smoke
 uv run python -m scripts.hunter_resume prepare-next-batch \
+  --ensure-mhlw \
   --manifest-csv data/manifest/mhlw_manifest.csv \
+  --manifest-jsonl data/manifest/mhlw_manifest.jsonl \
+  --manifest-checkpoint data/manifest/checkpoint.json \
+  --mhlw-raw-dir data/raw/mhlw \
   --master-csv data/processed/master.csv \
   --batch-csv data/runs/smoke/batch.csv \
-  --limit 5
+  --limit 5 \
+  --mhlw-sleep-seconds 0
 ```
 
 Run tests:
@@ -107,6 +109,8 @@ uv run python -m pytest -q
 ## Claude Agent Backfill Notes
 
 The `/hunter-contact-backfill` command is the main orchestrator prompt. It runs deterministic Python stages, dispatches native `hunter-contact-enricher` subagents, monitors raw Dokobot evidence, and runs the strict merge. It does not use `claude -p`, and Python is not responsible for managing Claude subagents.
+
+The subagent result JSONL must include `hunter_likelihood` and `hunter_likelihood_reason` for each row. Static enrichment sets a conservative value first; the subagent may update it using official/public evidence.
 
 The subagent must use:
 

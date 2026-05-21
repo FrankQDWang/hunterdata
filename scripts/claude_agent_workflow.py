@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Callable, Literal, Sequence
 from urllib.parse import urlparse
 
+from scripts.contact_schema import VALID_HUNTER_LIKELIHOODS
 from scripts.enrich_contacts import (
     ENRICHED_FIELDNAMES,
     SearchResult,
@@ -60,6 +61,8 @@ class AgentJob:
     license_number: str
     license_type: str
     city_or_prefecture: str
+    hunter_likelihood: str
+    hunter_likelihood_reason: str
     static_status: str
     static_source_url: str
     static_source_text_path: str
@@ -146,6 +149,8 @@ def build_agent_jobs(
                 license_number=normalized["license_number"],
                 license_type=normalized["license_type"],
                 city_or_prefecture=normalized["city_or_prefecture"],
+                hunter_likelihood=normalized["hunter_likelihood"],
+                hunter_likelihood_reason=normalized["hunter_likelihood_reason"],
                 static_status=normalized["enrichment_status"],
                 static_source_url=normalized["email_source_url"],
                 static_source_text_path=normalized["email_source_text_path"],
@@ -170,6 +175,10 @@ def build_deterministic_summary(row: dict[str, str]) -> str:
         parts.append(f"Static evidence URL: {row['email_source_url']}.")
     if row.get("email_source_text_path"):
         parts.append(f"Static evidence raw path: {row['email_source_text_path']}.")
+    if row.get("hunter_likelihood"):
+        parts.append(
+            f"Hunter likelihood: {row['hunter_likelihood']} ({row.get('hunter_likelihood_reason', '').strip()})."
+        )
     if status == "not_found":
         parts.append("Static stage did not confidently confirm an official email, form, or site.")
     elif status == "official_site_found_no_contact":
@@ -272,7 +281,7 @@ Output JSONL:
 Raw Dokobot evidence directory:
 `{raw_dir}/{batch_id}/`
 
-Read the input JSONL, use its deterministic context as starting evidence, find the exact company's public business email or inquiry/contact form, and write exactly one JSON object per input job to the output JSONL.
+Read the input JSONL, use its deterministic context as starting evidence, find the exact company's public business email or inquiry/contact form, judge `hunter_likelihood`, and write exactly one JSON object per input job to the output JSONL.
 """
 
 
@@ -286,6 +295,9 @@ def validate_agent_result(result: dict[str, Any], known_record_ids: set[str]) ->
     confidence = str(result.get("confidence", "")).strip() or "low"
     if confidence not in CONFIDENCE_VALUES:
         raise ValueError(f"agent result for {record_id} has invalid confidence: {confidence}")
+    hunter_likelihood = str(result.get("hunter_likelihood", "")).strip()
+    if hunter_likelihood not in VALID_HUNTER_LIKELIHOODS:
+        raise ValueError(f"agent result for {record_id} has invalid hunter_likelihood: {hunter_likelihood}")
 
     email = str(result.get("email", "")).strip().lower()
     if email and extract_emails(email) != [email]:
@@ -301,6 +313,8 @@ def validate_agent_result(result: dict[str, Any], known_record_ids: set[str]) ->
         "source_text_path": str(result.get("source_text_path", "")).strip(),
         "status": status,
         "confidence": confidence,
+        "hunter_likelihood": hunter_likelihood,
+        "hunter_likelihood_reason": str(result.get("hunter_likelihood_reason", "")).strip(),
         "notes": str(result.get("notes", "")).strip(),
     }
     for field in ("contact_form_url", "company_url", "source_url"):
@@ -481,6 +495,8 @@ def merge_agent_results(
             if result["source_url"]:
                 row["email_source_url"] = result["source_url"]
                 row["email_source_text_path"] = result["source_text_path"]
+            row["hunter_likelihood"] = result["hunter_likelihood"]
+            row["hunter_likelihood_reason"] = result["hunter_likelihood_reason"]
             row["enrichment_status"] = f"agent_{result['status']}"
             agent_note = f"Agent contact enrichment: {result['notes']}".strip()
             row["notes"] = "; ".join(part for part in (row.get("notes", ""), agent_note) if part)

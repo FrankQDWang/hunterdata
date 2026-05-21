@@ -15,6 +15,8 @@ def make_row(**overrides):
             "verification_status": "mhlw_verified",
             "confidence": "high",
             "classification": "recruitment_agency",
+            "hunter_likelihood": "medium",
+            "hunter_likelihood_reason": "Official site describes recruitment services.",
             "source_accessed_at": "2026-05-21T11:00:00+08:00",
         }
     )
