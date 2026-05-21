@@ -1,0 +1,2830 @@
+
+<!DOCTYPE html>
+
+
+
+
+
+
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta name="format-detection" content="telephone=no">
+<title>人材サービス総合サイト - 職業紹介事業所検索・一覧</title>
+<script type="text/javascript" src="jsp/js/common.js"></script>
+
+<link rel="shortcut icon" href="favicon.ico" />
+<link href="jsp/css/import_sec.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="jsp/js/jquery.js"></script>
+<script type="text/javascript" src="jsp/js/j_cookie.js"></script>
+<script type="text/javascript" src="jsp/js/changeFontSize.js"></script>
+<script type="text/javascript" src="jsp/js/postAction.js"></script>
+<script type="text/javascript" src="jsp/js/scroll.js"></script>
+<script type="text/javascript" src="jsp/js/onload.js"></script>
+<script type="text/javascript" src="jsp/js/GICB102030.js"></script>
+<script type="text/javascript" src="jsp/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="jsp/css/dynamic.css" media="all">
+</head>
+
+<body onload="init();">
+<div id="container">
+<div id="inner">
+
+<form name="multiForm1" id="ID_multiForm1" method="post" action="GICB102030.do">
+<input type="text" style="position:absolute;visibility:hidden" disabled />
+
+<input type="hidden" id="ID_params" name="params" value="none">
+
+<input type="hidden" id="ID_hfCond" name="hfCond" value="/lXNxUcqtH3kqcBy7CyTCrXSPtqvb62b4JCHnCJJRJE=">
+
+<input type="hidden" id="ID_curPage" name="curPage" value="3">
+
+<input type="hidden" id="ID_hfSortKey" name="hfSortKey" value="KEYSHUSHOKUSHA1YUKI3">
+
+<input type="hidden" id="ID_hfSortOrder" name="hfSortOrder" value="ASC">
+
+<input type="hidden" id="ID_hfSortOrderRev" name="hfSortOrderRev" value="DESC">
+
+<div>
+</div>
+        
+        <div id="container2">
+            
+            <div id="header">
+
+
+                <h1><a href="./GICB101010.do?action=initDisp&screenId=GICB101010"><img src="jsp/img/icon/logo.gif" alt="人材サービス総合サイト" style="border: none;" /></a></h1>
+
+				
+                <div id="header_area">
+                  <ul id="head_menu">
+                    <li><a href="./GICB101010.do?action=initDisp&screenId=GICB101010" class="head_menu-01">HOME</a></li>
+                    <li><a href="/icb_data/StaticContents/GICB190040.html" class="head_menu-02">お問い合わせ先</a></li>
+                    <li><a href="./GICB101010.do?action=initDisp&screenId=GICB190050" class="head_menu-03">サイトマップ</a></li>
+                  </ul>
+                <div id="font_size">
+                    <div class="f_left"><img src="jsp/img/icon/font_size.gif" alt="文字の大きさ" width="79" height="16" /></div>
+	                    <div id="fontswitch">
+		                     <ul>
+		                       <li><a href="javascript:void(0)" id="small" name="small">小</a></li>
+		                       <li><a href="javascript:void(0)" id="mid" name="mid">中</a></li>
+		                       <li><a href="javascript:void(0)" id="big" name="big">大</a></li>
+		                     </ul>
+	                    </div>
+                    </div>
+                </div>
+                
+
+
+
+    <ul id="navi">
+        <li><a href="javascript:doPostAction('transition','0')" id="id_gnavi_01" class="gnavi-01">労働者派遣事業検索</a></li>
+        <li><a href="javascript:doPostAction('transition','1')" id="id_gnavi_02" class="gnavi-02_menu_on">職業紹介事業検索</a></li>
+        <li><a href="javascript:doPostAction('transition','8')" id="id_gnavi_03" class="gnavi-03">特定募集情報等提供事業</a></li>
+        <li><a href="javascript:doPostAction('transition','2')" id="id_gnavi_04" class="gnavi-04">掲載の申込事業共通</a></li>
+        <li><a href="javascript:doPostAction('transition','3')" id="id_gnavi_05" class="gnavi-05">掲載の申込職業紹介事業</a></li>
+        <li><a href="javascript:doPostAction('transition','9')" id="id_gnavi_06" class="gnavi-06">掲載の申込特定募集情報等提供事業</a></li>
+        <li><a href="javascript:doPostAction('transition','4')" id="id_gnavi_07" class="gnavi-07">最新情報一覧</a></li>
+        <li><a href="javascript:doPostAction('transition','5')" id="id_gnavi_08" class="gnavi-08">派遣事業制度等</a></li>
+        <li><a href="javascript:doPostAction('transition','6')" id="id_gnavi_09" class="gnavi-09">求人情報</a></li>
+        <li><a href="javascript:doPostAction('transition','7')" id="id_gnavi_10" class="gnavi-10">アンケート</a></li>
+    </ul>
+
+            </div>
+    
+    <div id="siteMap"><div class="siteMap_pad"><span><span><a href="GICB101010.do?action=initDisp&screenId=GICB101010" style="color:#F65004;">HOME</a></span><span>&nbsp;<img src="jsp/img/icon/list.gif" align="absmiddle" style="border-width:0px;" />&nbsp;</span>職業紹介事業</span></div></div>
+            
+            <div id="main">
+    <h2 id="h2_area">&nbsp;&nbsp;&nbsp;許可・届出事業所の検索<img src="jsp/img/title/h2_XX.gif" alt="" width="1310" ></h2>
+  
+  <div id="search_area">
+    <div class="button4">
+      <a id="id_HlHelpPage" href="../icb_data/StaticContents/GICB190030.html?screenId=GICB102030" target="_blank"><img src="jsp/img/button/kensaku_guide.gif" style="border-width:0px;"/></a>
+    </div>
+	<div class="showFAQ">
+		<a id="ID_basicCondFAQ" name="basicCondFAQ" href="../icb_data/StaticContents/img/images/help04.png" target="_blank">
+			検索方法はこちら
+		</a>
+	</div>
+    <h3 id="h3_area">&nbsp;&nbsp;&nbsp;職業紹介事業<img src="jsp/img/title/h3_XX.gif" alt="" width="1263" ></h3>
+    <h4 class="clear"><img src="jsp/img/icon/glass_icon.gif" alt="" width="15" height="15">&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="h4_area">都道府県</span>&nbsp;&nbsp;<span id="h4_sho_area">※必須入力です</span><img src="jsp/img/title/h4_XX.gif" alt="" width="1270"/></h4>
+    <ul class="m_top">
+      <li>
+        <table cellpadding="1" cellspacing="1" id="searchKen" >
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title1" rowspan="8">
+              <input type="checkbox" id="ID_cbZenkoku1" name="cbZenkoku" checked onclick="checkZenkoku();" value="1"><label id="ID_LcbZenkoku1" for="ID_cbZenkoku1">全国</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbHokkaido_Tohoku1" name="cbHokkaido_Tohoku" onclick="checkTohoku();" value="1"><label id="ID_LcbHokkaido_Tohoku1" for="ID_cbHokkaido_Tohoku1">北海道／東北</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbHokkaido1" name="cbHokkaido" onclick="checkTiiki1();" value="1"><label id="ID_LcbHokkaido1" for="ID_cbHokkaido1">北海道</label>
+              <input type="checkbox" id="ID_cbAomori1" name="cbAomori" onclick="checkTiiki1();" value="1"><label id="ID_LcbAomori1" for="ID_cbAomori1">青森</label>
+              <input type="checkbox" id="ID_cbIwate1" name="cbIwate" onclick="checkTiiki1();" value="1"><label id="ID_LcbIwate1" for="ID_cbIwate1">岩手</label>
+              <input type="checkbox" id="ID_cbMiyagi1" name="cbMiyagi" onclick="checkTiiki1();" value="1"><label id="ID_LcbMiyagi1" for="ID_cbMiyagi1">宮城</label>
+              <input type="checkbox" id="ID_cbAkita1" name="cbAkita" onclick="checkTiiki1();" value="1"><label id="ID_LcbAkita1" for="ID_cbAkita1">秋田</label>
+              <input type="checkbox" id="ID_cbYamagata1" name="cbYamagata" onclick="checkTiiki1();" value="1"><label id="ID_LcbYamagata1" for="ID_cbYamagata1">山形</label>
+              <input type="checkbox" id="ID_cbFukushima1" name="cbFukushima" onclick="checkTiiki1();" value="1"><label id="ID_LcbFukushima1" for="ID_cbFukushima1">福島</label>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbKanto1" name="cbKanto" onclick="checkKanto();" value="1"><label id="ID_LcbKanto1" for="ID_cbKanto1">関東</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbIbaragi1" name="cbIbaragi" onclick="checkTiiki2();" value="1"><label id="ID_LcbIbaragi1" for="ID_cbIbaragi1">茨城</label>
+              <input type="checkbox" id="ID_cbTochigi1" name="cbTochigi" onclick="checkTiiki2();" value="1"><label id="ID_LcbTochigi1" for="ID_cbTochigi1">栃木</label>
+              <input type="checkbox" id="ID_cbGunma1" name="cbGunma" onclick="checkTiiki2();" value="1"><label id="ID_LcbGunma1" for="ID_cbGunma1">群馬</label>
+              <input type="checkbox" id="ID_cbSaitama1" name="cbSaitama" onclick="checkTiiki2();" value="1"><label id="ID_LcbSaitama1" for="ID_cbSaitama1">埼玉</label>
+              <input type="checkbox" id="ID_cbChiba1" name="cbChiba" onclick="checkTiiki2();" value="1"><label id="ID_LcbChiba1" for="ID_cbChiba1">千葉</label>
+              <input type="checkbox" id="ID_cbTokyo1" name="cbTokyo" onclick="checkTiiki2();" value="1"><label id="ID_LcbTokyo1" for="ID_cbTokyo1">東京</label>
+              <input type="checkbox" id="ID_cbKanagawa1" name="cbKanagawa" onclick="checkTiiki2();" value="1"><label id="ID_LcbKanagawa1" for="ID_cbKanagawa1">神奈川</label>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbKoshinetsu_Hokuriku1" name="cbKoshinetsu_Hokuriku" onclick="checkHokuriku();" value="1"><label id="ID_LcbKoshinetsu_Hokuriku1" for="ID_cbKoshinetsu_Hokuriku1">甲信越／北陸</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbNigata1" name="cbNigata" onclick="checkTiiki3();" value="1"><label id="ID_LcbNigata1" for="ID_cbNigata1">新潟</label>
+              <input type="checkbox" id="ID_cbToyama1" name="cbToyama" onclick="checkTiiki3();" value="1"><label id="ID_LcbToyama1" for="ID_cbToyama1">富山</label>
+              <input type="checkbox" id="ID_cbIshikawa1" name="cbIshikawa" onclick="checkTiiki3();" value="1"><label id="ID_LcbIshikawa1" for="ID_cbIshikawa1">石川</label>
+              <input type="checkbox" id="ID_cbFukui1" name="cbFukui" onclick="checkTiiki3();" value="1"><label id="ID_LcbFukui1" for="ID_cbFukui1">福井</label>
+              <input type="checkbox" id="ID_cbYamanashi1" name="cbYamanashi" onclick="checkTiiki3();" value="1"><label id="ID_LcbYamanashi1" for="ID_cbYamanashi1">山梨</label>
+              <input type="checkbox" id="ID_cbNagano1" name="cbNagano" onclick="checkTiiki3();" value="1"><label id="ID_LcbNagano1" for="ID_cbNagano1">長野</label>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbTokai1" name="cbTokai" onclick="checkTokai();" value="1"><label id="ID_LcbTokai1" for="ID_cbTokai1">東海</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbGifu1" name="cbGifu" onclick="checkTiiki4();" value="1"><label id="ID_LcbGifu1" for="ID_cbGifu1">岐阜</label>
+              <input type="checkbox" id="ID_cbShizuoka1" name="cbShizuoka" onclick="checkTiiki4();" value="1"><label id="ID_LcbShizuoka1" for="ID_cbShizuoka1">静岡</label>
+              <input type="checkbox" id="ID_cbAichi1" name="cbAichi" onclick="checkTiiki4();" value="1"><label id="ID_LcbAichi1" for="ID_cbAichi1">愛知</label>
+              <input type="checkbox" id="ID_cbMie1" name="cbMie" onclick="checkTiiki4();" value="1"><label id="ID_LcbMie1" for="ID_cbMie1">三重</label>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbKinki1" name="cbKinki" onclick="checkKinki();" value="1"><label id="ID_LcbKinki1" for="ID_cbKinki1">近畿</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbShiga1" name="cbShiga" onclick="checkTiiki5();" value="1"><label id="ID_LcbShiga1" for="ID_cbShiga1">滋賀</label>
+              <input type="checkbox" id="ID_cbKyoto1" name="cbKyoto" onclick="checkTiiki5();" value="1"><label id="ID_LcbKyoto1" for="ID_cbKyoto1">京都</label>
+              <input type="checkbox" id="ID_cbOsaka1" name="cbOsaka" onclick="checkTiiki5();" value="1"><label id="ID_LcbOsaka1" for="ID_cbOsaka1">大阪</label>
+              <input type="checkbox" id="ID_cbHyogo1" name="cbHyogo" onclick="checkTiiki5();" value="1"><label id="ID_LcbHyogo1" for="ID_cbHyogo1">兵庫</label>
+              <input type="checkbox" id="ID_cbNara1" name="cbNara" onclick="checkTiiki5();" value="1"><label id="ID_LcbNara1" for="ID_cbNara1">奈良</label>
+              <input type="checkbox" id="ID_cbWakayama1" name="cbWakayama" onclick="checkTiiki5();" value="1"><label id="ID_LcbWakayama1" for="ID_cbWakayama1">和歌山</label>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbChugoku1" name="cbChugoku" onclick="checkChugoku();" value="1"><label id="ID_LcbChugoku1" for="ID_cbChugoku1">中国</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbTottori1" name="cbTottori" onclick="checkTiiki6();" value="1"><label id="ID_LcbTottori1" for="ID_cbTottori1">鳥取</label>
+              <input type="checkbox" id="ID_cbShimane1" name="cbShimane" onclick="checkTiiki6();" value="1"><label id="ID_LcbShimane1" for="ID_cbShimane1">島根</label>
+              <input type="checkbox" id="ID_cbOkayama1" name="cbOkayama" onclick="checkTiiki6();" value="1"><label id="ID_LcbOkayama1" for="ID_cbOkayama1">岡山</label>
+              <input type="checkbox" id="ID_cbHiroshima1" name="cbHiroshima" onclick="checkTiiki6();" value="1"><label id="ID_LcbHiroshima1" for="ID_cbHiroshima1">広島</label>
+              <input type="checkbox" id="ID_cbYamaguchi1" name="cbYamaguchi" onclick="checkTiiki6();" value="1"><label id="ID_LcbYamaguchi1" for="ID_cbYamaguchi1">山口</label>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbShikoku1" name="cbShikoku" onclick="checkShikoku();" value="1"><label id="ID_LcbShikoku1" for="ID_cbShikoku1">四国</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbTokushima1" name="cbTokushima" onclick="checkTiiki7();" value="1"><label id="ID_LcbTokushima1" for="ID_cbTokushima1">徳島</label>
+              <input type="checkbox" id="ID_cbKagawa1" name="cbKagawa" onclick="checkTiiki7();" value="1"><label id="ID_LcbKagawa1" for="ID_cbKagawa1">香川</label>
+              <input type="checkbox" id="ID_cbEhime1" name="cbEhime" onclick="checkTiiki7();" value="1"><label id="ID_LcbEhime1" for="ID_cbEhime1">愛媛</label>
+              <input type="checkbox" id="ID_cbKochi1" name="cbKochi" onclick="checkTiiki7();" value="1"><label id="ID_LcbKochi1" for="ID_cbKochi1">高知</label>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle" class="searchKen_title2">
+              <input type="checkbox" id="ID_cbKyushu_Okinawa1" name="cbKyushu_Okinawa" onclick="checkKyushu();" value="1"><label id="ID_LcbKyushu_Okinawa1" for="ID_cbKyushu_Okinawa1">九州／沖縄</label>
+            </td>
+            <td align="center" valign="middle" class="searchKen_data">
+              <input type="checkbox" id="ID_cbFukuoka1" name="cbFukuoka" onclick="checkTiiki8();" value="1"><label id="ID_LcbFukuoka1" for="ID_cbFukuoka1">福岡</label>
+              <input type="checkbox" id="ID_cbSaga1" name="cbSaga" onclick="checkTiiki8();" value="1"><label id="ID_LcbSaga1" for="ID_cbSaga1">佐賀</label>
+              <input type="checkbox" id="ID_cbNagasaki1" name="cbNagasaki" onclick="checkTiiki8();" value="1"><label id="ID_LcbNagasaki1" for="ID_cbNagasaki1">長崎</label>
+              <input type="checkbox" id="ID_cbKumamoto1" name="cbKumamoto" onclick="checkTiiki8();" value="1"><label id="ID_LcbKumamoto1" for="ID_cbKumamoto1">熊本</label>
+              <input type="checkbox" id="ID_cbOita1" name="cbOita" onclick="checkTiiki8();" value="1"><label id="ID_LcbOita1" for="ID_cbOita1">大分</label>
+              <input type="checkbox" id="ID_cbMiyazaki1" name="cbMiyazaki" onclick="checkTiiki8();" value="1"><label id="ID_LcbMiyazaki1" for="ID_cbMiyazaki1">宮崎</label>
+              <input type="checkbox" id="ID_cbKagoshima1" name="cbKagoshima" onclick="checkTiiki8();" value="1"><label id="ID_LcbKagoshima1" for="ID_cbKagoshima1">鹿児島</label>
+              <input type="checkbox" id="ID_cbOkinawa1" name="cbOkinawa" onclick="checkTiiki8();" value="1"><label id="ID_LcbOkinawa1" for="ID_cbOkinawa1">沖縄</label>
+            </td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+
+    <h4 class="clear"><img src="jsp/img/icon/glass_icon.gif" alt="" width="15" height="15">&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="h4_area">許可・届出受理番号</span><img src="jsp/img/title/h4_XX.gif" alt="" width="1270"/></h4>
+    <ul class="m_top">
+      <li>
+        <table border="0" cellspacing="0">
+        <tr>
+          <td>2桁</td><td></td><td></td><td></td><td>6桁</td>
+        </tr>
+        <tr>
+          <td><input type="text" id="ID_txtKyokatodokedeNo1" name="txtKyokatodokedeNo1" class="inputCtrl_ds" maxlength=2 value=""></td>
+          <td>-</td>
+          <td>
+            <select id="ID_ucKyokatodokedeNo2" name="ucKyokatodokedeNo2">
+<option value="" selected></option>
+<option value="1">ユ</option>
+<option value="2">ム</option>
+<option value="3">特</option>
+<option value="4">地</option>
+
+</select>
+          </td>
+          <td>-</td>
+          <td><input type="text" id="ID_txtKyokatodokedeNo3" name="txtKyokatodokedeNo3" class="inputCtrl_ds" maxlength=6 value=""></td>
+        </tr>
+        <tr>
+          <td colspan="5">※必ず2桁－6桁を半角入力して下さい（例：01-ユ-000001）</td>
+        </tr>
+        </table>
+      </li>
+    </ul>
+
+    <h4 class="clear"><img src="jsp/img/icon/glass_icon.gif" alt="" width="15" height="15">&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="h4_area">事業主名称（本社など）</span><img src="jsp/img/title/h4_XX.gif" alt="" width="1270"/></h4>
+    <ul class="m_top">
+      <li>
+        <table border="0" cellspacing="0">
+          <tr>
+            <td><input type="text" id="ID_txtJigyonushiName" name="txtJigyonushiName" class="inputCtrl_ac" maxlength=128 value=""></td>
+            <td><input type="checkbox" id="ID_cbJigyonushiName1" name="cbJigyonushiName" checked value="1"><label id="ID_LcbJigyonushiName1" for="ID_cbJigyonushiName1">部分一致</label></td>
+          </tr>
+          <tr>
+            <td colspan="2">例：株式会社&nbsp;○○&nbsp;→&nbsp;○○のみでの検索も可能です。</td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+
+    <h4 class="clear"><img src="jsp/img/icon/glass_icon.gif" alt="" width="15" height="15">&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="h4_area">事業所名称（支店など）</span><img src="jsp/img/title/h4_XX.gif" alt="" width="1270"/></h4>
+    <ul class="m_top">
+      <li>
+        <table border="0" cellspacing="0">
+          <tr>
+            <td><input type="text" id="ID_txtJigyoshoName" name="txtJigyoshoName" class="inputCtrl_ac" maxlength=128 value=""></td>
+            <td><input type="checkbox" id="ID_cbJigyoshoName1" name="cbJigyoshoName" checked value="1"><label id="ID_LcbJigyoshoName1" for="ID_cbJigyoshoName1">部分一致</label></td>
+          </tr>
+          <tr>
+            <td colspan="2">例：株式会社&nbsp;○○&nbsp;→&nbsp;○○のみでの検索も可能です。</td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+
+    <h4 style="margin:2em 0 0.2em 1.0em;">【事業主名称及び事業所名称を検索する際の留意点】</h4>
+    <ul class="m_top">
+      <li type="disc">登録されている文字等（漢字、ひらがな、カタカナ、アルファベット、大文字、小文字、全角、半角）と異なる文字等が入力されると検索ができません。</li>
+      <li type="disc">検索結果に表示されない場合は、以下の例を参考に文字等を変えて再度の検索をお願いいたします。なお、部分一致の検索は可能です。
+        <table border="0" cellspacing="0">
+          <tr><td>（例：登録情報が「Kourousyou」の場合）</td></tr>
+          <tr><td>×「kourousyou」（最初を小文字で入力）</td></tr>
+          <tr><td>×「Ｋｏｕｒｏｕｓｙｏｕ」（全角で入力）</td></tr>
+          <tr><td>×「厚労省」（漢字で入力）</td></tr>
+          <tr><td>○「Kourou」（部分一致）</td></tr>
+        </table>
+      </li>
+      <li type="disc"><a href="../icb_data/StaticContents/検索可能文字.pdf" target="_blank">検索可能文字リスト</a>に無い文字で検索することはできません。検索可能文字に置き換えて検索するか、当該リストに無い文字を除いて入力し、部分一致による再度の検索をお願いいたします。</li>
+    </ul>
+
+    <h4 class="clear"><img src="jsp/img/icon/glass_icon.gif" alt="" width="15" height="15">&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="h4_area">区分</span><img src="jsp/img/title/h4_XX.gif" alt="" width="1270"/></h4>
+    <ul class="m_top">
+      <li>
+        <input type="checkbox" id="ID_cbJigyoshoKbnYu1" name="cbJigyoshoKbnYu" checked value="1"><label id="ID_LcbJigyoshoKbnYu1" for="ID_cbJigyoshoKbnYu1">有料職業紹介事業</label>
+      </li>
+      <li>
+        <input type="checkbox" id="ID_cbJigyoshoKbnMu1" name="cbJigyoshoKbnMu" value="1"><label id="ID_LcbJigyoshoKbnMu1" for="ID_cbJigyoshoKbnMu1">無料職業紹介事業</label>
+      </li>
+    </ul>
+    <h4 class="clear"><img src="jsp/img/icon/glass_icon.gif" alt="" width="15" height="15">&nbsp;&nbsp;&nbsp;&nbsp;
+        <span id="h4_area">優良事業者</span><img src="jsp/img/title/h4_XX.gif" alt="" width="1270"/></h4>
+    <ul class="m_top">
+      <li>
+        <input type="checkbox" id="ID_cbJigyoshoKbnYur1" name="cbJigyoshoKbnYur" value="1"><label id="ID_LcbJigyoshoKbnYur1" for="ID_cbJigyoshoKbnYur1">職業紹介優良事業者</label>
+         （制度の概要は<a target="_blank" href="https://www.jesra.or.jp/yuryoshokai/">こちら</a>）
+      </li>
+      <li>
+        <input type="checkbox" id="ID_cbJigyoshoKbnYtk1" name="cbJigyoshoKbnYtk" onclick="checkTekisei();" value="1"><label id="ID_LcbJigyoshoKbnYtk1" for="ID_cbJigyoshoKbnYtk1">医療・介護・保育分野における適正な有料職業紹介事業者</label>
+         （制度の概要は<a target="_blank" href="https://www.jesra.or.jp/tekiseinintei/">こちら</a>）
+      </li>
+      <li style="text-indent:1rem">
+        <input type="checkbox" id="ID_cbJigyoshoKbnIryo1" name="cbJigyoshoKbnIryo" onclick="checkTekiseiBunya();" value="1"><label id="ID_LcbJigyoshoKbnIryo1" for="ID_cbJigyoshoKbnIryo1">医療分野</label>
+      </li>
+      <li style="text-indent:1rem">
+        <input type="checkbox" id="ID_cbJigyoshoKbnKaigo1" name="cbJigyoshoKbnKaigo" onclick="checkTekiseiBunya();" value="1"><label id="ID_LcbJigyoshoKbnKaigo1" for="ID_cbJigyoshoKbnKaigo1">介護分野</label>
+      </li>
+      <li style="text-indent:1rem">
+        <input type="checkbox" id="ID_cbJigyoshoKbnHoiku1" name="cbJigyoshoKbnHoiku" onclick="checkTekiseiBunya();" value="1"><label id="ID_LcbJigyoshoKbnHoiku1" for="ID_cbJigyoshoKbnHoiku1">保育分野</label>
+      </li>
+    </ul>
+
+	<div id="searchDetBlock">
+	    <span class="button2" style="vertical-align:middle;">
+	        <span style="vertical-align:middle;">詳細な検索条件を指定できます。</span>
+	        <input type="image" name="nm_btnSearch" id="id_btnSearch"
+	                             src="jsp/img/button/kensaku_condition.gif" onclick="doPostAction('conditions','');" style="border-width:0px; vertical-align:middle;"/>
+	    </span>
+		<span class="showFAQ" id="searchDispDetCondFAQ">
+			<a id="ID_detCondFAQ" name="detCondFAQ" href="../icb_data/StaticContents/img/images/help05.png" target="_blank">
+				検索方法はこちら
+			</a>
+		</span>
+	</div>
+
+    <div class="button">
+        <input type="image" name="nm_btnSearch" id="id_btnSearch" src="jsp/img/button/search_button.gif" onclick="ScrollEvent();" style="border-width:0px;" />
+    </div>
+
+
+      
+        <h3 id="h3_area">&nbsp;&nbsp;&nbsp;事業所一覧<img src="jsp/img/title/h3_XX.gif" alt="" width="1263" ></h3>
+      
+    
+      <div class="search_condition">
+         検索時の条件
+        <ul style="list-style-type: disc">
+          
+            <li>都道府県：全国</li>
+          
+          
+          
+          
+          
+            <li>区分：有料職業紹介事業</li>
+          
+          
+          
+			
+          
+          
+          
+          
+          
+          
+          
+          </ul>
+      </div>
+    
+    <table width="1310px">
+        <tr>
+            <td style="Height: 20px;" colspan="2">
+              
+                <span id="ID_lbAttention3" name="lbAttention3">
+                    ※検索結果には一覧表右上の基準日現在で有効な事業主／事業所の情報が表示されます。
+                </span>
+              
+            </td>
+        </tr>
+        <tr>
+            <td style="Height: 20px;" colspan="2">
+              
+                <span id="ID_lbQst1" name="lbQst1">※よろしければ本サイトの利用満足度についての</span>
+                <a id="ID_hlQuestionnaires" name="hlQuestionnaires" href="./GICB108010.do?screenId=GICB108010&#x26;action=initDisp">アンケート</a>
+                <span id="ID_lbQst2" name="lbQst2">にご協力下さい。</span>
+                <br/>
+                <span id="ID_lbQst3" name="lbQst3">※下記の表の就職者欄について、事業主に支社や支所がある場合、その合計の数字が表示されます。</span>
+
+              
+            </td>
+        </tr>
+        <tr style="Height: 20px;">
+            <td style="width: 60%;">
+              
+                <span id="ID_lbSearch1" name="lbSearch1">検索結果</span>
+                <span id="ID_lbSearchCount" name="lbSearchCount">34066</span>
+                <span id="ID_lbSearch2" name="lbSearch2">件</span>&nbsp;&nbsp;
+                
+                  <span id="ID_lbSearchCurrent" name="lbSearchCurrent">41件～60</span>
+                  <span id="ID_lbSearch3" name="lbSearch3">件表示（</span>
+                  <span id="ID_lbSearchCurrentPage" name="lbSearchCurrentPage">3</span>
+                  <span id="ID_lbSearch4" name="lbSearch4">ページ目）</span>
+                
+              
+            </td>
+            <td style="text-align: right;width: 40%;">
+              
+                <span id="ID_lbUpdateDate" name="lbUpdateDate">令和8年5月1日現在</span>
+              
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+
+                  <table border="0" cellpadding="5" cellspacing="1" id="search_sort">
+                  <tr>
+                    <th><span id="lbHSort1">対象カテゴリー</span></th>
+                    
+                    <th><span id="lbHSort3">昇順／降順</span></th>
+					<th rowspan="2">
+						<input type="image" name="nm_btnSort" id="id_btnSort" src="jsp/img/button/sort_button.gif" onclick="ScrollEventSort();">
+					</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <select id="ID_ucCategory" name="ucCategory">
+<option value="1">就職者・4ヶ月以上・有期</option>
+<option value="2">就職者・4ヶ月以上・無期</option>
+<option value="3">就職者・4ヶ月未満・有期</option>
+<option value="4">離職者数（人）</option>
+<option value="5">離職が判明せず（人）</option>
+
+</select>
+                    </td>
+                    
+                    <td>
+                      <select id="ID_ucSort" name="ucSort">
+<option value="1">昇順</option>
+<option value="2">降順</option>
+
+</select>
+                    </td>
+                  </tr>
+                  </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+
+                <table style="width: 100%;" border="0" cellpadding="5" cellspacing="1" id="search">
+                <tr>
+                    <th style="width: 105px; padding:0px 0px;" rowspan="2">許可・受理番号<br />／許可年月日・<br />届出受理年月日</th>
+                    <th style="width: 145px;" rowspan="2">事業主氏名<br/>／事業所名称</th>
+                    <th style="width: 130px;" rowspan="2">事業所所在地<br/>／電話番号</th>
+                    <th style="width: 240px;" colspan="3">就職者</th>
+                    <th style="width: 80px;" rowspan="2">離職者数<br/>（無期雇用のうち就職後６ヶ月以内）<br/>（人）</th>
+                    
+                      
+                        <th style="width: 80px;" rowspan="2">離職が判明せず<br/>（無期雇用のうち就職後６ヶ月以内）<br/>（人）</th>
+                        <th style="width: 30px;" rowspan="2">手<br/>数<br/>料</th>
+                        <th style="width: 30px;" rowspan="2">返<br/>戻<br/>金<br/>制<br/>度<br/></th>
+                      
+                    
+                    
+                      
+                    
+					
+                    <th style="width: 170px;" rowspan="2">備考</th>
+                    <th style="width: 80px;" rowspan="2"></th>
+                </tr>
+                <tr>
+                    <th>4ヶ月以上<br/>有期及び<br/>無期（人）<br/>　</th>
+                    <th>4ヶ月以上<br/>有期及び<br/>無期（人）<br/>うち無期（人）</th>
+                    <th>4ヶ月未満<br/>有期（人日）<br/>　<br/>　</th>
+                </tr>
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300436%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300436</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成29年08月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　ＨＫＳ　ＪＡＰＡＮ</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　ＨＫＳ　ＪＡＰＡＮ</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道千歳市富丘4丁目1-7　ダイヤモンドビル210号</span>
+                        <br />
+                        <span id="ID_lbTel">0123-21-8092</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300436/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300436%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300443%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300443</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成29年10月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                          <a id="ID_linkJigyoshoURL" name="linkJigyoshoURL" href="https://clarkwsc.web.fc2.com/" target="_blank">
+                            
+                            <span id="ID_lbJigyonushiName">社会医療法人社団　三草会</span>
+                            <br />
+                            
+                            <span id="ID_lbJigyoshoName">社会医療法人社団　三草会　クラークワークサポートセンター</span>
+                          </a>
+                        
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市東区本町2条4丁目8番20号　管理棟1階</span>
+                        <br />
+                        <span id="ID_lbTel">011-782-6160</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300443/tesuryo/%E5%A5%91%E7%B4%84%E6%9B%B8%E9%9D%A2.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_henreikinURL" name="henreikinURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300443/henreikin/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8%E3%81%8A%E3%82%88%E3%81%B3%E8%BF%94%E6%88%BB%E9%87%91%E5%88%B6%E5%BA%A6%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgHenreikinURL" name="imgHenreikinURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="1">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300443%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300446%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300446</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成29年12月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　サンコー</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　サンコー　情報処理センター</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市清田区北野二条三丁目11番22号　サンコー情報処理センタービル1F、2F</span>
+                        <br />
+                        <span id="ID_lbTel">011-885-3500</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300446/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300446%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300447%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300447</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成29年11月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　ＳＰＩ</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　ＳＰＩ</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道千歳市富士一丁目1番地5</span>
+                        <br />
+                        <span id="ID_lbTel">0123-25-9212</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300447/tesuryo/%E8%81%B7%E6%A5%AD%E7%B4%B9%E4%BB%8B%20%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8_%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BESPI.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300447%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300461%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300461</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成30年08月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　ビツグベン</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　ビッグベン</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市北区太平五条一丁目5番5号</span>
+                        <br />
+                        <span id="ID_lbTel">011-775-5730</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300461/tesuryo/EPSON001.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300461%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300472%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300472</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成30年09月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　ノーステクノロジー</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　ノーステクノロジー</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市北区北九条西三丁目1番地1　パワービル札幌駅前2階</span>
+                        <br />
+                        <span id="ID_lbTel">011-707-5344</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300472/tesuryo/%E4%B8%80%E8%88%AC%E7%99%BB%E9%8C%B2%E5%9E%8B%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300472%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300476%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300476</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成30年11月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">合通プラス　株式会社</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">合通プラス　株式会社</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道苫小牧市字柏原6番地245　株式会社合通ロジ1階</span>
+                        <br />
+                        <span id="ID_lbTel">0144-84-8071</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300476/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_henreikinURL" name="henreikinURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300476/henreikin/%E8%BF%94%E6%88%BB%E9%87%91%E5%88%B6%E5%BA%A6.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgHenreikinURL" name="imgHenreikinURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="1">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300476%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300483%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300483</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成30年12月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　サクライサービス</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　サクライサービス</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市清田区清田2条3丁目2番6号</span>
+                        <br />
+                        <span id="ID_lbTel">011-881-1788</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300483/tesuryo/%E6%96%99%E9%87%91%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300483%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300502%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300502</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成31年04月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　ドリームサポート</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　ドリームサポート</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道河東郡音更町木野大通西9丁目2番地　創和ビル201号室</span>
+                        <br />
+                        <span id="ID_lbTel">0155-30-1050</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300502/tesuryo/06%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_henreikinURL" name="henreikinURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300502/henreikin/06%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgHenreikinURL" name="imgHenreikinURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="1">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300502%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300520%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300520</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和01年09月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">有限会社　コミュニティ</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">有限会社　コミュニティ</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道紋別市大山町一丁目36番14号</span>
+                        <br />
+                        <span id="ID_lbTel">0158-24-6522</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;7</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300520/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_henreikinURL" name="henreikinURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300520/henreikin/%E8%81%B7%E6%A5%AD%E7%B4%B9%E4%BB%8B%E8%BF%94%E6%88%BB%E9%87%91%E5%88%B6%E5%BA%A6.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgHenreikinURL" name="imgHenreikinURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="1">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300520%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300530%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300530</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和01年09月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　１３１</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　１３１</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市中央区大通西十五丁目1番地12　マンション大通1001号</span>
+                        <br />
+                        <span id="ID_lbTel">011-612-0131</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300530/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_henreikinURL" name="henreikinURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300530/henreikin/%E8%BF%94%E6%88%BB%E9%87%91%E5%88%B6%E5%BA%A6.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgHenreikinURL" name="imgHenreikinURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="1">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300530%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300532%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300532</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和01年10月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">エイトカラーファームズ　株式会社</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">エイトカラーファームズ　株式会社</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道勇払郡むかわ町米原479番地3</span>
+                        <br />
+                        <span id="ID_lbTel">0145-47-7811</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">-</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300532/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8%EF%BC%88%E3%82%A8%E3%82%A4%E3%83%88%E3%82%AB%E3%83%A9%E3%83%BC%E3%83%95%E3%82%A1%E3%83%BC%E3%83%A0%E3%82%BA%EF%BC%88%E6%A0%AA%EF%BC%89%EF%BC%89.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300532%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300533%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300533</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和01年10月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">おかげさまカンパニー　株式会社</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">おかげさまカンパニー　株式会社</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市白石区本郷通三丁目南4番23号</span>
+                        <br />
+                        <span id="ID_lbTel">090-7513-8862</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300533/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300533%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300543%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300543</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和01年11月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">千歳相互観光バス　株式会社</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">千歳相互観光バス　株式会社　札幌営業所</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道北広島市輪厚431番3</span>
+                        <br />
+                        <span id="ID_lbTel">011-377-8811</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300543/tesuryo/%E7%99%BB%E9%8C%B2%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300543%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300547%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300547</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和01年12月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">特定非営利活動法人　北海道ＮＰＯサポートセンター</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">北海道ＮＰＯサポートセンター　有料職業紹介所</span>
+                        
+                        <input type="hidden" id="ID_hfJigyoshoRegKbn" name="hfJigyoshoRegKbn" value="0">
+
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市中央区南八条西二丁目5番74　市民活動プラザ星園</span>
+                        <br />
+                        <span id="ID_lbTel">070-5289-4135</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300547/tesuryo/%E5%8C%97%E6%B5%B7%E9%81%93NPO%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E6%9C%89%E6%96%99%E8%81%B7%E6%A5%AD%E6%89%80%E6%96%99%E9%87%91%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300547%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300554%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300554</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">平成27年05月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社ＭＩＫ</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社ＭＩＫ</span>
+                        
+                        
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道札幌市北区北十四条西三丁目2-21</span>
+                        <br />
+                        <span id="ID_lbTel">011-299-7361</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300554/tesuryo/%E3%80%90MIK%E3%80%91%E5%B1%8A%E5%87%BA%E5%88%B6%E6%89%8B%E6%95%B0%E6%96%99%E3%81%AB%E4%BF%82%E3%82%8B%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300554%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300555%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300555</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和02年04月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　ガロード</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　ガロード</span>
+                        
+                        
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道帯広市西二十三条南一丁目133番地5&#xa0;2F</span>
+                        <br />
+                        <span id="ID_lbTel">0155-67-8961</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300555/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300555%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300564%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300564</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和02年03月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">株式会社　ドリーム</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">株式会社　ドリーム</span>
+                        
+                        
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道江別市工栄町8番地の11　ニホンフラッシュ（株）敷地内倉庫2&#xa0;F</span>
+                        <br />
+                        <span id="ID_lbTel">011-381-3299</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">135</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300564/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8%E4%B8%80%E8%88%AC%E7%99%BB%E9%8C%B2%E5%9E%8B.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                        
+                        
+                             無
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="0">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300564%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300569%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300569</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和02年03月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">北日本産業　株式会社</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">北日本産業株式会社　苫小牧営業所</span>
+                        
+                        
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道苫小牧市新開町3丁目17番2号</span>
+                        <br />
+                        <span id="ID_lbTel">0144-51-6888</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300569/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_henreikinURL" name="henreikinURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300569/henreikin/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgHenreikinURL" name="imgHenreikinURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="1">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300569%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+
+                <tr onmouseout="this.style.backgroundColor='';" onmouseover="this.style.backgroundColor='#ffe699';" style="height: 20px">
+                    <td style="width: 105px;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300570%2C1+++++" target="_blank">
+                        <span id="ID_lbKyokatodokedeNo" name="lbKyokatodokedeNo">01-ユ-300570</span>
+                      </a>
+                      <br />
+                      <span id="ID_lbKyokatodokedeDate" name="lbKyokatodokedeDate">令和02年02月01日</span>
+                    </td>
+                    <td style="width: 145px;" rowspan="1">
+                        
+                        
+                          <span id="ID_lbJigyonushiName">フロンティアパートナーＦＡＳ　株式会社</span>
+                          <br />
+                          <span id="ID_lbJigyoshoName">フロンティアパートナーＦＡＳ　株式会社</span>
+                        
+                        
+                    </td>
+                    <td style="width: 130px;" rowspan="1">
+                        <span id="ID_lbJigyoshoAddress">北海道帯広市西七条南六丁目1番地4</span>
+                        <br />
+                        <span id="ID_lbTel">070-6605-0508</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha1muki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbShushokusha2yuki3">&#xa0;&#xa0;0</span>
+                    </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                    			<span id="ID_lbRishokusha3">&#xa0;&#xa0;0</span>
+                    </td>
+                    
+                      <td style="width: 80px;text-align:center;" rowspan="1">
+                      			<span id="ID_lbNotHanmei3">&#xa0;&#xa0;0</span>
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_tesuryoURL" name="tesuryoURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300570/tesuryo/%E2%97%8E%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8_%E3%83%95%E3%83%AD%E3%83%B3%E3%83%86%E3%82%A3%E3%82%A2%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BCFAS%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgTesuryoURL" name="imgTesuryoURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        <input type="hidden" id="ID_tesuryoRegKbn" name="tesuryoRegKbn" value="1">
+
+                      </td>
+                      <td style="text-align:center;" rowspan="1">
+                        
+                          <a id="ID_henreikinURL" name="henreikinURL" href="/icb_data/UploadFiles/Jigyosho/01-%E3%83%A6-300570/henreikin/%E8%BF%94%E6%88%BB%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6.pdf" target="_blank">
+                            
+                              <img class="" src="jsp/img/icon/reader.gif" id="ID_imgHenreikinURL" name="imgHenreikinURL" />
+                            
+                                有
+                          </a>
+                        
+                        
+                        
+                        
+                        
+                        <input type="hidden" id="ID_henreikinRegKbn" name="henreikinRegKbn" value="1">
+
+                      </td>
+                    
+                    
+					
+                    <td style="width: 140px;" rowspan="1">
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                      <br />
+                      
+                   </td>
+                    <td style="width: 80px;text-align:center;" rowspan="1">
+                      <a id="ID_linkKyokatodokedeNo" name="linkKyokatodokedeNo" href="./GICB102030.do?screenId=GICB102030&amp;action=detail&amp;detkey_Detail=01-%E3%83%A6-300570%2C1+++++" target="_blank">
+                        <img src="jsp/img/button/detail.gif" style="border-width:0px;"/>
+                      </a>
+                    </td>
+                </tr>
+                
+                
+				
+				
+
+                </table>
+				<table style="text-align: right;width: 100%;"><tr><td align="right"><table><tr>
+<td style="padding:5px;"></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager01" href="javascript:doPostAction('page','1')" ">1</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager02" href="javascript:doPostAction('page','2')" ">2</a></td>
+<td style="padding:5px;"><span>3</span></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager04" href="javascript:doPostAction('page','4')" ">4</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager05" href="javascript:doPostAction('page','5')" ">5</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager06" href="javascript:doPostAction('page','6')" ">6</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager07" href="javascript:doPostAction('page','7')" ">7</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager08" href="javascript:doPostAction('page','8')" ">8</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager09" href="javascript:doPostAction('page','9')" ">9</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager10" href="javascript:doPostAction('page','10')" ">10</a></td>
+<td style="padding:5px;"><a onclick="ScrollEventMst(scroll120);" id="ID_pager11" href="javascript:doPostAction('page','11')" ">>></a></td>
+</tr></table></td></tr></table>
+
+            </td>
+        </tr>
+    </table>	
+    <input type="hidden" id="ID_hfScrollTop" name="hfScrollTop" value="0">
+
+  </div>
+  
+            </div>
+            
+
+
+            <div id="footer01">
+                <ul id="footer_menu" style="text-align:center">
+                  <li><a href="/icb_data/StaticContents/GICB190010.html" class="footer_menu-01">著作権等</a></li>
+                  <li><a href="/icb_data/StaticContents/GICB190020.html" class="footer_menu-02">プライバシー・セキュリティポリシー</a></li>
+                  <li><a href="/icb_data/StaticContents/GICB190030.html" class="footer_menu-03" target="_blank">サイトの使い方</a></li>
+                </ul>
+            </div>
+            <div id="footer03">
+                <img src="jsp/img/icon/kourou_logo.gif" alt="厚生労働省" style="border: none;" />
+            </div>
+            <div id="footer02">
+                <p class="add">
+                    厚生労働省職業安定局<br />
+                    <span class="copyright">All rights reserved, Copyright (C) Employment Security Bureau,Ministry of Health, Labour and Welfare</span>
+                </p>
+            </div>
+
+        </div>
+        
+<input type="hidden" name="screenId" value="GICB102030">
+<input type="hidden" name="action" id="ID_action" value="">
+<input type="hidden" name="codeAssistType" value="">
+<input type="hidden" name="codeAssistKind" value="">
+<input type="hidden" name="codeAssistCode" value="">
+<input type="hidden" name="codeAssistItemCode" value="">
+<input type="hidden" name="codeAssistItemName" value="">
+<input type="hidden" name="codeAssistDivide" value="">
+<input type="hidden" name="maba_vrbs" value="">
+</form>
+
+</div>
+</div>
+</body>
+
+</html>

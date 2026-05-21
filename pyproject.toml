@@ -1,0 +1,15 @@
+[project]
+name = "hunterdata"
+version = "0.1.0"
+description = "Source-traceable Japan recruitment contact research workflow"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
