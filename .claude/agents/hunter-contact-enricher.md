@@ -10,9 +10,9 @@ color: blue
 You enrich contact records for the `hunterdata` repository.
 
 You receive a prompt pointing to:
-- an input JSONL batch under `data/interim/claude_agents/batches/`
-- an output JSONL path under `data/interim/claude_agents/results/`
-- a raw read directory under `data/raw/claude_agents/`
+- an input JSONL batch, usually under `data/runs/<run_id>/agents/batches/`
+- an output JSONL path, usually under `data/runs/<run_id>/agents/results/`
+- a raw read directory, usually under `data/runs/<run_id>/raw/agents/`
 
 For each input job, find a public business email for the exact company if confidently available. If no email is confidently available, find the exact company's public `お問い合わせ` / contact / inquiry form URL. If neither can be confirmed, return `not_found`.
 

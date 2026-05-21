@@ -1,26 +1,31 @@
 # Japan Headhunter Contact Research
 
-This project builds a local, source-traceable dataset of 100 Japan recruitment/headhunter contact records.
+This repository builds a local, source-traceable dataset of Japan recruitment/headhunter company contacts from the official MHLW public occupational placement business source.
 
-## Outputs
+## Main Output
 
-- `data/processed/japan_headhunters_contacts.csv`
-- `data/processed/japan_headhunters_contacts.jsonl`
-- `data/processed/japan_headhunters_sources.csv`
-- `data/processed/qa_report.md`
-- `data/processed/japan_headhunters_contacts_static_enriched.csv`
-- `data/processed/japan_headhunters_contacts_static_enriched_zh.csv`
-- `data/processed/japan_headhunters_contacts_agent_enriched.csv`
-- `data/processed/japan_headhunters_contacts_agent_enriched_zh.csv`
+- `hunter_contacts.csv`: human-facing final CSV with Chinese headers.
+
+## Machine Outputs
+
+- `data/manifest/mhlw_manifest.csv`: full MHLW manifest baseline.
+- `data/manifest/mhlw_manifest.jsonl`: machine-readable manifest.
+- `data/manifest/checkpoint.json`: manifest refresh checkpoint/status.
+- `data/processed/master.csv`: canonical machine-readable enriched master.
+- `data/processed/master_zh.csv`: canonical enriched master with Chinese headers.
+- `data/runs/<run_id>/`: per-run batch, logs, static enrichment, agent prompts/results, raw evidence, and QA report.
+- `data/raw/mhlw/`: raw official MHLW HTML evidence.
+
+Generated runtime data is intentionally ignored by git, except for `.gitkeep` placeholders and source/example files.
 
 ## Requirements
 
 - `uv`
 - Python 3.12 managed by `uv`
 - Dokobot CLI (`dokobot --help` should work)
-- Chrome + Dokobot local bridge if using local Dokobot reads
-- Claude Code CLI for the optional agent backfill (`claude auth status` should succeed)
-- Claude Code may require a one-time workspace trust confirmation; run `claude` once from the repository root and trust the folder before using `/hunter-contact-backfill`.
+- Chrome + Dokobot local bridge for agent evidence reads
+- Claude Code CLI for native subagent orchestration (`claude auth status` should succeed)
+- Claude Code may require a one-time workspace trust confirmation. Run `claude` once from the repository root and trust the folder before using project slash commands.
 
 ## Setup
 
@@ -33,84 +38,80 @@ uv run python --version
 
 MHLW `人材サービス総合サイト` is the primary business verification source.
 Company websites are the preferred source for email, phone, and contact form URLs.
-JESRA and recognized certification directories are secondary verification sources.
 
 Do not collect private social profiles, login-only data, paid database data, inferred email patterns, or personal non-business contact details.
 
-## Run
+## Recommended Claude Code Flow
 
-```bash
-uv run python -m scripts.mhlw_collect --target-count 100
-uv run python -m scripts.qa_report data/processed/japan_headhunters_contacts.csv --expected-count 100
-```
-
-The MHLW collector uses the public `人材サービス総合サイト` search and detail pages for `有料職業紹介事業`, saves raw official HTML under `data/raw/mhlw/`, writes `data/interim/candidates.jsonl`, and then emits the processed contacts, source audit CSV, JSONL, and QA report.
-
-## Contact Enrichment Pipeline
-
-The recommended workflow is:
-
-1. collect MHLW verified companies and phones;
-2. run deterministic static enrichment for public emails and `お問い合わせ` forms;
-3. send unresolved rows to native Claude Code subagents, one unresolved company per prompt, with at most 5 running at once;
-4. require every subagent result to include raw local Dokobot evidence created by `scripts.dokobot_local_read`;
-5. merge agent JSONL results by `record_id`.
-
-Recommended Claude Code flow for a fresh clone:
+Open Claude Code from the repository root:
 
 ```bash
 claude
 ```
 
-Then run the project slash command:
+First refresh the full official manifest:
+
+```text
+/hunter-manifest-refresh
+```
+
+Then process the next unprocessed batch of 100 rows:
 
 ```text
 /hunter-contact-backfill
 ```
 
-The slash command is the main orchestrator prompt. It runs the deterministic Python stages, dispatches native `hunter-contact-enricher` subagents, monitors raw Dokobot evidence, and runs the strict merge. It does not use `claude -p`, and Python is not responsible for managing Claude subagents.
-All default paths are relative to the repository directory where you start Claude Code, so outputs land under this project's `data/` directory.
+Run `/hunter-contact-backfill` again on the next day/session to continue from the next unprocessed manifest rows. Completed rows are determined by `record_id` values already present in `data/processed/master.csv`; new batches are upserted by `record_id`, not appended blindly. The default batch size is 100, and the final remaining batch may be smaller.
 
-For a real one-row smoke test before running the full queue:
+## Pipeline
 
-```bash
-uv run python -m scripts.claude_agent_workflow \
-  --target-count 100 \
-  --agents 1 \
-  --claude-mode prompt-files \
-  --candidate-limit 0 \
-  --one-job-per-prompt \
-  --max-agent-jobs 1
+```mermaid
+flowchart TD
+    A["/hunter-manifest-refresh"] --> B["data/manifest/mhlw_manifest.csv"]
+    B --> C["/hunter-contact-backfill"]
+    C --> D["Prepare next 100 unprocessed rows"]
+    D --> E["Deterministic static email/form enrichment"]
+    E --> F{"Email or form found?"}
+    F -- "Yes" --> H["Batch final merge"]
+    F -- "No" --> G["Claude native hunter-contact-enricher subagent, max 5 active"]
+    G --> H
+    H --> I["Upsert data/processed/master.csv by record_id"]
+    I --> J["Export hunter_contacts.csv"]
 ```
 
-Then open the single generated prompt under `data/interim/claude_agents/prompts/` with the `hunter-contact-enricher` agent. The subagent should call:
+## Manual Smoke Tests
+
+Manifest smoke:
 
 ```bash
-uv run python -m scripts.dokobot_local_read "<url>" -o "data/raw/claude_agents/<batch>/<record>.txt" --timeout 120
+uv run python -m scripts.mhlw_manifest --limit 5 --sleep-seconds 0
 ```
 
-This wrapper opens a visible Chrome tab, calls the local Chrome bridge with `dokobot read --local --device ... --reuse-tab`, and writes a sibling `.meta.json` audit file.
-
-If you want to prepare prompt files manually:
+Prepare a small resumable batch from an existing manifest:
 
 ```bash
-uv run python -m scripts.claude_agent_workflow --target-count 100 --agents 5 --refresh-static --candidate-limit 0 --one-job-per-prompt
+mkdir -p data/runs/smoke
+uv run python -m scripts.hunter_resume prepare-next-batch \
+  --manifest-csv data/manifest/mhlw_manifest.csv \
+  --master-csv data/processed/master.csv \
+  --batch-csv data/runs/smoke/batch.csv \
+  --limit 5
 ```
 
-Then run the generated prompt files under `data/interim/claude_agents/prompts/` with the `hunter-contact-enricher` agent. After all result files are written under `data/interim/claude_agents/results/`, merge:
+Run tests:
 
 ```bash
-uv run python -m scripts.claude_agent_workflow --merge-only
+uv run python -m pytest -q
 ```
 
-Final files:
+## Claude Agent Backfill Notes
 
-- `data/processed/japan_headhunters_contacts_agent_enriched.csv`
-- `data/processed/japan_headhunters_contacts_agent_enriched_zh.csv`
+The `/hunter-contact-backfill` command is the main orchestrator prompt. It runs deterministic Python stages, dispatches native `hunter-contact-enricher` subagents, monitors raw Dokobot evidence, and runs the strict merge. It does not use `claude -p`, and Python is not responsible for managing Claude subagents.
 
-If you already have a manually curated candidate manifest, run:
+The subagent must use:
 
 ```bash
-uv run python -m scripts.collect_contacts --target-count 100 --use-dokobot-local
-uv run python -m scripts.qa_report data/processed/japan_headhunters_contacts.csv --expected-count 100
+uv run python -m scripts.dokobot_local_read "<url>" -o "<raw_path>" --timeout 120
 ```
+
+The wrapper delegates tab management to Dokobot using local Chrome bridge + reuse-tab behavior and writes a sibling `.meta.json` audit file.
