@@ -16,6 +16,7 @@ from scripts.enrich_contacts import (
     ENRICHED_FIELDNAMES,
     SearchResult,
     rank_official_results,
+    static_enrich_row,
     web_search,
     write_chinese_csv,
     write_enriched_csv,
@@ -60,6 +61,10 @@ class AgentJob:
     license_type: str
     city_or_prefecture: str
     static_status: str
+    static_source_url: str
+    static_source_text_path: str
+    static_notes: str
+    deterministic_summary: str
     candidate_urls: list[dict[str, str]]
 
 
@@ -142,10 +147,36 @@ def build_agent_jobs(
                 license_type=normalized["license_type"],
                 city_or_prefecture=normalized["city_or_prefecture"],
                 static_status=normalized["enrichment_status"],
+                static_source_url=normalized["email_source_url"],
+                static_source_text_path=normalized["email_source_text_path"],
+                static_notes=normalized["notes"],
+                deterministic_summary=build_deterministic_summary(normalized),
                 candidate_urls=candidates,
             )
         )
     return jobs
+
+
+def build_deterministic_summary(row: dict[str, str]) -> str:
+    status = row.get("enrichment_status", "") or "unknown"
+    parts = [f"Conservative static enrichment status: {status}."]
+    if row.get("email"):
+        parts.append(f"Static stage found email: {row['email']}.")
+    if row.get("contact_form_url"):
+        parts.append(f"Static stage found contact form: {row['contact_form_url']}.")
+    if row.get("company_url"):
+        parts.append(f"Static stage found likely official site: {row['company_url']}.")
+    if row.get("email_source_url"):
+        parts.append(f"Static evidence URL: {row['email_source_url']}.")
+    if row.get("email_source_text_path"):
+        parts.append(f"Static evidence raw path: {row['email_source_text_path']}.")
+    if status == "not_found":
+        parts.append("Static stage did not confidently confirm an official email, form, or site.")
+    elif status == "official_site_found_no_contact":
+        parts.append("Static stage found a likely official site but no public email/contact form.")
+    elif status == "contact_form_found":
+        parts.append("Static stage found a form but still no public email.")
+    return " ".join(parts)
 
 
 def write_agent_batches(
@@ -196,52 +227,52 @@ def write_agent_batches(
     return written
 
 
+def write_single_agent_batch(
+    job: AgentJob,
+    *,
+    batch_index: int,
+    batch_dir: Path,
+    prompt_dir: Path,
+    result_dir: Path,
+    log_dir: Path,
+    raw_dir: Path,
+) -> AgentBatch:
+    for directory in (batch_dir, prompt_dir, result_dir, log_dir, raw_dir):
+        directory.mkdir(parents=True, exist_ok=True)
+    batch_id = f"agent-{batch_index:03d}"
+    job_path = batch_dir / f"{batch_id}.jsonl"
+    prompt_path = prompt_dir / f"{batch_id}.md"
+    result_path = result_dir / f"{batch_id}-results.jsonl"
+    log_path = log_dir / f"{batch_id}.json"
+    job_path.write_text(json.dumps(asdict(job), ensure_ascii=False, sort_keys=False) + "\n", encoding="utf-8")
+    prompt_path.write_text(
+        build_agent_prompt(
+            batch_id=batch_id,
+            job_path=job_path,
+            result_path=result_path,
+            raw_dir=raw_dir,
+        ),
+        encoding="utf-8",
+    )
+    result_path.write_text("", encoding="utf-8")
+    return AgentBatch(batch_id=batch_id, job_path=job_path, prompt_path=prompt_path, result_path=result_path, log_path=log_path)
+
+
 def build_agent_prompt(*, batch_id: str, job_path: Path, result_path: Path, raw_dir: Path) -> str:
-    return f"""You are an autonomous contact-enrichment agent for the hunterdata project.
+    return f"""Process this hunter-contact-enricher job.
 
-Task:
-- Read JSONL jobs from `{job_path}`.
-- For each input job, find a public business email for the exact company if confidently available.
-- If no email is confidently available, find the exact company's public inquiry/contact form URL.
-- If neither can be confirmed, return `not_found`.
+The agent definition contains the task rules, acceptance criteria, Dokobot requirement, and output schema. This file is only the job envelope.
 
-Hard rules:
-- Write exactly one JSON object per input job to `{result_path}`.
-- Preserve the exact `record_id` from the input. Never invent or modify record IDs.
-- Do not edit CSV files. Do not edit files outside `{result_path}` and `{raw_dir}`.
-- Do not submit forms, bypass CAPTCHA, use paid databases, login-only pages, private social profiles, or inferred email patterns.
-- Treat input `contact_form_url`, `company_url`, and candidate URLs as candidate official URLs.
-- If the job has no usable candidate URL, use public web search to identify the most likely official company site or contact page first. Do not accept directory/listing pages as final evidence unless they only help discover the official URL.
-- For every job, run at least one local Dokobot browser read through this wrapper before accepting or rejecting it:
-  `uv run python -m scripts.dokobot_local_read "<url>" -o "{raw_dir}/{batch_id}/<record_id>-<slug>.txt" --timeout 120`
-- The wrapper opens a visible Chrome tab, then creates both the raw text file and a sibling `.meta.json` file proving `dokobot read --local --device <local Chrome device> --reuse-tab` succeeded.
-- Do not use remote Dokobot mode and do not replace this with curl, requests, or headless browser output.
-- Only accept a page if it is clearly the same company by company name, phone, license context, or official branding.
-- If you use non-Dokobot public page reads for search/navigation, still use the local Dokobot wrapper on the final evidence page and record that public URL in the result.
-- For Japanese companies, an `お問い合わせ` form is acceptable when no public email is available.
+Input JSONL:
+`{job_path}`
 
-Output JSONL schema for each job:
-{{
-  "record_id": "exact input record_id",
-  "company_name": "company name from input",
-  "email": "public business email or empty string",
-  "contact_form_url": "public inquiry/contact form URL or empty string",
-  "company_url": "confirmed official company URL or empty string",
-  "source_url": "URL where the email/form/company URL was confirmed, or empty string",
-  "source_text_path": "raw page text path if saved, or empty string",
-  "status": "email_found | contact_form_found | official_site_found_no_contact | not_found | error",
-  "confidence": "high | medium | low",
-  "notes": "short reason, including why you accepted/rejected candidates"
-}}
+Output JSONL:
+`{result_path}`
 
-Acceptance:
-- `email_found`: email is public, business-relevant, and belongs to the exact company/site.
-- `contact_form_found`: no email found, but exact company contact/inquiry form is confirmed.
-- `official_site_found_no_contact`: exact company official site found, but no email/form found.
-- `not_found`: no exact official site/contact channel can be confirmed.
-- `error`: only for tool/runtime failures; include the error in notes.
+Raw Dokobot evidence directory:
+`{raw_dir}/{batch_id}/`
 
-When finished, ensure `{result_path}` exists and contains exactly one JSON line for every input job.
+Read the input JSONL, use its deterministic context as starting evidence, find the exact company's public business email or inquiry/contact form, and write exactly one JSON object per input job to the output JSONL.
 """
 
 
@@ -315,8 +346,95 @@ def validate_agent_raw_evidence(
     command = meta.get("command") if isinstance(meta.get("command"), list) else []
     if meta.get("tool") != "dokobot" or meta.get("mode") != "local" or meta.get("returncode") != 0:
         raise ValueError(f"agent result for {result['record_id']} metadata does not prove successful local Dokobot read: {meta_path}")
-    if meta.get("visible_tab") is not True or "--local" not in command or "--device" not in command or "--reuse-tab" not in command:
-        raise ValueError(f"agent result for {result['record_id']} metadata does not prove visible local Dokobot tab use: {meta_path}")
+    if "--local" not in command or "--device" not in command or "--reuse-tab" not in command:
+        raise ValueError(f"agent result for {result['record_id']} metadata does not prove local Dokobot reuse-tab use: {meta_path}")
+
+
+def stream_static_enrichment_and_queue(args: argparse.Namespace) -> None:
+    with args.base_csv.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+
+    queue_path = args.agent_dir / "agent_queue.jsonl"
+    state_path = args.agent_dir / "stream_state.json"
+    batch_dir = args.agent_dir / "batches"
+    prompt_dir = args.agent_dir / "prompts"
+    result_dir = args.agent_dir / "results"
+    log_dir = args.agent_dir / "logs"
+    for directory in (args.agent_dir, batch_dir, prompt_dir, result_dir, log_dir, args.agent_raw_dir):
+        directory.mkdir(parents=True, exist_ok=True)
+    queue_path.write_text("", encoding="utf-8")
+
+    enriched_rows: list[dict[str, str]] = []
+    agent_jobs = 0
+    total = len(rows)
+    for row_number, row in enumerate(rows, start=1):
+        updated = static_enrich_row(row, args.static_raw_dir)
+        enriched_rows.append(updated)
+        write_enriched_csv(enriched_rows, args.static_csv)
+        write_chinese_csv(enriched_rows, args.static_zh_csv)
+
+        ready_job = None
+        if not args.max_agent_jobs or agent_jobs < args.max_agent_jobs:
+            jobs = build_agent_jobs([updated], when=args.agent_when, candidate_limit=args.candidate_limit)
+            ready_job = jobs[0] if jobs else None
+        if ready_job:
+            agent_jobs += 1
+            batch = write_single_agent_batch(
+                ready_job,
+                batch_index=agent_jobs,
+                batch_dir=batch_dir,
+                prompt_dir=prompt_dir,
+                result_dir=result_dir,
+                log_dir=log_dir,
+                raw_dir=args.agent_raw_dir,
+            )
+            with queue_path.open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps(asdict(ready_job), ensure_ascii=False, sort_keys=False) + "\n")
+            print(
+                f"AGENT_JOB_READY {batch.batch_id} {ready_job.record_id} {ready_job.company_name}",
+                file=sys.stderr,
+                flush=True,
+            )
+
+        state_path.write_text(
+            json.dumps(
+                {
+                    "processed_rows": row_number,
+                    "total_rows": total,
+                    "agent_jobs": agent_jobs,
+                    "done": False,
+                    "updated_at": time.time(),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        print(
+            f"[{row_number}/{total}] {row.get('company_name', '')}: {updated.get('enrichment_status', '')}",
+            file=sys.stderr,
+            flush=True,
+        )
+        if args.static_sleep_seconds:
+            time.sleep(args.static_sleep_seconds)
+
+    state_path.write_text(
+        json.dumps(
+            {
+                "processed_rows": len(enriched_rows),
+                "total_rows": total,
+                "agent_jobs": agent_jobs,
+                "done": True,
+                "updated_at": time.time(),
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    print(f"Streaming static enrichment complete. Agent jobs: {agent_jobs}", file=sys.stderr, flush=True)
 
 
 def merge_agent_results(
@@ -634,6 +752,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--max-agent-jobs", type=int, default=0)
     parser.add_argument("--one-job-per-prompt", action="store_true")
     parser.add_argument("--claude-mode", choices=["prompt-files", "background"], default="prompt-files")
+    parser.add_argument("--mhlw-only", action="store_true")
+    parser.add_argument("--stream-static-queue", action="store_true")
     parser.add_argument("--merge-only", action="store_true")
     parser.add_argument("--refresh-mhlw", action="store_true")
     parser.add_argument("--refresh-static", action="store_true")
@@ -668,6 +788,17 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    if args.mhlw_only:
+        collect_from_mhlw(
+            target_count=args.target_count,
+            raw_dir=args.mhlw_raw_dir,
+            output_dir=args.output_dir,
+            sleep_seconds=args.mhlw_sleep_seconds,
+        )
+        return
+    if args.stream_static_queue:
+        stream_static_enrichment_and_queue(args)
+        return
     if args.merge_only:
         if not args.allow_incomplete_agent_results:
             validate_agent_batches_complete(args.agent_dir)

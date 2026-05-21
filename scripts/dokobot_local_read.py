@@ -33,7 +33,7 @@ def discover_local_device_id(*, runner=subprocess.run) -> tuple[str, str]:
     return parse_local_device_id(output), output
 
 
-def build_read_command(*, url: str, output: Path, device_id: str, timeout: int, reuse_tab: bool = False) -> list[str]:
+def build_read_command(*, url: str, output: Path, device_id: str, timeout: int, reuse_tab: bool = True) -> list[str]:
     command = [
         "dokobot",
         "read",
@@ -51,8 +51,16 @@ def build_read_command(*, url: str, output: Path, device_id: str, timeout: int, 
     return command
 
 
-def open_visible_chrome_tab(url: str, *, runner=subprocess.run, delay_seconds: float = 1.0) -> dict[str, object]:
+def preopen_chrome_tab(
+    url: str,
+    *,
+    runner=subprocess.run,
+    delay_seconds: float = 1.0,
+    foreground: bool = False,
+) -> dict[str, object]:
     command = ["open", "-a", "Google Chrome", url]
+    if not foreground:
+        command.insert(1, "-g")
     completed = runner(command, capture_output=True, text=True, check=False)
     if completed.returncode == 0 and delay_seconds > 0:
         time.sleep(delay_seconds)
@@ -70,8 +78,10 @@ def read_with_local_dokobot(
     output: Path,
     device_id: str | None = None,
     timeout: int = 120,
-    visible_tab: bool = True,
-    visible_tab_delay: float = 1.0,
+    preopen_tab: bool = False,
+    preopen_tab_delay: float = 1.0,
+    foreground_tab: bool = False,
+    reuse_tab: bool = True,
     runner=subprocess.run,
 ) -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -79,13 +89,18 @@ def read_with_local_dokobot(
     doko_list_output = ""
     if not device_id:
         device_id, doko_list_output = discover_local_device_id(runner=runner)
-    visible_tab_result = None
-    if visible_tab:
-        visible_tab_result = open_visible_chrome_tab(url, runner=runner, delay_seconds=visible_tab_delay)
-        if visible_tab_result["returncode"] != 0:
-            print(visible_tab_result["stderr"], end="", file=sys.stderr)
-            return int(visible_tab_result["returncode"])
-    command = build_read_command(url=url, output=output, device_id=device_id, timeout=timeout, reuse_tab=visible_tab)
+    preopen_tab_result = None
+    if preopen_tab:
+        preopen_tab_result = preopen_chrome_tab(
+            url,
+            runner=runner,
+            delay_seconds=preopen_tab_delay,
+            foreground=foreground_tab,
+        )
+        if preopen_tab_result["returncode"] != 0:
+            print(preopen_tab_result["stderr"], end="", file=sys.stderr)
+            return int(preopen_tab_result["returncode"])
+    command = build_read_command(url=url, output=output, device_id=device_id, timeout=timeout, reuse_tab=reuse_tab)
     completed = runner(command, capture_output=True, text=True, check=False)
     finished_at = utc_now()
     meta = {
@@ -96,8 +111,12 @@ def read_with_local_dokobot(
         "output_path": str(output),
         "meta_path": str(meta_path_for(output)),
         "command": command,
-        "visible_tab": visible_tab,
-        "visible_tab_result": visible_tab_result,
+        "visible_tab": preopen_tab,
+        "visible_tab_result": preopen_tab_result,
+        "preopen_tab": preopen_tab,
+        "preopen_tab_result": preopen_tab_result,
+        "foreground_tab": foreground_tab,
+        "reuse_tab": reuse_tab,
         "returncode": completed.returncode,
         "stdout": completed.stdout,
         "stderr": completed.stderr,
@@ -123,8 +142,11 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("-o", "--output", type=Path, required=True)
     parser.add_argument("--device")
     parser.add_argument("--timeout", type=int, default=120)
-    parser.add_argument("--no-visible-tab", action="store_true")
+    parser.add_argument("--preopen-tab", action="store_true")
+    parser.add_argument("--foreground-tab", action="store_true")
+    parser.add_argument("--no-reuse-tab", action="store_true")
     parser.add_argument("--visible-tab-delay", type=float, default=1.0)
+    parser.add_argument("--no-visible-tab", action="store_true", help=argparse.SUPPRESS)
     return parser.parse_args(argv)
 
 
@@ -136,8 +158,10 @@ def main() -> None:
             output=args.output,
             device_id=args.device,
             timeout=args.timeout,
-            visible_tab=not args.no_visible_tab,
-            visible_tab_delay=args.visible_tab_delay,
+            preopen_tab=args.preopen_tab and not args.no_visible_tab,
+            preopen_tab_delay=args.visible_tab_delay,
+            foreground_tab=args.foreground_tab,
+            reuse_tab=not args.no_reuse_tab,
         )
     )
 

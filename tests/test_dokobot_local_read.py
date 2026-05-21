@@ -1,6 +1,6 @@
 import subprocess
 
-from scripts.dokobot_local_read import build_read_command, parse_local_device_id, read_with_local_dokobot
+from scripts.dokobot_local_read import build_read_command, parse_local_device_id, preopen_chrome_tab, read_with_local_dokobot
 
 
 def test_parse_local_device_id_from_doko_list():
@@ -44,6 +44,18 @@ def test_build_read_command_can_reuse_visible_tab(tmp_path):
     assert "--reuse-tab" in command
 
 
+def test_preopen_chrome_tab_does_not_focus_chrome_by_default():
+    calls = []
+
+    def runner(command, *, capture_output, text, check):
+        calls.append(command)
+        return subprocess.CompletedProcess(command, 0, stdout="", stderr="")
+
+    assert preopen_chrome_tab("https://example.com/", runner=runner, delay_seconds=0)["returncode"] == 0
+
+    assert calls[0] == ["open", "-g", "-a", "Google Chrome", "https://example.com/"]
+
+
 def test_read_with_local_dokobot_writes_meta(tmp_path):
     calls = []
 
@@ -60,9 +72,11 @@ def test_read_with_local_dokobot_writes_meta(tmp_path):
 
     output = tmp_path / "raw" / "example.txt"
 
-    assert read_with_local_dokobot(url="https://example.com/", output=output, visible_tab=False, runner=runner) == 0
+    assert read_with_local_dokobot(url="https://example.com/", output=output, preopen_tab=False, runner=runner) == 0
 
     meta = output.with_name("example.txt.meta.json").read_text(encoding="utf-8")
     assert '"mode": "local"' in meta
     assert '"returncode": 0' in meta
+    assert '"reuse_tab": true' in meta
     assert calls[1][:5] == ["dokobot", "read", "--local", "--device", "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece"]
+    assert "--reuse-tab" in calls[1]

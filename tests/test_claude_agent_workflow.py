@@ -14,6 +14,7 @@ from scripts.claude_agent_workflow import (
     merge_agent_results,
     parse_args,
     run_workflow,
+    stream_static_enrichment_and_queue,
     validate_agent_batches_complete,
     wait_for_agent_results,
     write_agent_batches,
@@ -65,6 +66,7 @@ def test_build_agent_jobs_skips_rows_that_already_have_email():
 
     assert [job.record_id for job in jobs] == ["needs-agent"]
     assert jobs[0].candidate_urls[0]["url"] == "https://sample.co.jp/"
+    assert "Conservative static enrichment status" in jobs[0].deterministic_summary
 
 
 def test_default_candidate_provider_skips_search_when_limit_is_zero(monkeypatch):
@@ -92,8 +94,9 @@ def test_write_agent_batches_creates_prompt_and_empty_result_files(tmp_path):
     assert len(batches) == 2
     assert "record_id" in batches[0].job_path.read_text(encoding="utf-8")
     prompt_text = batches[0].prompt_path.read_text(encoding="utf-8")
-    assert "hunterdata" in prompt_text
-    assert "scripts.dokobot_local_read" in prompt_text
+    assert "job envelope" in prompt_text
+    assert str(batches[0].job_path) in prompt_text
+    assert str(batches[0].result_path) in prompt_text
     assert batches[0].result_path.read_text(encoding="utf-8") == ""
 
 
@@ -170,6 +173,64 @@ def test_run_workflow_can_limit_agent_jobs_for_real_smoke_tests(tmp_path, monkey
     queue_lines = (tmp_path / "agents" / "agent_queue.jsonl").read_text(encoding="utf-8").splitlines()
     assert len(queue_lines) == 1
     assert json.loads(queue_lines[0])["record_id"] == "a"
+
+
+def test_stream_static_enrichment_queues_unresolved_rows_immediately(tmp_path, monkeypatch):
+    base_csv = tmp_path / "base.csv"
+    rows = [
+        enriched_row("has-email", email="info@example.co.jp", status="email_found"),
+        enriched_row("needs-agent", status="not_found"),
+    ]
+    rows[1]["email"] = ""
+    write_csv(base_csv, rows)
+
+    def fake_static_enrich_row(row, raw_dir):
+        updated = dict(row)
+        if row["record_id"] == "has-email":
+            updated["email"] = "info@example.co.jp"
+            updated["enrichment_status"] = "email_found"
+        else:
+            updated["email"] = ""
+            updated["contact_form_url"] = ""
+            updated["enrichment_status"] = "not_found"
+        return updated
+
+    monkeypatch.setattr("scripts.claude_agent_workflow.static_enrich_row", fake_static_enrich_row)
+    args = parse_args(
+        [
+            "--base-csv",
+            str(base_csv),
+            "--static-csv",
+            str(tmp_path / "static.csv"),
+            "--static-zh-csv",
+            str(tmp_path / "static_zh.csv"),
+            "--static-raw-dir",
+            str(tmp_path / "static_raw"),
+            "--agent-dir",
+            str(tmp_path / "agents"),
+            "--agent-raw-dir",
+            str(tmp_path / "raw"),
+            "--stream-static-queue",
+            "--candidate-limit",
+            "0",
+            "--static-sleep-seconds",
+            "0",
+        ]
+    )
+
+    stream_static_enrichment_and_queue(args)
+
+    queue_lines = (tmp_path / "agents" / "agent_queue.jsonl").read_text(encoding="utf-8").splitlines()
+    state = json.loads((tmp_path / "agents" / "stream_state.json").read_text(encoding="utf-8"))
+    assert len(queue_lines) == 1
+    queued = json.loads(queue_lines[0])
+    assert queued["record_id"] == "needs-agent"
+    assert queued["deterministic_summary"]
+    assert "static_source_url" in queued
+    assert (tmp_path / "agents" / "prompts" / "agent-001.md").exists()
+    assert (tmp_path / "agents" / "results" / "agent-001-results.jsonl").read_text(encoding="utf-8") == ""
+    assert state["done"] is True
+    assert state["processed_rows"] == 2
 
 
 def test_launch_claude_background_batches_logs_each_launch(tmp_path):
