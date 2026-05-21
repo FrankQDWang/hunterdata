@@ -31,6 +31,35 @@ def test_extract_contact_forms_returns_absolute_urls_from_relative_paths():
     ]
 
 
+def test_extract_contact_forms_ignores_malformed_urls():
+    text = "bad https://mailtime.com\\nTwitter（ツイッター）：https://example.com/contact"
+
+    assert extract_contact_forms(text, base_url="https://example.com") == [
+        "https://example.com/contact"
+    ]
+
+
+def test_extract_contact_forms_ignores_contact_named_static_assets():
+    text = """
+    <link rel="stylesheet" href="https://example.com/wp-content/plugins/contact-form-7/includes/css/styles.css">
+    <script src="https://example.com/contact-form.js"></script>
+    <a href="/contact/">お問い合わせ</a>
+    """
+
+    assert extract_contact_forms(text, base_url="https://example.com") == [
+        "https://example.com/contact/"
+    ]
+
+
+def test_extract_contact_forms_does_not_turn_absolute_url_paths_into_relative_links():
+    text = '<a href="https://other.example/inquiry/">お問い合わせ</a> <a href="/contact/">Contact</a>'
+
+    assert extract_contact_forms(text, base_url="https://example.com") == [
+        "https://other.example/inquiry/",
+        "https://example.com/contact/",
+    ]
+
+
 def test_extract_keywords_and_classification_for_executive_search():
     text = "弊社はエグゼクティブサーチとヘッドハンティングを提供します。"
 

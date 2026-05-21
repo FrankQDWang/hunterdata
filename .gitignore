@@ -2,3 +2,10 @@
 .pytest_cache/
 __pycache__/
 *.pyc
+data/interim/claude_agents*/
+data/interim/dokobot_email_*.jsonl
+data/raw/claude_agents*/
+data/raw/enrichment/
+data/raw/static_enrichment/
+data/processed/smoke_*.csv
+data/processed/qa_report_smoke*.md

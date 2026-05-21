@@ -25,11 +25,24 @@ ALL_KEYWORDS = EXECUTIVE_KEYWORDS + RECRUITMENT_KEYWORDS + STAFFING_KEYWORDS + H
 
 EMAIL_RE = re.compile(r"(?<![\w.+-])[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}(?![\w.-])")
 PHONE_RE = re.compile(r"(?<!\d)(0\d{1,4}[-\s]\d{1,4}[-\s]\d{3,4})(?!\d)")
-ABSOLUTE_URL_RE = re.compile(r"https?://[^\s<>'\")]+", re.IGNORECASE)
+ABSOLUTE_URL_RE = re.compile(r"https?://[^\\\s<>'\")]+", re.IGNORECASE)
 RELATIVE_CONTACT_RE = re.compile(
-    r"(?<!:)/(?:contact|contacts|inquiry|inquiries|toiawase|otoiawase|お問い合わせ)[^\s<>'\")]*",
+    r"(?<![\w.:/-])/(?:contact|contacts|inquiry|inquiries|toiawase|otoiawase|お問い合わせ)[^\s<>'\")]*",
     re.IGNORECASE,
 )
+STATIC_ASSET_EXTENSIONS = {
+    ".css",
+    ".js",
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".gif",
+    ".svg",
+    ".webp",
+    ".ico",
+    ".woff",
+    ".woff2",
+}
 
 
 def _dedupe(values: list[str]) -> list[str]:
@@ -63,7 +76,13 @@ def extract_phones(text: str) -> list[str]:
 
 
 def _is_contact_url(url: str) -> bool:
-    parsed = urlparse(url)
+    try:
+        parsed = urlparse(url)
+    except ValueError:
+        return False
+    lower_path = parsed.path.lower()
+    if any(lower_path.endswith(extension) for extension in STATIC_ASSET_EXTENSIONS):
+        return False
     haystack = f"{parsed.path} {parsed.query}".lower()
     return any(
         token in haystack
