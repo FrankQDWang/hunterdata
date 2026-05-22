@@ -12,17 +12,27 @@ Goal:
 - First run deterministic conservative email/contact-form enrichment.
 - Keep and update `hunter_likelihood` plus `hunter_likelihood_reason` for every row.
 - As soon as deterministic enrichment finds neither a public email nor a contact form, dispatch one native Claude Code `hunter-contact-enricher` subagent for that unresolved company.
-- Keep at most 5 active agents at once. This is an active-agent slot limit, not a dispatch wave size.
+- Keep at most `AGENT_LIMIT` active agents at once. This is an active-agent slot limit, not a dispatch wave size.
 - Free an agent slot only after that subagent is done/closed and its expected JSONL result plus local Dokobot raw evidence have been validated.
 - Merge only after every expected agent result is complete and has raw Dokobot evidence.
+
+Runtime parameters:
+- Default `BATCH_SIZE=100` and `AGENT_LIMIT=5`.
+- If the slash command arguments include `batch-size=N` or `agents=N`, use only positive integer values. If a value is missing, non-integer, or less than 1, stop with `BLOCKED: invalid runtime argument`.
+- Before running the shell block below, set `BATCH_SIZE` and `AGENT_LIMIT` to the parsed values. The shell block shows the defaults.
+- `BATCH_SIZE` controls the `prepare-next-batch --limit` value and final QA expected row count.
+- `AGENT_LIMIT` controls active native subagent slots only. It does not change one-job-per-prompt queue generation.
 
 Division of labor:
 - Python owns deterministic work only: incremental MHLW official crawl, batch selection, static enrichment, queue/prompt generation, merge validation, master upsert.
 - Claude main agent owns orchestration: start the background static queue, watch prompt/result/raw files, dispatch subagents, track active slots, retry killed/incomplete agents, and close finished agents.
 - `hunter-contact-enricher` owns judgment work: given one company, find the best official site/contact evidence and judge hunter likelihood using its own reasoning and local Dokobot reads.
 - Do not make the main agent solve contact enrichment itself. Do not replace the subagent with Bash `curl`, Python scraping, or hard-coded per-site logic.
+- Do not override the main agent model; use the operator's current/default Claude Code model for orchestration. The `hunter-contact-enricher` subagent definition pins its own `model: haiku`.
 
 Important operational rules:
+- Before any data/run work, run `python3 scripts/hunter_preflight.py`.
+- If preflight exits non-zero, report its Chinese remediation output and stop immediately. Do not create run directories, crawl MHLW, dispatch agents, write results, or merge.
 - Do not require a full MHLW manifest refresh before this command. The command owns incremental MHLW crawling for this batch.
 - `data/manifest/mhlw_manifest.csv` is a local cache of official rows discovered so far, not necessarily the full 34k+ MHLW list.
 - `TaskCreate` / `TaskUpdate` are todo tools, not subagent dispatch. Use the Claude Code `Agent` tool with `subagent_type: hunter-contact-enricher`. If the `Agent` tool is unavailable, stop with `BLOCKED: Agent tool unavailable`.
@@ -34,7 +44,10 @@ Important operational rules:
 1. Incrementally fetch official MHLW rows as needed, then prepare the next resumable batch:
 
 ```bash
+python3 scripts/hunter_preflight.py || exit $?
 uv sync --python 3.12
+BATCH_SIZE=100
+AGENT_LIMIT=5
 RUN_ID="$(date +%Y%m%d-%H%M%S)"
 RUN_DIR="data/runs/${RUN_ID}"
 mkdir -p "${RUN_DIR}"
@@ -46,7 +59,7 @@ uv run python -m scripts.hunter_resume prepare-next-batch \
   --mhlw-raw-dir data/raw/mhlw \
   --master-csv data/processed/master.csv \
   --batch-csv "${RUN_DIR}/batch.csv" \
-  --limit 100 \
+  --limit "${BATCH_SIZE}" \
   --mhlw-sleep-seconds 0.1
 BATCH_COUNT="$(( $(wc -l < "${RUN_DIR}/batch.csv") - 1 ))"
 ```
@@ -85,7 +98,7 @@ This process updates:
 - Poll `${RUN_DIR}/agents/prompts/`, `${RUN_DIR}/agents/results/`, `${RUN_DIR}/agents/stream_state.json`, and `${RUN_DIR}/raw/agents/`.
 - Maintain an in-memory set of active batch IDs.
 - Dispatch only prompt files that are ready, not already active, and not already complete.
-- Active count must never exceed 5.
+- Active count must never exceed `AGENT_LIMIT`.
 - When an active agent writes its expected JSONL result, validate that exact batch before freeing the slot:
   `uv run python -m scripts.claude_agent_workflow --validate-agent-batch <agent-NNN> --agent-dir "${RUN_DIR}/agents" --agent-raw-dir "${RUN_DIR}/raw/agents"`
 - Validation includes schema, raw local Dokobot metadata, and same-company evidence checks. A valid `not_found` is acceptable only when its raw evidence still proves the exact company by company name, phone, license number, or known official domain.
@@ -117,11 +130,22 @@ uv run python -m scripts.claude_agent_workflow --agent-status --agent-dir "${RUN
 tail -n 20 "${RUN_DIR}/static-stream.log"
 ```
 
+If the static stream exits non-zero, or exits before `${RUN_DIR}/agents/stream_state.json` says `"done": true`, stop immediately. Inspect `${RUN_DIR}/static-stream.log`, report the failure, and do not dispatch more agents or merge.
+
 Continue until:
 - `${RUN_DIR}/agents/stream_state.json` says `"done": true`
 - every batch reported by `--agent-status` has status `valid` or `quarantined`; quarantined batches intentionally have empty result JSONL after the bad result is archived
 - every expected non-quarantined agent batch passes validation:
   `uv run python -m scripts.claude_agent_workflow --validate-agent-results --agent-dir "${RUN_DIR}/agents" --agent-raw-dir "${RUN_DIR}/raw/agents"`
+
+Acceptance checklist before merge:
+- `${RUN_DIR}/batch.csv` exists and `BATCH_COUNT` is greater than 0.
+- `${RUN_DIR}/agents/stream_state.json` has `"done": true`, `processed_rows == total`, and `total == BATCH_COUNT`.
+- `--agent-status` reports only `valid` or `quarantined` statuses.
+- `--validate-agent-results` exits 0.
+- No killed, retry-pending, or incomplete non-quarantined agent batch remains.
+- `${RUN_DIR}/static.csv` exists and has `BATCH_COUNT` data rows.
+- If any checklist item fails, stop and report the failing item. Do not merge.
 
 5. Merge the batch and update the master output:
 

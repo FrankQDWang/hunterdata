@@ -28,6 +28,28 @@ The older `japan_headhunters_*` prototype outputs are legacy compatibility artif
 - `data/manifest/mhlw_manifest.csv`: incremental MHLW row cache.
 - `data/manifest/checkpoint.json`: MHLW crawl cursor.
 
+## Operator Environments
+
+Fresh clone baseline:
+- A clone contains source, tests, docs, prompts, placeholders, examples, and any committed resumable business data.
+- Resumable business data is tracked by git: manifest cache, checkpoint, raw MHLW HTML, raw Dokobot evidence, run directories, processed CSV/JSONL outputs, QA reports, and root export CSVs.
+- `data/processed/master.csv` is the main resume boundary. Rows whose `record_id` already appears there are skipped by the next batch.
+- Operators hand off partial progress by committing and pushing `data/`, `hunter_contacts.csv`, and `mhlw_placement_contacts_all.csv`.
+
+Full automation environment:
+- Claude Code CLI and Claude Code Desktop Code tab are the supported automated entrypoints because the pipeline depends on repo-local `.claude/commands`, native `Agent` subagents, shell execution, local file writes, and validator-controlled merge gates.
+- Required external tools are `uv` with Python 3.12, Chrome, Dokobot CLI, the Dokobot browser extension/local bridge, and either Claude Code CLI or Claude Code Desktop.
+- Claude Code Desktop uses the same underlying Claude Code engine as the CLI, with a graphical interface and separate session history.
+- The main orchestrator uses the operator's current/default Claude Code model. The `hunter-contact-enricher` subagent is pinned to `model: haiku` in its project agent frontmatter.
+- `/hunter-contact-backfill` must run `python3 scripts/hunter_preflight.py` before creating any run/data artifacts. A non-zero preflight result blocks crawling, agent dispatch, result writing, and merge.
+- Preflight failure output is deterministic Chinese remediation text owned by `scripts/hunter_preflight.py`, not by the slash command prompt.
+
+Claude Desktop Chat/Cowork environment:
+- Claude Desktop Chat or Cowork alone is manual operator mode, not an equivalent runtime for this repository workflow.
+- Chat/Cowork can assist research, especially when configured with local extensions/MCP, but it must not bypass repository validators.
+- Chat/Cowork-only operators must run Python commands in Terminal, use generated prompt packets as manual work items, write result/evidence files in the expected locations, and then run the same validation and merge gates.
+- Do not treat a Desktop chat answer, a copied summary, or a non-validated JSONL line as accepted pipeline output.
+
 ## Batch Behavior
 
 1. Ensure the local MHLW manifest cache has at least 100 rows not already present in `data/processed/master.csv`.
@@ -39,6 +61,20 @@ The older `japan_headhunters_*` prototype outputs are legacy compatibility artif
 7. If validation fails, archive the bad result and either retry the same batch or quarantine it after the attempt limit.
 8. Merge batch results only after all expected agent batches validate or are quarantined.
 9. Upsert the batch into `master.csv` by `record_id`, then regenerate all human-facing CSVs and the master QA report.
+
+## Stage Contracts
+
+Strong-process stages:
+- MHLW manifest refresh, batch selection, static enrichment, agent queue generation, validation, merge, master upsert, QA, and CSV export are deterministic runbook stages.
+- The orchestrator must keep no more than the configured active-agent slot limit.
+- The orchestrator must stop instead of merging when static streaming fails, agent batches remain incomplete, validation fails, or QA reports critical failures.
+- A quarantined agent batch is a terminal state that preserves the static/MHLW row and intentionally does not merge bad agent evidence.
+
+Exploratory stage:
+- `hunter-contact-enricher` owns judgment work for unresolved companies only.
+- The subagent chooses likely official/public evidence pages, but it does not own completion criteria.
+- The subagent must not edit CSV files, infer email patterns, submit forms, use paid databases, use login-only/private social sources, or use search snippets/directory pages as final evidence.
+- The validator owns acceptance. Subagent summaries, killed-task summaries, and non-empty JSONL files are not sufficient.
 
 ## Field Semantics
 
@@ -61,6 +97,7 @@ The older `japan_headhunters_*` prototype outputs are legacy compatibility artif
   - local Dokobot raw evidence path
   - sibling `.meta.json` proving `dokobot read --local --device ... --reuse-tab` succeeded
   - same-company evidence via company name token, phone, license number, or known official company domain
+  - result `source_url` matching the Dokobot metadata URL by same-site domain
 - `error` results do not count as complete. They are retried or quarantined.
 - Quarantined batches preserve the static/MHLW row and do not merge bad agent evidence.
 

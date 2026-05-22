@@ -20,15 +20,35 @@ This repository builds a local, source-traceable dataset of Japan recruitment/he
   - Agent retry/quarantine state lives under each run's `agents/` directory: `retry_state.json`, `quarantine.jsonl`, `failed_results/`, and `retry_prompts/`.
 - `data/raw/mhlw/`: raw official MHLW HTML evidence.
 
-Generated runtime data is intentionally ignored by git, except for `.gitkeep` placeholders and source/example files.
+Generated business data is intentionally tracked by git so another operator can clone the repository and continue from the committed progress.
+
+## Git Tracking Policy
+
+The repository tracks code, tests, docs, Claude prompts, baseline files, and resumable business data.
+
+Tracked resumable data includes:
+
+- `data/manifest/`: MHLW manifest cache and checkpoint. This lets the next operator continue discovery instead of starting the official crawl from scratch.
+- `data/processed/`: cumulative machine master, Chinese master, and QA report. `data/processed/master.csv` is the main resume boundary because already-processed `record_id` values are skipped.
+- `hunter_contacts.csv`: accepted `high`/`medium` hunter-likelihood export.
+- `mhlw_placement_contacts_all.csv`: all processed rows, including `low` and `exclude`.
+- `data/runs/`: per-run batches, static outputs, agent prompts/results, retry/quarantine state, logs, and batch QA.
+- `data/raw/`: raw MHLW/Dokobot evidence and manual observations used for auditability.
+
+The repository does not track local environments or Python/test caches:
+
+- `.venv/`, `.pytest_cache/`, `__pycache__/`, and `*.pyc`
 
 ## Requirements
 
-- `uv`
-- Python 3.12 managed by `uv`
-- Dokobot CLI (`dokobot --help` should work)
-- Chrome + Dokobot local bridge for agent evidence reads
-- Claude Code CLI for native subagent orchestration (`claude auth status` should succeed)
+A fresh clone does not include a virtual environment, browser bridge, or Claude runtime. It does include whatever resumable data has been committed. Install these external dependencies on each machine:
+
+- `git`
+- `uv` for Python environment management. See the official uv installation docs: <https://docs.astral.sh/uv/getting-started/installation/>.
+- Python 3.12 managed by `uv`.
+- Chrome.
+- Dokobot browser extension, Dokobot CLI, and the local Chrome bridge for evidence reads. Dokobot's quick setup documents `npm i -g @dokobot/cli` and `dokobot install-bridge`: <https://dokobot.ai/help/agent-features>.
+- Claude Code CLI or Claude Code Desktop Code tab for the full automated workflow with project slash commands and native `Agent` subagents. Claude Code setup is documented at <https://docs.claude.com/en/docs/claude-code/setup>; Claude Code Desktop is documented at <https://code.claude.com/docs/en/desktop>.
 - Claude Code may require a one-time workspace trust confirmation. Run `claude` once from the repository root and trust the folder before using project slash commands.
 
 ## Setup
@@ -36,7 +56,95 @@ Generated runtime data is intentionally ignored by git, except for `.gitkeep` pl
 ```bash
 uv sync --python 3.12
 uv run python --version
+uv run python -m pytest -q
 ```
+
+Run the deterministic dependency preflight before starting a production batch:
+
+```bash
+python3 scripts/hunter_preflight.py
+```
+
+The preflight prints Chinese remediation guidance and exits non-zero if `uv`, Python 3.12 through `uv`, Chrome, Dokobot CLI, Dokobot local bridge, or the Dokobot Chrome plugin/device connection is missing or not ready.
+
+Verify browser and Claude dependencies when using the full automated flow:
+
+```bash
+dokobot --help
+dokobot doko list
+claude --version
+claude doctor
+```
+
+For Claude Code Desktop, open the Claude Desktop app's Code tab, choose this repository folder, and use the integrated terminal to verify `dokobot --help`, `dokobot doko list`, and `uv run python -m pytest -q`. The Code tab uses the same underlying Claude Code engine as the CLI, but has separate session history and a graphical workflow.
+
+## Fresh Clone Use Flow
+
+On another machine:
+
+```bash
+git clone <repo-url>
+cd hunterdata
+uv sync --python 3.12
+uv run python -m pytest -q
+python3 scripts/hunter_preflight.py
+```
+
+Then install and verify Chrome, the Dokobot browser extension, Dokobot CLI, the Dokobot local bridge, and either Claude Code CLI or Claude Code Desktop as listed above.
+
+CLI path:
+
+```bash
+claude
+```
+
+Then run:
+
+```text
+/hunter-contact-backfill
+```
+
+Desktop Code path:
+- Open Claude Desktop.
+- Switch to the Code tab.
+- Open this repository folder.
+- Confirm the project slash command is available, then run `/hunter-contact-backfill`.
+
+Each run updates tracked resumable data under `data/manifest/`, `data/raw/`, `data/runs/`, `data/processed/`, and the two root export CSVs. After a successful partial run, commit and push those data changes together with any code/prompt changes so the next operator can continue from the same `record_id` boundary.
+
+## Data Handoff And Reset
+
+To hand off partial progress after running a few batches:
+
+```bash
+git status --short
+uv run python -m pytest -q
+git add data hunter_contacts.csv mhlw_placement_contacts_all.csv
+git commit -m "data: update hunter contact progress"
+git push
+```
+
+The next operator can clone or pull that commit and run `/hunter-contact-backfill`; completed rows are skipped by `record_id` values already present in `data/processed/master.csv`.
+
+To intentionally start over from an empty baseline, remove the tracked data outputs in a normal commit. Do not use `git clean` for business data reset; the resumable data is tracked now.
+
+## Claude Desktop Modes
+
+Claude Desktop has multiple modes. The distinction matters for this repository:
+
+- Claude Code Desktop, the Code tab in Claude Desktop, is an equivalent supported runtime for this repository's automated workflow when it is opened on this repository folder. It runs the same underlying Claude Code engine as the CLI, with a graphical interface, integrated terminal, file editor, diff/review panes, and separate session history.
+- Claude Code CLI remains the best option when operators need shell-native scripting, automation, or exact terminal workflow.
+- Claude Desktop Chat and Claude Cowork are not the same as opening this repository in Claude Code Desktop's Code tab.
+
+If an operator uses Claude Desktop Chat or Cowork rather than the Code tab, treat it as manual operator mode for this repository:
+
+- Run Python commands in Terminal from the repo root.
+- Use generated prompt files under `data/runs/<run_id>/agents/prompts/` as manual work packets.
+- Paste a prompt packet into Claude Desktop and perform browser research with the same evidence rules.
+- Write the result JSONL and raw evidence files exactly where the prompt requests, or use an approved local Desktop extension/MCP setup that can write those files.
+- Run the repository validators and merge commands from Terminal. Do not merge Desktop-generated output without passing the same validator gates.
+
+Recommended automated modes are Claude Code CLI or Claude Code Desktop Code tab. Chat/Cowork-only operation is slower and more manual because orchestration, subagent concurrency, Dokobot reads, local file writes, and validation must be driven outside the repository's Claude Code workflow or through separately configured local tools.
 
 ## Source Rules
 
@@ -127,7 +235,16 @@ uv run python -m pytest -q
 
 The `/hunter-contact-backfill` command is the main orchestrator prompt. It runs deterministic Python stages, dispatches native `hunter-contact-enricher` subagents, monitors raw Dokobot evidence, and runs the strict merge. It does not use `claude -p`, and Python is not responsible for managing Claude subagents.
 
+Model policy:
+- The main Claude Code orchestrator uses the operator's current/default model. The slash command does not override it.
+- The project `hunter-contact-enricher` subagent is pinned to `model: haiku` in its frontmatter.
+
 The subagent result JSONL must include `hunter_likelihood` and `hunter_likelihood_reason` for each row. Static enrichment sets a conservative value first; the subagent may update it using official/public evidence.
+
+Prompt boundaries:
+- `/hunter-contact-backfill` is a strong-process runbook. It owns batch size, active-agent slots, static-stream monitoring, retry/quarantine decisions, and merge gates.
+- `hunter-contact-enricher` is exploratory within strict boundaries. It chooses the best public official evidence page, but it must not edit CSVs, infer email patterns, submit forms, use paid/login-only/private sources, or use search snippets/directories as final evidence.
+- The validator, not the subagent summary, decides completion. Accepted agent results need schema-valid JSONL, local Dokobot raw evidence, Dokobot metadata, same-company identity evidence, and a source URL matching the raw Dokobot metadata site.
 
 Agent completion is strict. A result is not complete merely because a JSONL line exists. The validator checks schema, raw local Dokobot evidence, Dokobot metadata, and same-company evidence. `not_found` is accepted when the raw evidence proves the exact company was checked. `error`, wrong-company evidence, invalid JSON, or missing raw evidence should be recorded with `--record-agent-failure`; the helper archives the bad result, resets the result file, and either creates a retry prompt or quarantines the batch after the attempt limit.
 

@@ -74,6 +74,7 @@ def test_prepare_next_batch_can_incrementally_fill_manifest(tmp_path, monkeypatc
 
 def test_upsert_master_and_export_updates_existing_and_writes_root_csv(tmp_path):
     master = tmp_path / "data" / "processed" / "master.csv"
+    master_zh = tmp_path / "data" / "processed" / "master_zh.csv"
     root = tmp_path / "hunter_contacts.csv"
     all_root = tmp_path / "mhlw_placement_contacts_all.csv"
     qa_path = tmp_path / "data" / "processed" / "master_qa_report.md"
@@ -96,6 +97,7 @@ def test_upsert_master_and_export_updates_existing_and_writes_root_csv(tmp_path)
     rows = upsert_master_and_export(
         batch_csv=batch,
         master_csv=master,
+        master_zh_csv=master_zh,
         root_csv=root,
         all_root_csv=all_root,
         master_qa_path=qa_path,
@@ -112,6 +114,7 @@ def test_upsert_master_and_export_updates_existing_and_writes_root_csv(tmp_path)
 
 def test_upsert_master_and_export_writes_duplicate_report(tmp_path):
     master = tmp_path / "data" / "processed" / "master.csv"
+    master_zh = tmp_path / "data" / "processed" / "master_zh.csv"
     root = tmp_path / "hunter_contacts.csv"
     all_root = tmp_path / "mhlw_placement_contacts_all.csv"
     qa_path = tmp_path / "data" / "processed" / "master_qa_report.md"
@@ -127,6 +130,7 @@ def test_upsert_master_and_export_writes_duplicate_report(tmp_path):
     upsert_master_and_export(
         batch_csv=batch,
         master_csv=master,
+        master_zh_csv=master_zh,
         root_csv=root,
         all_root_csv=all_root,
         master_qa_path=qa_path,
