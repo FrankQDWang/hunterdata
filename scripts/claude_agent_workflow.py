@@ -400,7 +400,13 @@ def validate_agent_semantic_evidence(result: dict[str, str], job: dict[str, Any]
     raw_text = raw_path.read_text(encoding="utf-8", errors="replace")
     meta_path = raw_path.with_name(f"{raw_path.name}.meta.json")
     meta = json.loads(meta_path.read_text(encoding="utf-8"))
-    evidence_url = str(meta.get("url") or result.get("source_url") or result.get("company_url") or "")
+    evidence_url = str(meta.get("url") or "")
+    result_source_url = str(result.get("source_url", ""))
+    if result_source_url and evidence_url and not _same_site_url(result_source_url, evidence_url):
+        raise ValueError(
+            f"agent result for {result['record_id']} source_url does not match Dokobot metadata URL: "
+            f"{result_source_url} vs {evidence_url}"
+        )
 
     signals = []
     if _raw_text_contains_company(raw_text, str(job.get("company_name", ""))):
@@ -411,10 +417,6 @@ def validate_agent_semantic_evidence(result: dict[str, str], job: dict[str, Any]
         signals.append("license_number")
     if _same_site_url(evidence_url, str(job.get("company_url", ""))):
         signals.append("company_url_domain")
-    if result.get("source_url") and _same_site_url(str(result.get("source_url", "")), str(job.get("company_url", ""))):
-        signals.append("source_url_domain")
-    if result.get("company_url") and _same_site_url(str(result.get("company_url", "")), str(job.get("company_url", ""))):
-        signals.append("result_company_url_domain")
 
     if not signals:
         raise ValueError(
@@ -780,6 +782,7 @@ def merge_agent_results(
             if result["source_url"]:
                 row["email_source_url"] = result["source_url"]
                 row["email_source_text_path"] = result["source_text_path"]
+            row["confidence"] = result["confidence"]
             row["hunter_likelihood"] = result["hunter_likelihood"]
             row["hunter_likelihood_reason"] = result["hunter_likelihood_reason"]
             row["enrichment_status"] = f"agent_{result['status']}"
@@ -834,6 +837,44 @@ def validate_agent_batches_complete(
             incomplete.append(f"{batch.batch_id} ({exc})")
     if incomplete:
         raise ValueError(f"Incomplete agent result batches: {'; '.join(incomplete)}")
+
+
+def agent_batch_statuses(
+    agent_dir: Path,
+    *,
+    raw_dir: Path = Path("data/raw/claude_agents"),
+    require_raw: bool = True,
+) -> list[dict[str, str]]:
+    batches = load_agent_batches(agent_dir)
+    retry_state = _load_retry_state(agent_dir / "retry_state.json")
+    quarantined = {
+        batch_id
+        for batch_id, entry in retry_state.items()
+        if isinstance(entry, dict) and entry.get("status") == "quarantined"
+    }
+    statuses = []
+    for batch in batches:
+        item = {
+            "batch_id": batch.batch_id,
+            "job_path": str(batch.job_path),
+            "result_path": str(batch.result_path),
+            "status": "incomplete",
+        }
+        if batch.batch_id in quarantined:
+            item["status"] = "quarantined"
+            last_error = retry_state.get(batch.batch_id, {}).get("last_error", "")
+            if last_error:
+                item["reason"] = str(last_error)
+            statuses.append(item)
+            continue
+        try:
+            validate_agent_batch_result(batch, raw_dir=raw_dir, require_raw=require_raw)
+        except ValueError as exc:
+            item["reason"] = str(exc)
+        else:
+            item["status"] = "valid"
+        statuses.append(item)
+    return statuses
 
 
 def batch_expected_record_ids(batch: AgentBatch) -> set[str]:
@@ -1100,6 +1141,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--merge-only", action="store_true")
     parser.add_argument("--validate-agent-results", action="store_true")
     parser.add_argument("--validate-agent-batch", default="")
+    parser.add_argument("--agent-status", action="store_true")
     parser.add_argument("--record-agent-failure", default="")
     parser.add_argument("--failure-reason", default="")
     parser.add_argument("--max-agent-attempts", type=int, default=3)
@@ -1165,6 +1207,21 @@ def main() -> None:
             require_raw=not args.allow_missing_agent_raw,
         )
         print("agent_results_valid")
+        return
+    if args.agent_status:
+        print(
+            json.dumps(
+                {
+                    "batches": agent_batch_statuses(
+                        args.agent_dir,
+                        raw_dir=args.agent_raw_dir,
+                        require_raw=not args.allow_missing_agent_raw,
+                    )
+                },
+                ensure_ascii=False,
+                sort_keys=True,
+            )
+        )
         return
     if args.mhlw_only:
         collect_from_mhlw(

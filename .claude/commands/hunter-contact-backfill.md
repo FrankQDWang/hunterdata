@@ -113,13 +113,14 @@ After each dispatch or notification, run short filesystem checks instead of endi
 find "${RUN_DIR}/agents/results" -maxdepth 1 -type f -size +0 | sort | wc -l
 find "${RUN_DIR}/raw/agents" -type f -name '*.meta.json' | sort | wc -l
 cat "${RUN_DIR}/agents/stream_state.json"
+uv run python -m scripts.claude_agent_workflow --agent-status --agent-dir "${RUN_DIR}/agents" --agent-raw-dir "${RUN_DIR}/raw/agents"
 tail -n 20 "${RUN_DIR}/static-stream.log"
 ```
 
 Continue until:
 - `${RUN_DIR}/agents/stream_state.json` says `"done": true`
-- every prompt in `${RUN_DIR}/agents/prompts/` has a matching non-empty result JSONL
-- every expected agent batch either passes validation or is listed as quarantined:
+- every batch reported by `--agent-status` has status `valid` or `quarantined`; quarantined batches intentionally have empty result JSONL after the bad result is archived
+- every expected non-quarantined agent batch passes validation:
   `uv run python -m scripts.claude_agent_workflow --validate-agent-results --agent-dir "${RUN_DIR}/agents" --agent-raw-dir "${RUN_DIR}/raw/agents"`
 
 5. Merge the batch and update the master output:

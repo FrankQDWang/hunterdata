@@ -7,6 +7,8 @@ import pytest
 from scripts.claude_agent_workflow import (
     AgentBatch,
     agent_batch_complete,
+    agent_batch_statuses,
+    batch_expected_record_ids,
     build_agent_jobs,
     build_claude_background_command,
     default_candidate_provider,
@@ -352,6 +354,46 @@ def test_merge_agent_results_updates_by_record_id_and_preserves_order(tmp_path):
     assert zh_output_csv.exists()
 
 
+def test_merge_agent_results_uses_agent_confidence_for_adopted_result(tmp_path):
+    base_csv = tmp_path / "base.csv"
+    result_dir = tmp_path / "results"
+    result_dir.mkdir()
+    raw_dir = tmp_path / "raw"
+    raw_file = _write_raw(raw_dir, "agent-001", "a.txt")
+    write_csv(base_csv, [enriched_row("a")])
+    (result_dir / "agent-001-results.jsonl").write_text(
+        json.dumps(
+            {
+                "record_id": "a",
+                "company_name": "株式会社 サンプル",
+                "email": "info@sample.co.jp",
+                "contact_form_url": "",
+                "company_url": "https://sample.co.jp/",
+                "source_url": "https://sample.co.jp/contact/",
+                "source_text_path": str(raw_file),
+                "status": "email_found",
+                "confidence": "low",
+                "hunter_likelihood": "medium",
+                "hunter_likelihood_reason": "Official site describes recruitment service.",
+                "notes": "low confidence official contact evidence",
+            },
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    merged = merge_agent_results(
+        base_csv=base_csv,
+        result_dir=result_dir,
+        raw_dir=raw_dir,
+        output_csv=tmp_path / "out.csv",
+        zh_output_csv=tmp_path / "out_zh.csv",
+    )
+
+    assert merged[0]["confidence"] == "low"
+
+
 def test_merge_agent_results_rejects_invalid_hunter_likelihood(tmp_path):
     base_csv = tmp_path / "base.csv"
     result_dir = tmp_path / "results"
@@ -539,6 +581,61 @@ def test_agent_batch_complete_rejects_wrong_company_evidence(tmp_path):
         validate_agent_batch_result(batch, raw_dir=raw_dir)
 
 
+def test_agent_batch_complete_rejects_self_reported_url_as_company_evidence(tmp_path):
+    row = enriched_row("a")
+    row["company_url"] = "https://sample.co.jp/"
+    jobs = build_agent_jobs([row], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "batches",
+        prompt_dir=tmp_path / "prompts",
+        result_dir=tmp_path / "results",
+        log_dir=tmp_path / "logs",
+        raw_dir=raw_dir,
+    )[0]
+    raw_file = _write_raw(
+        raw_dir,
+        "agent-001",
+        "a.txt",
+        text="Wrong Company official page 06-9999-9999",
+        url="https://wrong.example/contact/",
+    )
+    result = _agent_result("a", raw_file)
+    result["company_url"] = "https://sample.co.jp/"
+    result["source_url"] = "https://wrong.example/contact/"
+    batch.result_path.write_text(json.dumps(result, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    assert not agent_batch_complete(batch, raw_dir=raw_dir)
+    with pytest.raises(ValueError, match="does not prove same company"):
+        validate_agent_batch_result(batch, raw_dir=raw_dir)
+
+
+def test_agent_batch_complete_rejects_source_url_that_does_not_match_raw_metadata(tmp_path):
+    row = enriched_row("a")
+    row["company_url"] = "https://sample.co.jp/"
+    jobs = build_agent_jobs([row], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "batches",
+        prompt_dir=tmp_path / "prompts",
+        result_dir=tmp_path / "results",
+        log_dir=tmp_path / "logs",
+        raw_dir=raw_dir,
+    )[0]
+    raw_file = _write_raw(raw_dir, "agent-001", "a.txt", url="https://sample.co.jp/contact/")
+    result = _agent_result("a", raw_file)
+    result["source_url"] = "https://wrong.example/contact/"
+    batch.result_path.write_text(json.dumps(result, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    assert not agent_batch_complete(batch, raw_dir=raw_dir)
+    with pytest.raises(ValueError, match="source_url does not match Dokobot metadata URL"):
+        validate_agent_batch_result(batch, raw_dir=raw_dir)
+
+
 def test_agent_batch_complete_rejects_error_status_for_retry(tmp_path):
     jobs = build_agent_jobs([enriched_row("a")], candidate_provider=lambda row: [])
     raw_dir = tmp_path / "raw"
@@ -626,6 +723,45 @@ def test_quarantined_agent_batch_counts_complete_and_preserves_static_row(tmp_pa
     assert (tmp_path / "agents" / "quarantine.jsonl").exists()
     assert batch.result_path.read_text(encoding="utf-8") == ""
     validate_agent_batches_complete(tmp_path / "agents", raw_dir=raw_dir)
+
+
+def test_agent_batch_statuses_reports_valid_quarantined_and_incomplete(tmp_path):
+    raw_dir = tmp_path / "raw"
+    jobs = build_agent_jobs(
+        [enriched_row("valid"), enriched_row("quarantined"), enriched_row("incomplete")],
+        candidate_provider=lambda row: [],
+    )
+    batches = write_agent_batches(
+        jobs,
+        agents=3,
+        batch_dir=tmp_path / "agents" / "batches",
+        prompt_dir=tmp_path / "agents" / "prompts",
+        result_dir=tmp_path / "agents" / "results",
+        log_dir=tmp_path / "agents" / "logs",
+        raw_dir=raw_dir,
+        one_job_per_prompt=True,
+    )
+    batches_by_job = {next(iter(batch_expected_record_ids(batch))): batch for batch in batches}
+    batches_by_job["valid"].result_path.write_text(
+        json.dumps(_agent_result("valid", _write_raw(raw_dir, "agent-001", "valid.txt")), ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    batches_by_job["quarantined"].result_path.write_text("bad json\n", encoding="utf-8")
+    record_agent_validation_failure(
+        agent_dir=tmp_path / "agents",
+        batch_id=batches_by_job["quarantined"].batch_id,
+        failure_reason="invalid json",
+        max_attempts=1,
+    )
+
+    statuses = {
+        item["batch_id"]: item["status"]
+        for item in agent_batch_statuses(tmp_path / "agents", raw_dir=raw_dir)
+    }
+
+    assert statuses[batches_by_job["valid"].batch_id] == "valid"
+    assert statuses[batches_by_job["quarantined"].batch_id] == "quarantined"
+    assert statuses[batches_by_job["incomplete"].batch_id] == "incomplete"
 
 
 def test_validate_agent_batches_complete_rejects_incomplete_results(tmp_path):

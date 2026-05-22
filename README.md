@@ -91,7 +91,14 @@ flowchart TD
 Manifest smoke:
 
 ```bash
-uv run python -m scripts.mhlw_manifest --limit 5 --sleep-seconds 0
+mkdir -p data/runs/smoke/manifest
+uv run python -m scripts.mhlw_manifest \
+  --manifest-csv data/runs/smoke/manifest/mhlw_manifest.csv \
+  --manifest-jsonl data/runs/smoke/manifest/mhlw_manifest.jsonl \
+  --checkpoint data/runs/smoke/manifest/checkpoint.json \
+  --raw-dir data/runs/smoke/manifest/raw \
+  --limit 5 \
+  --sleep-seconds 0
 ```
 
 Prepare a small resumable batch, fetching official MHLW rows if needed:
