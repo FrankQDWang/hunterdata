@@ -1,0 +1,432 @@
+# 株式会社ソフトガーデン
+> https://www.soft-garden.co.jp/
+
+[1]
+[2]
+---
+2025.12.1
+セキュリティ方針を改定しました。
+---
+2025.10.1
+代表取締役が交代しました。
+---
+2023.1.6
+ISTQB®パートナープログラムにてISTQB® Gold パートナーに認定されました。
+---
+2022.3.1
+ウクライナ難民の人道的救済のため国連UNHCR協会を通じて寄付しました。
+---
+[3]
+---
+2021.6.21
+ホームページをリニューアルいたしました。
+---
+2016.10.4
+会社概要にISMS認証取得を掲載。
+---
+2016.4.1
+情報セキュリティ方針を公開しました。
+---
+2015.8.1
+首都圏営業開始しました。
+---
+2014.11. 25
+業務内容更新しました。
+---
+INFORMATION
+---
+> [4]
+ABOUT
+**お客様にマッチしたソフトウェアを。**
+私たちソフトガーデンは、最先端のコンピューター技術を駆使した、ソフトウェアの開発、評価・テスト、サービス・サポートを行う会社です。 お客様のニーズにお応えするソフトウェア製品を開発、提供する上で、品質の向上を常に心掛け、社会の発展に寄与し、すべての協力者との相互繁栄を目指しております。
+
+> MORE [5]
+---
+SERVICE
+
+[6]
+[7]
+[8]
+[9]
+[10]
+
+**ITソリューション事業**
+クラウドサービス、ITシステム、組込みシステムの機能開発、業務支援ツールの開発から、運用保守ツールの開発までお客様のご要望に合わせたソリューションを提供いたします。
+**IT課題の解決に向けたヒアリング、調査、分析から設計・開発、運用保守までトータルでコーディネイト**
+**ソフトウェア開発・評価**
+**システム保守・運用**
+---
+> **業務内容（一例）**
+01
+
+Software development / evaluation
+
+**ソフトウェア開発・評価**
+
+[11]
+**要件定義**
+
+Webシステム系、モバイル系、組込系などのシステム開発、評価、保守、コンサルティングなど、幅広いお客様のニーズに対応しています。納品後も責任を持ってフォローします。
+お客様のニーズを確認し、技術要素も調査。システムの機能・要件・性能も明確化。
+
+[12]
+
+[13]
+**設計**
+
+要件定義から基本設計を行い、機能の具体的な仕様・処理も技術的に決定。
+
+[14]
+**開発・テスト**
+
+詳細設計からプログラミングし、単体テストレベルで仕様通りか確認。
+
+[15]
+**評価**
+
+システム結合や総合テストにより、基本設計レベルでの検証を実施。
+---
+**業務内容（一例）**
+> 02
+> System maintenance and operation
+> **システム保守・運用**
+**システム保守**
+> [16]
+開発が完了したシステムに障害が起こらないようにシステムを強化。
+> 開発・導入したシステムの保守・運用面を支援します。納品後のシステム保守、システム運用監視、システムオペレーション、ヘルプデスクなど、保守や運用面に係るサービスを行います。
+
+> [17]
+**システム運用監視**
+> [18]
+システムの安定稼働を行うための監視、トラブル発生時の復旧対応と改善。
+
+**システムオペレーション**
+> [19]
+サーバーの起動／停止や定期ジョブの実行、バックアップ運用、帳票運用。
+
+**ヘルプデスク**
+> [20]
+お客様製品・サービスに関連する情報とサポートをエンドユーザーなどに提供。
+---
+[21]
+[22]
+[23]
+[24]
+[25]
+
+**実績紹介**
+
+**販売関係**
+**情報関係**
+**製造関係**
+**物流関係**
+**金融関係**
+
+**業種**
+**システム**
+**概要**
+販売（薬品）
+お薬管理システム
+コンシューマ向けお薬管理システムサーバー開発 PHP
+販売（書籍）
+書籍購読システム、アプリ
+コンシューマ向け書籍購読システムサーバーおよびモバイルアプリ開発 Java AWS
+販売（動画）
+動画視聴システム
+コンシューマ向け動画購読システムサーバー開発 Java AWS
+**主要取引先様**
+株式会社アイキューブ
+株式会社アイティフラッグス
+アークシステム株式会社
+株式会社アルバック
+インフォテクノ株式会社
+株式会社ウイン・コンサル
+株式会社HBA
+株式会社NTTデータ
+株式会社NTTデータCCS
+株式会社エム・ソフト
+株式会社エンテックス
+キーウェア北海道株式会社
+サイバーコム株式会社
+株式会社システナ
+株式会社クレスコ
+東京コンピュータサービス株式会社
+中央システム株式会社
+ナレッジビーンズ株式会社
+ハイテクシステム株式会社
+富士ソフト株式会社
+株式会社ユー・エス・イー
+株式会社CS
+株式会社デジック
+北都システム株式会社
+株式会社NTTネクシア
+株式会社札幌情報ソリューションズ
+株式会社システムサイエンス
+HISホールディングス株式会社
+株式会社GSI
+株式会社電通システム
+日立システムズ株式会社
+---
+COMPANY
+
+> **代表メッセージ**
+2020年、新型感染症による世界的大流行が我々の生活を一変させ、大勢の人の命を奪い人と人との集いを抑制し社会を分断しました。
+経済は低迷し失業から困窮する人も大勢います。
+わが社は情報通信産業を通じ法人としての社会的責任を果たすべく、社員の雇用を守り、これから情報処理の職を目指す人への雇用機会を創出します。 公平な機会と安心して働ける環境を第一に、一人ひとりの個性を受容し理解し認めること、そして失敗や過ちに寛容な心で、許しと勇気を与えられる企業文化を創りあげていきます。
+
+個性を認め合い共同から協働する仲間とともに、情報通信産業の発展に貢献していきます。
+> 代表取締役 長南 満
+---
+**理念**
+いつも100年継続することを考える会社を目指す！ いつも継続する会社になるために、社会秩序を守り、社会から求められ、社会を幸福にすることができる会社になること。 社員は、スキルも大事だけれども、世の中から、お客様から、社内から、チームから求められ働きたいと思われる人財を目指し、 会社も、そのような有能な社員が働き続けられる環境を目指す。 そして、自由でクリエイティブな挑戦をすることを会社は歓迎し、若手が成長する会社でありたい。
+---
+[26]
+---
+[27]
+---
+**会社情報**
+会社名
+株式会社ソフトガーデン
+設立
+2001年4月10日
+資本金
+5,000万円
+代表取締役社長（会長兼務） 長南 満
+役員
+取締役 前田 亜沙子
+
+札幌事業所本社 〒060-0051 札幌市中央区南1条東3丁目10番13号アイパスビル3階
+所在地
+横浜事業所 〒222-0033 神奈川県横浜市港北区新横浜3丁目7番18号日総第18ビル7階
+
+取引銀行
+北洋銀行
+事業登録
+労働者派遣事業 派01-300692
+労働者派遣事業 派01-300692 有料職業紹介事業 01-ユ-300398
+MSA-IS-308 / ISO 27001 ・ソフトウェア開発及びシステム運用についての技術者の派遣及び管理業務 ・受託ソフトウェア開発業務
+
+> ISTQBゴールドパートナー
+登録・認証
+> **ISTQBゴールドパートナー**
+> IVECシルバーパートナー
+
+> **IVECシルバーパートナー**
+
+JIET（特定非営利活動法人 日本情報技術取引所） IVIA（一般社団法人IT検証産業協会） JSTQB（Japan Testing Certification Board） HISA（北海道情報産業システム協会） 民紹協（公益社団法人 全国民営職業紹介事業協会） FutureStageパートナー会 札幌商工会議所
+加盟団体
+---
+**会社沿革**
+
+2000年4月
+> 個人事業として創業 建設業務系ソフトウェアの販売事業
+2001年4月
+> 有限会社ソフトガーデン設立
+2001年6月
+> ブロードバンドのユーザーサポート受託開始
+2004年4月
+> ソフトウェア委託開発・請負業務開始
+2011年10月
+> 特定派遣業の開始
+2012年11月
+> 名称を「株式会社ソフトガーデン」に変更 本社を札幌市（現在地）に移転 資本金を400万円に増資
+2014年7月
+> 資本金を1,000万円に増資
+2016年9月
+> ISMS取得（本社一部取得）
+2017年7月
+> 一般派遣業の開始
+2017年9月
+> ISMS取得（全社取得）
+2017年9月
+> 資本金を4,000万円に増資
+2018年12月
+> 資本金を5,000万円に増資
+---
+[28]
+**組織図**
+---
+[29]
+---
+RECRUIT
+技術をもっと極めたい、経験が少ないが挑戦したい、ブランクがあるがふたたび取り組みたい、いろいろな思いを持ち、自身を成長させたいと思ったら、私達とともにソフトガーデンを盛り上げていきませんか。 そして自身のキャリアを充実させていきましょう。
+---
+REQUIREMENTS TYPE
+**募集職種**
+---
+**スマホアプリ開発**
+
+仕事内容
+> スマホ・タブレットアプリの設計・製造・運用業務を担当 ご経験している内容を考慮し適切な役割を担当します。
+応募資格
+> Java・kotlin・swift・objective-Cのいずれかを 使用したシステムの製造・運用経験がある方
+歓迎
+> 設計経験者 基本情報処理技術者・応用情報技術者・該当する言語資格・AWSなどクラウド系資格の保有 何かしらのアプリ開発ツール使用経験
+給与
+> 経験・能力などを考慮の上、当社規程により決定 240,000～380,000円
+手当
+> 通勤手当（全額支給）、役付手当、残業手当、家族手当、住宅手当、 資格取得お祝い金（資格取得キャンペーン有り）等
+昇給・賞与
+> 昇給／年1回（10月） 賞与／年2回（5月、10月）
+勤務地
+> 当社各事業所、札幌市近辺、首都圏
+勤務時間
+> 9:00～18:00 ※残業有（月平均約20時間）
+福利厚生
+> 各種社会保険完備
+休日・休暇
+> 完全週休2日制（土・日）、祝日、年末年始特別休暇、 夏季特別休暇、年次有給休暇、特別有給休暇（慶弔等）
+
+> **エントリー [30]**
+---
+**組込・制御系システムの開発**
+
+仕事内容
+> 組込み・制御系システムの設計・製造・運用業務を担当 ご経験している内容を考慮し適切な役割を担当します。
+応募資格
+> C・C++ のいずれかを使用したシステムの製造・運用経験がある方
+歓迎
+> 設計経験者 基本情報処理技術者・応用情報技術者・該当する言語資格・クラウド系資格の保有 リアルタイムOSやドライバー開発経験
+給与
+> 経験・能力などを考慮の上、当社規程により決定 240,000～380,000円
+手当
+> 通勤手当（全額支給）、役付手当、残業手当、家族手当、住宅手当、 資格取得お祝い金（資格取得キャンペーン有り）等
+昇給・賞与
+> 昇給／年1回（10月） 賞与／年2回（5月、10月）
+勤務地
+> 当社各事業所、札幌市近辺、首都圏 ※通勤時間考慮します。
+勤務時間
+> 9:00～18:00 ※残業有（月平均約20時間）
+福利厚生
+> 各種社会保険完備
+休日・休暇
+> 完全週休2日制（土・日）、祝日、年末年始特別休暇、 夏季特別休暇、年次有給休暇、特別有給休暇（慶弔等）
+> **エントリー [30]**
+---
+[Column 1]
+**キャリア技術者**
+
+[Column 2]
+**未経験・若手技術者**
+
+---
+**システムエンジニア・プログラマー**
+**募集要項**
+---
+**Salesforceシステムの開発**
+
+仕事内容
+> Salesforceシステムの設計・製造・運用業務を担当 ご経験している内容を考慮し適切な役割を担当します。
+応募資格
+> Salesforceを使用したシステムの製造・運用経験がある方
+歓迎
+> 設計経験者 Salesforce資格の保有 基本情報処理技術者・応用情報技術者・該当する言語資格・クラウド系資格の保有
+給与
+> 経験・能力などを考慮の上、当社規程により決定 240,000～380,000円
+手当
+> 通勤手当（全額支給）、役付手当、残業手当、家族手当、住宅手当、 資格取得お祝い金（資格取得キャンペーン有り）等
+昇給・賞与
+> 昇給／年1回（10月） 賞与／年2回（5月、10月）
+勤務地
+> 当社各事業所、首都圏 ※通勤時間考慮します。
+勤務時間
+> 9:00～18:00 ※残業有（月平均約20時間）
+福利厚生
+> 各種社会保険完備
+休日・休暇
+> 完全週休2日制（土・日）、祝日、年末年始特別休暇、 夏季特別休暇、年次有給休暇、特別有給休暇（慶弔等）
+
+> **エントリー [30]**
+---
+**WEBアプリケーション開発**
+
+仕事内容
+> Webアプリケーションの設計・製造・運用業務を担当 ご経験している内容を考慮し適切な役割を担当します。
+応募資格
+> Java・JavaScript・Python・Ruby・C♯・PHP・C++ のいずれかを 使用したシステムの製造・運用経験がある方
+歓迎
+> 設計経験者 基本情報処理技術者・応用情報技術者・該当する言語資格・AWSなどクラウド系資格の保有
+給与
+> 経験・能力などを考慮の上、当社規程により決定 240,000～380,000円
+手当
+> 通勤手当（全額支給）、役付手当、残業手当、家族手当、住宅手当、 資格取得お祝い金（資格取得キャンペーン有り）等
+昇給・賞与
+> 昇給／年1回（10月） 賞与／年2回（5月、10月）
+勤務地
+> 当社各事業所、札幌市近辺、首都圏 ※通勤時間考慮します。
+勤務時間
+> 9:00～18:00 ※残業有（月平均約20時間）
+福利厚生
+> 各種社会保険完備
+休日・休暇
+> 完全週休2日制（土・日）、祝日、年末年始特別休暇、 夏季特別休暇、年次有給休暇、特別有給休暇（慶弔等）
+
+> **エントリー [30]**
+---
+FAQ**よくあるご質問**
+HPに掲載されている職種以外にも、職種について問い合わせは可能ですか？
+職務経歴がないのですが、応募できますか？
+合否の連絡はどのように来ますか？
+---
+[31]
+
+CAREER UP
+近年、ITエンジニアのキャリアは、様々な方向性を選択できることが一般的になってきました。 プログラマーやテスターの下流工程の知識と経験を積んだうえで、将来は管理職を目標とするか、スペシャリストを目標とするか、ともに業務していくなかで、会社と相談しながら進めることができます。
+---
+VOICE
+**先輩社員の声**
+---
+ACCESS
+**札幌事業所本社**
+**横浜事業所**
+---
+事業内容 [32] 会社概要 [5] 採用情報 [33] アクセス [34] お知らせ [35] お問い合せ [36]
+---
+[37]
+---
+[38]
+---
+情報セキュリティ方針 [39] 労働者派遣法に基づく情報公開 [40]
+---
+Copyright © 2021 SOFT GARDEN Co.Ltd. All Rights Reserved.
+
+[1] https://maps.googleapis.com/maps/api/js/StaticMapService.GetMapImage?1m2&1i14894953&2i6616159&2e1&3u16&4m2&1u556&2u338&5m6&1e0&5sja&6sjp&10b1&12b1&14i47083502&8e1&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=73887
+[2] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/common/sitelogo.png
+[3] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/common/promo.png
+[4] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/about/image.png
+[5] https://www.soft-garden.co.jp/#section02
+[6] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/service/image_01.png
+[7] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/service/image_02.png
+[8] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/service/image_03.png
+[9] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/service/image_04.png
+[10] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/service/image_05.png
+[11] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/soft_01.png
+[12] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/image_01.png
+[13] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/soft_02.png
+[14] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/soft_03.png
+[15] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/soft_04.png
+[16] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/sys_01.png
+[17] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/image_02.png
+[18] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/sys_02.png
+[19] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/sys_03.png
+[20] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/sys_04.png
+[21] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/icon_01.png
+[22] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/icon_02.png
+[23] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/icon_03.png
+[24] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/icon_04.png
+[25] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/works/icon_05.png
+[26] https://www.soft-garden.co.jp/wp-content/uploads/ft_authorization_gold.png
+[27] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/common/ft_authorization_04.png
+[28] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/company/210930_organization.png
+[29] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/recruit/image_01.png
+[30] https://www.soft-garden.co.jp/#form
+[31] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/career/image_01.png
+[32] https://www.soft-garden.co.jp/#section01
+[33] https://www.soft-garden.co.jp/#section03
+[34] https://www.soft-garden.co.jp/#section04
+[35] https://www.soft-garden.co.jp/#section06
+[36] https://www.soft-garden.co.jp/#section05
+[37] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/common/ft_authorization_01.png
+[38] https://www.soft-garden.co.jp/wp-content/themes/lightning-pro-child/image/common/ft_authorization_02.png
+[39] https://www.soft-garden.co.jp/security/
+[40] https://www.soft-garden.co.jp/disclosure/

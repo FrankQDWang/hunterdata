@@ -73,7 +73,8 @@ Strong-process stages:
 Exploratory stage:
 - `hunter-contact-enricher` owns judgment work for unresolved companies only.
 - The subagent chooses likely official/public evidence pages, but it does not own completion criteria.
-- The subagent must not edit CSV files, infer email patterns, submit forms, use paid databases, use login-only/private social sources, or use search snippets/directory pages as final evidence.
+- WebSearch/WebFetch are allowed only for candidate discovery and triage. Final accepted evidence must still come from local Dokobot raw evidence.
+- The subagent must not edit CSV files, infer email patterns, submit forms, use paid databases, use login-only/private social sources, or use WebSearch/WebFetch output, search snippets, or directory pages as final evidence.
 - The validator owns acceptance. Subagent summaries, killed-task summaries, and non-empty JSONL files are not sufficient.
 
 ## Field Semantics
@@ -93,6 +94,7 @@ Exploratory stage:
 - Agent results must validate before they count as complete:
   - known `record_id`
   - valid status/confidence/hunter likelihood
+  - status/field consistency, including no email/form on `not_found` or `official_site_found_no_contact`
   - valid source URL fields
   - local Dokobot raw evidence path
   - sibling `.meta.json` proving `dokobot read --local --device ... --reuse-tab` succeeded

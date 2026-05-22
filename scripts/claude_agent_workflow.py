@@ -350,9 +350,35 @@ def validate_agent_result(result: dict[str, Any], known_record_ids: set[str]) ->
         value = normalized[field]
         if value and not _is_http_url(value):
             raise ValueError(f"agent result for {record_id} has invalid {field}: {value}")
+    _validate_agent_status_fields(normalized)
     if status in {"email_found", "contact_form_found", "official_site_found_no_contact"} and not normalized["source_url"]:
         raise ValueError(f"agent result for {record_id} must include source_url for status {status}")
     return normalized
+
+
+def _validate_agent_status_fields(result: dict[str, str]) -> None:
+    record_id = result["record_id"]
+    status = result["status"]
+    email = result["email"]
+    contact_form_url = result["contact_form_url"]
+    company_url = result["company_url"]
+
+    if status == "email_found" and not email:
+        raise ValueError(f"agent result for {record_id} has status email_found but no email")
+    if status == "contact_form_found":
+        if not contact_form_url:
+            raise ValueError(f"agent result for {record_id} has status contact_form_found but no contact_form_url")
+        if email:
+            raise ValueError(f"agent result for {record_id} has status contact_form_found but also includes email")
+    if status == "official_site_found_no_contact":
+        if email or contact_form_url:
+            raise ValueError(
+                f"agent result for {record_id} has status official_site_found_no_contact but includes email/contact_form_url"
+            )
+        if not company_url:
+            raise ValueError(f"agent result for {record_id} has status official_site_found_no_contact but no company_url")
+    if status == "not_found" and (email or contact_form_url):
+        raise ValueError(f"agent result for {record_id} has status not_found but includes email/contact_form_url")
 
 
 def validate_agent_raw_evidence(

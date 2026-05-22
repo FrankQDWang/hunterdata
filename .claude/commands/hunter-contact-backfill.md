@@ -26,7 +26,7 @@ Runtime parameters:
 Division of labor:
 - Python owns deterministic work only: incremental MHLW official crawl, batch selection, static enrichment, queue/prompt generation, merge validation, master upsert.
 - Claude main agent owns orchestration: start the background static queue, watch prompt/result/raw files, dispatch subagents, track active slots, retry killed/incomplete agents, and close finished agents.
-- `hunter-contact-enricher` owns judgment work: given one company, find the best official site/contact evidence and judge hunter likelihood using its own reasoning and local Dokobot reads.
+- `hunter-contact-enricher` owns judgment work: given one company, find the best official site/contact evidence and judge hunter likelihood using its own reasoning, WebSearch/WebFetch for candidate discovery, and local Dokobot reads for final evidence.
 - Do not make the main agent solve contact enrichment itself. Do not replace the subagent with Bash `curl`, Python scraping, or hard-coded per-site logic.
 - Do not override the main agent model; use the operator's current/default Claude Code model for orchestration. The `hunter-contact-enricher` subagent definition pins its own `model: haiku`.
 
@@ -101,7 +101,7 @@ This process updates:
 - Active count must never exceed `AGENT_LIMIT`.
 - When an active agent writes its expected JSONL result, validate that exact batch before freeing the slot:
   `uv run python -m scripts.claude_agent_workflow --validate-agent-batch <agent-NNN> --agent-dir "${RUN_DIR}/agents" --agent-raw-dir "${RUN_DIR}/raw/agents"`
-- Validation includes schema, raw local Dokobot metadata, and same-company evidence checks. A valid `not_found` is acceptable only when its raw evidence still proves the exact company by company name, phone, license number, or known official domain.
+- Validation includes schema, status/field consistency, raw local Dokobot metadata, and same-company evidence checks. A valid `not_found` is acceptable only when its raw evidence still proves the exact company by company name, phone, license number, or known official domain.
 - If validation fails, record the failure before retrying:
   `uv run python -m scripts.claude_agent_workflow --record-agent-failure <agent-NNN> --failure-reason "<validator error>" --agent-dir "${RUN_DIR}/agents" --max-agent-attempts 3`
 - If that command returns `"status": "retry"`, dispatch the returned `retry_prompt_path` for the same active slot. It has already archived the bad result and reset the expected result file.
@@ -115,7 +115,7 @@ When dispatching an agent, keep the prompt minimal. Give it the prompt file and 
 Process exactly this hunter-contact-enricher prompt:
 ${RUN_DIR}/agents/prompts/agent-NNN.md
 
-Read the prompt and its batch JSONL. Find the exact company's public business email, or if no email is confidently available, its public inquiry/contact form. Also set hunter_likelihood to high, medium, low, or exclude with a short reason. Use your own judgment to find the best official evidence page. You must use local Dokobot through scripts.dokobot_local_read for final evidence and write exactly one JSONL result to the required result path.
+Read the prompt and its batch JSONL. Find the exact company's public business email, or if no email is confidently available, its public inquiry/contact form. Also set hunter_likelihood to high, medium, low, or exclude with a short reason. Use your own judgment and WebSearch/WebFetch when needed to discover candidate official pages, but you must use local Dokobot through scripts.dokobot_local_read for final evidence and write exactly one JSONL result to the required result path.
 ```
 
 4. Keep the parent turn alive and monitor slots.

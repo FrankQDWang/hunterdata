@@ -1,0 +1,33 @@
+{
+  "tool": "dokobot",
+  "mode": "local",
+  "device_id": "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+  "url": "https://www.buffett-code.com/company/3y3nqn2pfi/",
+  "output_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-buffett.txt",
+  "meta_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-buffett.txt.meta.json",
+  "command": [
+    "dokobot",
+    "read",
+    "--local",
+    "--device",
+    "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+    "--timeout",
+    "120",
+    "-o",
+    "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-buffett.txt",
+    "--reuse-tab",
+    "https://www.buffett-code.com/company/3y3nqn2pfi/"
+  ],
+  "visible_tab": false,
+  "visible_tab_result": null,
+  "preopen_tab": false,
+  "preopen_tab_result": null,
+  "foreground_tab": false,
+  "reuse_tab": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Written to /Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-buffett.txt\n\nSession: 316047725955993601 (use --session-id to continue)\n",
+  "doko_list_output": "",
+  "started_at": "2026-05-22T03:00:47.575407+00:00",
+  "finished_at": "2026-05-22T03:01:02.254205+00:00"
+}

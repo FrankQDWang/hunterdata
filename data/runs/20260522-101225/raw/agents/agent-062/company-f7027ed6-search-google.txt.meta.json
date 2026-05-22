@@ -1,0 +1,33 @@
+{
+  "tool": "dokobot",
+  "mode": "local",
+  "device_id": "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+  "url": "https://www.google.com/search?q=%22N%26star%22+%E5%90%88%E5%90%8C%E4%BC%9A%E7%A4%BE+%E6%96%B0%E5%86%A0%E7%94%BA+%E4%BA%BA%E6%9D%90%E7%B4%B9%E4%BB%8B",
+  "output_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-search-google.txt",
+  "meta_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-search-google.txt.meta.json",
+  "command": [
+    "dokobot",
+    "read",
+    "--local",
+    "--device",
+    "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+    "--timeout",
+    "120",
+    "-o",
+    "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-search-google.txt",
+    "--reuse-tab",
+    "https://www.google.com/search?q=%22N%26star%22+%E5%90%88%E5%90%8C%E4%BC%9A%E7%A4%BE+%E6%96%B0%E5%86%A0%E7%94%BA+%E4%BA%BA%E6%9D%90%E7%B4%B9%E4%BB%8B"
+  ],
+  "visible_tab": false,
+  "visible_tab_result": null,
+  "preopen_tab": false,
+  "preopen_tab_result": null,
+  "foreground_tab": false,
+  "reuse_tab": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Written to /Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-062/company-f7027ed6-search-google.txt\n",
+  "doko_list_output": "",
+  "started_at": "2026-05-22T03:00:28.600328+00:00",
+  "finished_at": "2026-05-22T03:00:30.679428+00:00"
+}

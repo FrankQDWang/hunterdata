@@ -1,0 +1,109 @@
+# 株式会社 オフィス・インテグラル - ＧＷＩＮグループ
+> http://www.gwin.co.jp/group/int/office-int/
+
+[Column 1]
+[1]
+
+[Column 2]
+[2]
+
+[Column 3]
+[3]
+[4]
+
+---
+**トップ [5]** **グループ企業 [6]** **トピックス [7]** **採用情報 [8]**
+---
+株式会社 オフィス・インテグラル
+---
+GWINテクニカルセンタ（GTC）
+---
+**スペシャリストへの成長機会を提供します！**
+---
+GWINテクニカルセンタ（GTC）は、グループ企業の共通理念である「最高のサービスを提供する」を実践・展開するために、2000年８月 八王子市石川町に創設されました。
+---
+お客さまのニーズに応え、満足をいただくために、新入社員の育成や現役で活躍するメンバーのスキル向上を図ることを目的に、社会人として必要なビジネスの基礎研修からフィールドエンジニアとして必要な高度な技術知識の習得まで、経験豊かな講師陣による、画像診断機器の実機を用いた研修を実施しています。
+---
+**グループとしての強みを生かした採用・教育活動 **
+---
+洗練された技術は医療従事者や患者様に安心と信頼を提供します
+---
+**採用グループ**GWINグループ各社において活躍いただける社員の採用活動をしています。各社が必要とする職種・地域で、能力をいかんなく発揮していただくために、多方面にわたる優秀な人材の採用活動を随時行っています。
+---
+**教育グループ**GWINグループの一員として、新入社員から第一線で活躍する方まで、長いスパンでのスキルアップをサポートしています。社会人として身に付けておくべきビジネスマナー、電気、電子の基礎から、パソコン、ネットワーク、LINUXの教育、最先端の技術にいたるまで、経験豊かな講師陣による座学・実習研修でお客様との大きな信頼を築ける優秀なエンジニアの育成を目指します。
+---
+[9]
+---
+**新入社員研修**新入社員の方には、ビジネスマナーの基本、倫理規定などの基本から、今後仕事をしていく中で必要なスキル、知識、技術を身に付けます。
+---
+**スキルアップ**テクニカルセンタでは、センター内に設置の画像診断装置を使った実践的な研修を通じて、スペシャリストへの成長の機会を提供しています。
+---
+**オーバーホール**更新された装置などのオーバーホールはGTCで実施されます。
+---
+**安心と信頼**充実した研修によって培われた技術は、機器の安全操業を支え、結果として医療従事者の皆さまや患者さんに安心と信頼を提供します。
+---
+研修設備
+---
+GWINグループ企業合同で新入社員の育成や活躍中のメンバーを対象にスキルアッ プトレーニングを実施しています。
+---
+[10]
+CTスキャナー
+---
+[11]
+CTスキャナー用コンソール
+---
+[12]
+３Dプリンタ
+---
+[13]
+研修室
+---
+[14]
+実技研修
+---
+会社概要
+---
+所在地
+〒192-0032 東京都八王子市石川町94-1
+TEL
+042-660-5809
+FAX
+042-660-5930
+---
+[15]
+グループ企業
+> メニュー
+▶︎アクト・セン株式会社 [16]
+> ▶︎グループ会社 [6]
+▶︎スペリオルアドバンテック株式会社 [17]
+> ▶︎トピックス [7]
+[18]
+▶︎大通システム株式会社 [19]
+> ▶︎採用情報 [8]
+▶︎株式会社アシム・クリエイト [20]
+> ▶︎メンバー専用ページ [21]
+▶︎株式会社オフィス・インテグラル [22]
+copyright ©GWIN Group. All Rights Reserved.
+
+[1] http://www.gwin.co.jp/wp/wp-content/themes/leverweb-tema/header-left.png
+[2] http://www.gwin.co.jp/wp/wp-content/uploads/p0-1.jpg
+[3] http://www.gwin.co.jp/wp/wp-content/uploads/p1.jpg
+[4] http://www.gwin.co.jp/wp/wp-content/uploads/p2.jpg
+[5] http://www.gwin.co.jp/
+[6] http://www.gwin.co.jp/group/
+[7] http://www.gwin.co.jp/topics/
+[8] http://www.gwin.co.jp/recruit/
+[9] http://www.gwin.co.jp/wp/wp-content/uploads/oft-image2-1-2.png
+[10] http://www.gwin.co.jp/wp/wp-content/uploads/integ_ct.jpg
+[11] http://www.gwin.co.jp/wp/wp-content/uploads/integ_ctpc_1.jpg
+[12] http://www.gwin.co.jp/wp/wp-content/uploads/integ_3d_printer.jpg
+[13] http://www.gwin.co.jp/wp/wp-content/uploads/integ_training_2.jpg
+[14] http://www.gwin.co.jp/wp/wp-content/uploads/integ_training_1.jpg
+[15] http://www.gwin.co.jp/wp/wp-content/uploads/gwin_footer.png
+[16] http://www.gwin.co.jp/group/act1000/
+[17] http://www.gwin.co.jp/group/satex/
+[18] http://www.gwin.co.jp/wp/wp-content/themes/leverweb-tema/footer-imag-pc2.png
+[19] http://www.gwin.co.jp/group/daitsu-system/
+[20] http://www.gwin.co.jp/group/as-create/
+[21] https://gwin.act1000.jp/php/gmp_login.php
+[22] http://www.gwin.co.jp/group/int/

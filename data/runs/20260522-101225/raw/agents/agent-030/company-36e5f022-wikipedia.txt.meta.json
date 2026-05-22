@@ -1,0 +1,33 @@
+{
+  "tool": "dokobot",
+  "mode": "local",
+  "device_id": "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+  "url": "https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%83%E3%82%B0%E3%83%99%E3%83%B3_(%E4%BC%81%E6%A5%AD)",
+  "output_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-030/company-36e5f022-wikipedia.txt",
+  "meta_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-030/company-36e5f022-wikipedia.txt.meta.json",
+  "command": [
+    "dokobot",
+    "read",
+    "--local",
+    "--device",
+    "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+    "--timeout",
+    "120",
+    "-o",
+    "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-030/company-36e5f022-wikipedia.txt",
+    "--reuse-tab",
+    "https://ja.wikipedia.org/wiki/%E3%83%93%E3%83%83%E3%82%B0%E3%83%99%E3%83%B3_(%E4%BC%81%E6%A5%AD)"
+  ],
+  "visible_tab": false,
+  "visible_tab_result": null,
+  "preopen_tab": false,
+  "preopen_tab_result": null,
+  "foreground_tab": false,
+  "reuse_tab": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Written to /Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-030/company-36e5f022-wikipedia.txt\n",
+  "doko_list_output": "Local:\n  62882f0c-f9f1-49fc-83b4-c0f98b4d9ece  pid 23912, Chrome, ext 0.3.0\n\n  Try: dokobot read --local <url>\n       dokobot read --local --device <id> <url>\n",
+  "started_at": "2026-05-22T02:36:41.734707+00:00",
+  "finished_at": "2026-05-22T02:36:45.760989+00:00"
+}

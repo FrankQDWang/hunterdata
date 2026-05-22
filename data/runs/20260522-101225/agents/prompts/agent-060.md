@@ -1,0 +1,14 @@
+Process this hunter-contact-enricher job.
+
+The agent definition contains the task rules, acceptance criteria, Dokobot requirement, and output schema. This file is only the job envelope.
+
+Input JSONL:
+`data/runs/20260522-101225/agents/batches/agent-060.jsonl`
+
+Output JSONL:
+`data/runs/20260522-101225/agents/results/agent-060-results.jsonl`
+
+Raw Dokobot evidence directory:
+`data/runs/20260522-101225/raw/agents/agent-060/`
+
+Read the input JSONL, use its deterministic context as starting evidence, find the exact company's public business email or inquiry/contact form, judge `hunter_likelihood`, and write exactly one JSON object per input job to the output JSONL.

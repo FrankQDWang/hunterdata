@@ -1,0 +1,58 @@
+# お問い合わせ | 株式会社チセイ
+> http://chisei-tokachi.com/contact
+
+[1]
+---
+**TOP [2]** **COMPANY [3]** **BUSINESS [4]** **BLOG [5]** **WORKS [6]** **RECRUIT [7]** **CONTACT [8]**
+---
+お問い合わせ
+**Contact**
+---
+**Information**
+注意事項
+弊社へのお問い合わせは下記フォームにご記述の上、送信ボタンを押してください。 ※送信完了しましたらトップページへと移動します お問い合わせ内容については２営業日以内に確認次第、早急にご連絡いたします 連絡がない場合はメールが届いていない可能性などが考えられますの 恐れ入りますが一度お電話にてご連絡をお願いいたします
+---
+必須お名前
+---
+必須電話番号
+---
+必須メールアドレス
+---
+郵便番号
+---
+[9]
+---
+郵便番号か住所を入力すると郵便番号が検索できます
+---
+都道府県
+市区町村
+丁目番地
+---
+ご住所
+---
+お問い合わせ内容
+---
+必須送信確認
+---
+上記送信内容を確認したらチェックを入れてください
+---
+送信する
+---
+[10]
+
+**TOP [2]** **COMPANY [3]** **BUSINESS [4]**
+株式会社チセイ北海道帯広市東13条南3丁目1-14TEL 0155-28-3378 FAX 0155-28-3379
+**BLOG [5]** **WORKS [6]** **RECRUIT [7]** **CONTACT [8]**
+---
+**Copyright (C)Chisei All Rights Reserved**
+
+[1] http://chisei-tokachi.com/contents/wp-content/themes/chisei/img/logo.jpg
+[2] http://chisei-tokachi.com/
+[3] http://chisei-tokachi.com/company
+[4] http://chisei-tokachi.com/business
+[5] http://chisei-tokachi.com/blog
+[6] http://chisei-tokachi.com/works
+[7] http://chisei-tokachi.com/recruit
+[8] http://chisei-tokachi.com/contact
+[9] http://chisei-tokachi.com/contents/wp-content/themes/chisei/img/top_return_btn.png
+[10] http://chisei-tokachi.com/contents/wp-content/themes/chisei/img/footer_logo.png

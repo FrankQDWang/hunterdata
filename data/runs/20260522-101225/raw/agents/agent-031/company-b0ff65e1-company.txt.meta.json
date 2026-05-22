@@ -1,0 +1,33 @@
+{
+  "tool": "dokobot",
+  "mode": "local",
+  "device_id": "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+  "url": "https://www.north-t.co.jp/campany/",
+  "output_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-031/company-b0ff65e1-company.txt",
+  "meta_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-031/company-b0ff65e1-company.txt.meta.json",
+  "command": [
+    "dokobot",
+    "read",
+    "--local",
+    "--device",
+    "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+    "--timeout",
+    "120",
+    "-o",
+    "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-031/company-b0ff65e1-company.txt",
+    "--reuse-tab",
+    "https://www.north-t.co.jp/campany/"
+  ],
+  "visible_tab": false,
+  "visible_tab_result": null,
+  "preopen_tab": false,
+  "preopen_tab_result": null,
+  "foreground_tab": false,
+  "reuse_tab": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Written to /Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-031/company-b0ff65e1-company.txt\n",
+  "doko_list_output": "Local:\n  62882f0c-f9f1-49fc-83b4-c0f98b4d9ece  pid 23912, Chrome, ext 0.3.0\n\n  Try: dokobot read --local <url>\n       dokobot read --local --device <id> <url>\n",
+  "started_at": "2026-05-22T02:35:25.632706+00:00",
+  "finished_at": "2026-05-22T02:35:28.987695+00:00"
+}

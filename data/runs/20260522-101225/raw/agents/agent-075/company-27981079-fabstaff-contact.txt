@@ -1,0 +1,48 @@
+# お問い合わせ｜FabStaffService
+> https://fab-staff.com/contact/
+
+**0120-862-331** **mail@fab-staff.com**
+---
+お問い合わせ
+お仕事相談・登録 [1] お仕事検索 [2]
+---
+**お問い合わせ**
+---
+ご意見・ご要望・苦情等は以下の電話番号・メール・フォームのいずれかより承ります。
+---
+**電話番号**
+011-792-7217
+
+**メール**
+mail@fab-staff.com
+---
+**氏名・法人様名**
+**※必須**
+---
+**電話番号**
+**※必須**
+---
+**メールアドレス**
+**※必須**
+---
+**お問い合わせ内容**
+**※必須**
+---
+プライバシーポリシー [3]
+---
+会社概要 [4] お問い合わせ [5] サイトマップ [6] プライバシーポリシー [7]
+---
+株式会社FAB 〒001-0037 北海道札幌市北区北37条西4丁目3-12-5F
+---
+TEL：011-792-7217 FAX：011-792-6267 MAIL：mail@fab-staff.com
+---
+©FAB.inc All Rights Reserved.
+四角ロゴ
+
+[1] https://fab-staff.com/form/?id=14&from=single
+[2] https://fab-staff.com/
+[3] https://fab-staff.com/privacypolicy
+[4] https://fab-staff.com/company/
+[5] https://fab-staff.com/contact/
+[6] https://fab-staff.com/sitemap/
+[7] https://fab-staff.com/privacypolicy/

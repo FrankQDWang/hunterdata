@@ -1,0 +1,35 @@
+# COMPANY
+> https://hi-lab.co.jp/company/
+
+[1]
+---
+**HOME [2]** **SERVICE [3]** **COMPANY [4]** **CONTACT [5]**
+---
+**COMPANY**
+---
+HOME [2] COMPANY
+---
+COMPANY PROFILE
+---
+社名
+> 株式会社 ヒューマンイノベーションラボ
+本社所在地
+> 北海道札幌市中央区北2条西2丁目32
+代表者
+> 代表取締役 岡崎 哲也
+設立
+> 2023年 9月
+資本金
+> 500万円
+> 広告代理業及び各種の宣伝に関する業務人材の育成、職業適性、能力開発のための教育及びカウンセリング業務採用BPOサービス各種採用導入支援（新卒・中途・障がい者・外国人）
+事業内容
+---
+HOME [2] SERVICE [3] COMPANY [4] CONTACT [5]
+---
+Copyright © All Rights Reserved.
+
+[1] https://hi-lab.co.jp/wp-content/uploads/2023/08/%E3%83%AD%E3%82%B4.png
+[2] https://hi-lab.co.jp/
+[3] https://hi-lab.co.jp/service/
+[4] https://hi-lab.co.jp/company/
+[5] https://hi-lab.co.jp/contact/

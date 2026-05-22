@@ -1,0 +1,131 @@
+# 人材サービス総合サイト - 職業紹介事業詳細
+> https://jinzai.hellowork.mhlw.go.jp/JinzaiWeb/GICB102030.do?screenId=GICB102030&action=detail&detkey_Detail=04-%E3%83%A6-010055%2C1+++++
+
+[1]
+
+文字の大きさ
+小) 中) 大)
+---
+HOME [2] 職業紹介事業 [3] 職業紹介事業詳細
+---
+**職業紹介事業詳細**
+---
+令和8年5月1日現在
+---
+許可・届出受理番号
+04-ユ-010055
+---
+許可届出受理年月日
+平成12年12月01日
+---
+事業主名称
+有限会社あけぼの介護センター
+---
+事業所名称
+有限会社あけぼの介護センター
+---
+事業所所在地
+宮城県仙台市青葉区中江一丁目13番11号
+---
+電話番号
+022-796-6360
+---
+取扱職種
+専門的・技術的職業,管理的職業,事務的職業,販売の職業,サービスの職業,家政婦(夫)
+---
+取扱地域
+東北地方
+---
+その他
+---
+得意とする職種
+---
+参考情報（得意職種等）
+無
+---
+手数料
+有  [4]
+---
+返戻金制度
+無
+---
+備考
+---
+**職業紹介事業の運営「法第32条の16 第3項に関する事項（情報提供）」**
+---
+**就職者**
+**離職者数（無期雇用のうち就職後６ヶ月以内）（人）**
+**離職が判明せず（無期雇用のうち就職後６ヶ月以内）（人）**
+**情報登録年度**
+**4ヶ月以上有期及び無期（人）**
+**4ヶ月以上有期及び無期（人）うち無期（人）**
+**4ヶ月未満有期（人日）**
+
+令和02年度
+0
+0
+7
+0
+0
+令和03年度
+6
+6
+0
+0
+0
+令和04年度
+3
+3
+0
+0
+0
+令和05年度
+0
+0
+338
+0
+0
+令和06年度
+0
+0
+238
+0
+0
+令和07年度
+0
+0
+279
+0
+0
+---
+**職業紹介事業の運営「法第32条の16 第3項に関する事項（情報提供）その②」**
+---
+> **取扱業務の職種**
+> **手数料実績率・額**
+-
+> - -
+-
+> - -
+-
+> - -
+-
+> - -
+-
+> - -
+---
+**取扱業務の職種別の手数料実績率および離職率**
+---
+**取扱業務の職種** **手数料実績率又は額** **離職率**
+---
+[5]
+---
+[6]
+---
+厚生労働省All rights reserved, Copyright (C) Employment Security Bureau,Ministry of Health, Labour and Welfare
+
+[1] https://jinzai.hellowork.mhlw.go.jp/JinzaiWeb/jsp/img/icon/logo.gif
+[2] https://jinzai.hellowork.mhlw.go.jp/JinzaiWeb/GICB101010.do?action=initDisp&screenId=GICB101010
+[3] https://jinzai.hellowork.mhlw.go.jp/JinzaiWeb/GICB102040.do?screenId=GICB102040&action=transition&params=1
+[4] https://jinzai.hellowork.mhlw.go.jp/icb_data/UploadFiles/Jigyosho/04-%E3%83%A6-010055/tesuryo/%E6%89%8B%E6%95%B0%E6%96%99%E8%A1%A8.pdf
+[5] https://jinzai.hellowork.mhlw.go.jp/JinzaiWeb/jsp/img/button/close_button.gif
+[6] https://jinzai.hellowork.mhlw.go.jp/JinzaiWeb/jsp/img/icon/kourou_logo.gif

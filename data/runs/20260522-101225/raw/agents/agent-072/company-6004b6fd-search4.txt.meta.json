@@ -1,0 +1,33 @@
+{
+  "tool": "dokobot",
+  "mode": "local",
+  "device_id": "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+  "url": "https://www.google.com/search?q=%22%E5%8C%97%E6%B5%B7%E9%81%93%E5%80%B6%E6%A5%BD%E9%83%A8%22+%22HP%22+OR+%22%E3%82%A6%E3%82%A7%E3%83%96%22+OR+%22%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%22+%22%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%22&hl=ja&num=10",
+  "output_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-072/company-6004b6fd-search4.txt",
+  "meta_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-072/company-6004b6fd-search4.txt.meta.json",
+  "command": [
+    "dokobot",
+    "read",
+    "--local",
+    "--device",
+    "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+    "--timeout",
+    "120",
+    "-o",
+    "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-072/company-6004b6fd-search4.txt",
+    "--reuse-tab",
+    "https://www.google.com/search?q=%22%E5%8C%97%E6%B5%B7%E9%81%93%E5%80%B6%E6%A5%BD%E9%83%A8%22+%22HP%22+OR+%22%E3%82%A6%E3%82%A7%E3%83%96%22+OR+%22%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%22+%22%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%22&hl=ja&num=10"
+  ],
+  "visible_tab": false,
+  "visible_tab_result": null,
+  "preopen_tab": false,
+  "preopen_tab_result": null,
+  "foreground_tab": false,
+  "reuse_tab": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Written to /Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-072/company-6004b6fd-search4.txt\n\nSession: 316049822537568257 (use --session-id to continue)\n",
+  "doko_list_output": "Local:\n  62882f0c-f9f1-49fc-83b4-c0f98b4d9ece  pid 23912, Chrome, ext 0.3.0\n\n  Try: dokobot read --local <url>\n       dokobot read --local --device <id> <url>\n",
+  "started_at": "2026-05-22T03:09:07.359919+00:00",
+  "finished_at": "2026-05-22T03:09:10.303289+00:00"
+}

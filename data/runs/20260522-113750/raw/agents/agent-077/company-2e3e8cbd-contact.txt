@@ -1,0 +1,55 @@
+# お問い合わせ | 株式会社 福祉工房
+> https://f-kobo.co.jp/contact/
+
+[1]
+---
+**ホーム [2]**
+HOME [2]
+---
+**事業内容 [3]**
+Service [3]
+---
+**事業実績 [4]**
+Results [4]
+---
+**会社案内 [5]**
+Company [5]
+---
+**お問い合わせ [6]**
+---
+Contact [6]
+---
+[Column 1]
+HOME [2] お問い合わせ
+
+[Column 2]
+**お問い合わせ**
+
+---
+弊社に関するお問い合わせは、下記フォームより送信してください。お問い合わせいただきました内容は、弊社の掲げる個人情報保護方針に沿って管理し、お客様の同意なく第三者に開示・提供することはございません。詳細につきましては、当サイトの「個人情報保護方針 [7]」をご参照ください。
+---
+氏名
+---
+会社名・事業所名
+---
+メールアドレス
+---
+件名
+---
+お問い合わせ内容
+---
+個人情報保護方針 [7] 一般事業主行動計画 [8] 特定商取引に関する表示 [9] SECURITY ACTION [10] このサイトについて [11]
+---
+Copyright © 株式会社 福祉工房 All Rights Reserved.
+
+[1] https://f-kobo.co.jp/wp/wp-content/uploads/2021/08/logo.png
+[2] https://f-kobo.co.jp/
+[3] https://f-kobo.co.jp/service/
+[4] https://f-kobo.co.jp/results/
+[5] https://f-kobo.co.jp/company/
+[6] https://f-kobo.co.jp/contact/
+[7] https://f-kobo.co.jp/privacy/
+[8] https://f-kobo.co.jp/plan/
+[9] https://f-shopweb.easy-myshop.jp/c-law
+[10] https://f-kobo.co.jp/security-action/
+[11] https://f-kobo.co.jp/site/

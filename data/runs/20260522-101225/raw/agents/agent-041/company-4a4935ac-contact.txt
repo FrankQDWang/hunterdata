@@ -1,0 +1,36 @@
+# お問い合わせ
+> https://www.mik-s.jp/contact
+
+[1]
+会社概要 [2]
+MIKについて
+業務内容 [3]
+ブログ [4]
+お問い合わせ [5]
+---
+**お問合せ**
+弊社へのお問い合わせは、下記フォームよりご連絡いただきますようお願いいたします。
+---
+**お問合せフォーム**
+---
+**会社名**
+---
+**部署**
+---
+**お名前**
+---
+**お名前(ふりがな)**
+---
+**ご連絡先メールアドレス**
+---
+**ご連絡先電話番号**
+---
+**お問合せ内容**
+---
+送信
+
+[1] https://www.mik-s.jp/mik_logo_black.svg
+[2] https://www.mik-s.jp/gaiyou
+[3] https://www.mik-s.jp/business_content
+[4] https://www.mik-s.jp/blog
+[5] https://www.mik-s.jp/contact

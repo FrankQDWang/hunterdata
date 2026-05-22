@@ -1,0 +1,379 @@
+# 事業内容 | 株式会社GSI（札幌・東京・福岡・大阪・仙台）
+> https://glue-si.com/products/#global-hrs
+
+近年様々な産業においてIT化・デジタル化が進む中、日本においては深刻な社会問題として慢性的に IT人材が不足しており、ITの開発力不足に悩む企業に対し、当社はITエンジニアの派遣契約・準委任契約に基づくシステム開発・運用保守等を行うことや、請負契約に基づくシステムの受託開発を行う等の形態で札幌・東京・福岡・大阪・仙台を拠点に全国へサービスを提供しています。 特定の業種に依存せず、産業領域に特化しないことで、製造業、サービス業等様々な業種のお客様にサービスを提供しています。 お客様の開発負荷を軽減するため、豊富な知識と経験を持ったITエンジニア（システムエンジニア・プログラマー）が、お客様のオフィスに常駐し迅速かつ細やかにご要望にお応えします。 常駐開発サービスの背景には重要情報、機密情報の漏洩を未然に防ぐ目的等からも、お客様の社内（リモートワーク含む）でのシステム開発依頼が多い状況です。 当社は、情報セキュリティの重要性を認識しており、ISMS（ISO/IEC27001 情報セキュリティマネジメントシステム）やプライバシーマークを取得し、情報保護教育の徹底を実施しています。又、サービスの質の向上を図るため、QMS（ISO9001 品質マジメントシステム）を取得し、お客様への高品質なサービスを提供できる体制を整え、お客様のご要望を満たすとともに、QMSの維持・改善に取り組み、より一層の信頼を得られる企業を目指しています。
+---
+お客様がビジネス機会を失わず開発能力を拡大していただくため、当社は「最適なタイミング」で「最適なITエンジニア」をご提案します。
+---
+常駐開発サービス
+RESIDENT DEVELOPMENT
+最適なタイミングで最適なITエンジニアを
+
+> 派遣契約に基づ常駐開発サービス
+> 準委任契約に基づ常駐開発サービス
+---
+システムエンジニア／プログラマー／運用管理・保守等の幅広いITエンジニアをご提案します。 派遣契約に基づく常駐開発サービスは「労働力の提供」になります。準委任契約に基づく常駐開発サービスは「技術の提供」になります。 仕事の内容としては大きな差はありませんが、指揮命令系統が異なります。派遣契約に基づく常駐開発サービスは、派遣されたお客様から指示を貰い仕事に取組みます。準委任契約に基づく常駐開発サービスは、当社の現場管理責任者からの指示によって仕事に取組みます。
+---
+受託開発サービス
+ENTRUSTED DEVELOPMENT
+---
+主に常駐開発サービスを通じて首都圏のお客様から依頼される新規開発・保守開発等を持帰りの形態にて受託し、納品するサービスを展開しています。 様々なシステム開発の経験・ノウハウをもつ技術者が、札幌、東京、福岡、大阪、仙台に分散しておりますので、例えば、東京で「要件定義作業」と「設計作業」、福岡・仙台で「開発作業（リモート開発）」といった対応を行うことができ、お客様のニーズに柔軟に対応できる社内体制を整備しています。
+---
+業種を問わない技術ノウハウ
+様々な業種・幅広いベンダー案件への対応経験 多様な技術を蓄積する常駐/受託に対応可能な優秀なITエンジニアが多数在籍 フレキシブルな対応が可能
+
+プロパー中心の開発体制の構築
+プロパー比率を上げることによりチームワークが向上、高い品質提供が可能 統率のとれたメンバー構成により、円滑な作業で生産性向上、コストを削減 徹底したセキュリティ教育を受けているため、万全のセキュリティ体制 拠点全体での体制構築が可能
+---
+受託案件の実績多数
+上流工程から下流工程までの開発を多数経験、高い品質提供が可能 経験豊富なPM、PL、メンバーの体制維持により、管理作業やメンバーのコントロールも柔軟に対応が可能
+---
+受託開発サービスの流れ
+ヒアリング
+ご要望・状況をヒアリングします。
+---
+[Column 1]
+調査・分析
+
+[Column 2]
+ご要望をどのような方法で実現できるか調査・分析します。
+
+---
+[Column 1]
+要件定義
+
+[Column 2]
+実装すべき機能や満たすべき性能等を明確にします。
+
+---
+[Column 1]
+設 計
+
+[Column 2]
+システムの構成・システムの機能を設計します。システムに必要な機能をプログラムに分割し、データや処理の流れを明確に定義し、プログラムをモジュールに分割し、各プログラム内の構造設計を行います。
+
+---
+[Column 1]
+製 造
+
+[Column 2]
+設計書に基づいて各モジュールごとにプログラミングします。
+
+---
+[Column 1]
+テスト
+
+[Column 2]
+ご要望通りのシステムが製造されているか検証します。
+
+---
+[Column 1]
+保 守
+
+[Column 2]
+システムを最適に保つための保守・運用を行います。
+
+---
+受託開発サービスの体制
+---
+オフショア開発事業
+---
+当社はオフショア開発におけるビジネスの課題を解決し、成長を実現するための革新的なアプローチを追求しており、最先端のオフショア開発ソリューションを提供いたします。フィリピン特有のメリットと創業20年以上で培ったGSIの豊富な開発実績を掛け合わせたコスト削減にも品質にも強い開発を実現しました。下記のバナーよりご確認ください。
+---
+エンジニアスキル
+ENGINEER SKILLS
+
+> 保有資格一覧
+> 国家資格
+> 人数
+基本情報技術者
+> 173名
+応用情報技術者
+> 49名
+データベーススペシャリスト/ソフトウェア開発技術者
+> 4名
+情報セキュリティマジメント/情報セキュリティスペシャリスト
+> 18名
+> Java関連資格
+> 人数
+Oracle認定Javaプログラマ SE6(OCJ-P)
+> 19名
+Oracle認定Webコンポーネントディベロッパ（OCJ-WC）
+> 15名
+Oracle Certified Java Programmer, Silver SE7/SE8/SE11
+> 193名
+Oracle Certified Java Programmer, Gold SE7/SE8/SE11
+> 56名
+> Android関連資格
+> 人数
+Androidアプリケーション技術者認定試験ベーシック
+> 11名
+> データベース関連資格
+> 人数
+OSS-DB（Silver,Gold）
+> 50名
+ORACLE MASTER Oracle Database Bronze10g,12c/Silver11g,12c/Platinum
+> 27名
+> クラウド系関連資格
+> 人数
+AWS 認定デベロッパー – アソシエイト
+> 5名
+AWS 認定ソリューションアーキテクト – アソシエイト
+> 14名
+Google Cloud Professional Cloud Architect
+> 6名
+> Linux関連資格
+> 人数
+LPIC-3:LPI 304 Virtualization & High Availability Exam
+> 2名
+LPIC-2
+> 1名
+LPIC-1
+> 11名
+> 2026年4月1日現在
+---
+サービス販売
+SERVICE SALES
+GRANDITは様々な業種や企業への導入実績を持ち、お客様の目的や課題解決に対応した拡張性の高い 統合基幹システム(ERPパッケージ)です。 GSIはお客様のニーズに合わせた導入を提案、対応致します。
+> GSIは、Google社が提供するクラウド型グループウェア「Google Workspace (旧：G Suite)」の正規代理店です。 GmailやGoogleカレンダー、ドキュメントファイルの共有など、ビジネスに最適な基本機能を提供します。お客様の環境、ご要望に合わせて導入を総合的にサポートいたします。
+GRANDIT
+> Google Workspace
+店舗のことを知りつくした多機能 × 低価格なタブレットPOSレジ。飲食店に必要な機能に特化したPOSの為、シンプルで直感的な操作性。 基本のレジ業務はもちろん、リアルタイムでの売上集計・分析までお役立ち機能を標準搭載。 店内オペレーションに必要な機能の大半を実装しています。
+> UM SaaS Cloudは、製造業向けのクラウド型生産管理システムです。見積もりから受発注、生産管理までを一元管理し、製造業の効率化とDXを実現します。GSIはお客様のニーズや課題に最適な提案ができるよう、対応いたします。
+Uレジ
+> UM SaaS Cloud
+CAPは、社内情報も共有できるAIチャットサービスです。汎用AIには真似できない、自社独自のルールやナレッジに精通した専用環境を実現。調べ物や書類作成の時間を劇的に短縮し、コア業務への集中を加速させます。
+CAP
+---
+デジタルデザイン
+DEGITAL DESIGN
+コンセプトを視覚的に表現し、ユーザーエクスペリエンスを向上させる役割を果たすために。
+
+WEBデザイン
+WEBサイト制作
+WEBサイト運用支援
+CMS構築・導入
+デジタルマーケティング支援
+UI/UX改善
+アクセスログ解析
+グラフィックデザイン
+ロゴ・CI デザイン
+会社案内
+商品パッケージ
+ポスター・リーフレット
+販促物
+名刺・封筒
+---
+デジタル空間での情報伝達とユーザーエクスペリエンスを向上させる重要な役割を果たすWEBサイトの制作をはじめ、運用・管理・SEO 対策なども行うことで、より効果的なウェブサイト運用を実現していきます。また、視覚的なメッセージをより効果的に伝えるグラフィックデザインを制作し、クライアントの課題解決に貢献します。
+---
+アカウントマネジメント
+
+ACCOUNT MANAGEMENT
+
+お客様のニーズに合わせ製品やサービス、最適なソリューションを提供し、ビジネスの成長を促進します。
+
+クラウドサービスの導入サポート
+
+DX関連の課題解決サービス
+
+運用保守・コンサルティング
+
+当社では、システムやプロセスを円滑に運用し、効果的に維持管理するためのサービスを提供致します。 ビジネスの運用コストを削減し、ビジネスパフォーマンスの向上や課題解決を支援致します。
+
+> システム監視と トラブルシューティン
+> 定期的なメンテナンス
+> バックアップと復元
+
+> システムの定期的な メンテナンスを実施し 安定性とパフォーマンスを維持します
+> データのバックアップと 復元手順を定期的に実施し データの安全性を確保します
+> システムの日常的な運用監視を行い、 トラブルや問題が発生した際に 迅速に対応します
+
+> 新しいテクノロジーの導入と トレーニン
+> 問題の特定と改善提案
+> 戦略の立案と実行支援
+
+> システムやプロセスの問題を特定し、 効率性を向上させるため 改善提案を行います
+> ビジネス目標を達成するための アドバイスや戦略を提供し ソリューションの実行を支援します
+> 新しいテクノロジーの導入に関する アドバイスやトレーニングを提供し、 お客様のスキルや知識の向上を支援します。
+---
+Google WorkspaceはGoogleが提供するクラウド型の情報共有ができる総合アプリケーションです。 ビジネスや教育で必要とされる基本機能がほとんどそろい、あらゆる規模の企業に、シンプルで強力なコミュニケーションとコラボレーションのツールをご提供します。 すべての機能がブラウザ上で使用できるため、コンピュータへのインストールの必要もなく、インターネットへ接続していれば場所や端末を選びません。 導入のご相談・有料版利用のメリットについては下記のバナーよりご確認ください。
+---
+当社では、DX関連の課題解決に定額料金で幅広く対応するサービスを提供しています。 お客様のご要望に応じたDX導入・運用に関するご相談・対応をワンストップで行い、お客様のDXとの距離を近づけるサポートをさせていただきます。詳しくは下記のバナーよりご確認ください。
+---
+[1]
+[2]
+---
+[3]
+---
+[4]
+[5]
+---
+[6]
+---
+[Column 1]
+[7]
+[8]
+
+[Column 2]
+[9]
+[10]
+
+[Column 3]
+[11]
+
+[Column 4]
+[12]
+
+[Column 5]
+[13]
+
+[Column 6]
+[14]
+
+---
+グローバル人材サービス
+GLOBAL HUMAN RESOURCE SERVICES
+企業の多様なニーズに応じて、適切な人材を迅速に確保し、 効果的な人材活用を支援します。
+> 特定技能制度事業
+詳しくは下記のバナーよりご確認ください。
+
+> お問い合わせ・資料請求
+> お問い合わせ [15]
+---
+日本国内の特定産業分野における深刻な人手不足を解消し、経済成長を支えるために設立された特定技能制度で企業の人手不足を解消し、成長を支えるために、特定技能を持つ外国人労働者と日本企業をつなぐサービスを提供しています。 労働者と企業の双方に対して幅広いサポートを提供し、スムーズな雇用プロセスを実現します。
+---
+[16]
+---
+**企業情報 [17]**
+**事業内容 [18]**
+> **活動報告 [19]**
+> **採用情報 [20]**
+
+代表挨拶 [21]
+GSIのシステム開発 [22]
+> **取り組み [23]**
+> **ビジネスパートナー募集 [24]**
+
+経営理念 [25]
+常駐開発 [26]
+
+> SDGs [27]
+> **お問い合わせ [15]**
+会社概要 [28]
+受託開発 [29]
+
+> コンプライアンスに関する基本方針 [30]
+
+会社沿革 [31]
+エンジニアスキル [32]
+> システム開発のお問い合わせ [33]
+
+> 贈収賄・腐敗行為防止に関する基本方針 [34]
+
+組織体制 [35]
+サービス販売 [36]
+> 採用についてのお問い合わせ [37]
+
+> 内部統制システムの整備に関する基本方針 [38]
+
+拠点情報 [39]
+GRANDIT [40]
+> 企業パートナーについてのお問い合わせ [41]
+
+コーポレート・ガバナンス体制 [42]
+GoogleWorkspace [43]
+> 個人情報保護に関する基本方針 [44]
+> フリーランスについてのお問い合わせ [45]
+
+リスク管理・コンプライアンス体制 [46]
+Uレジ [47]
+> ISO/IEC規格に関する基本方針 [48]
+> Google Workspaceについてのお問い合わせ [49]
+
+UM SaaS Cloud [50]
+> 情報セキュリティ基本方針 [51]
+
+**お知らせ [52]**
+> パッケージ製品についてのお問い合わせ [53]
+
+CAP [54]
+> 品質基本方針 [55]
+
+> その他お問い合わせ [56]
+
+**IR情報 [57]**
+デジタルデザイン [58]
+> 環境基本方針 [59]
+
+> 緊急のお問い合わせ [60]
+
+アカウントマネジメント [61]
+> 許認可事業 [62]
+
+グローバル人材サービス [63]
+
+> ©2023 GSI Co., Ltd.
+
+[1] https://glue-si.com/wp-content/uploads/contact_recruit.png
+[2] https://glue-si.com/wp-content/uploads/contact_gogle.png
+[3] https://glue-si.com/wp-content/uploads/company__02.jpg
+[4] https://glue-si.com/wp-content/uploads/top-entrusteddevelopment.jpg
+[5] https://glue-si.com/wp-content/uploads/top-employeequalification.jpg
+[6] https://glue-si.com/wp-content/uploads/top-system.jpg
+[7] https://glue-si.com/wp-content/uploads/top-packagesales.jpg
+[8] https://glue-si.com/wp-content/uploads/contact_package.png
+[9] https://glue-si.com/wp-content/uploads/top-degital-design.jpg
+[10] https://glue-si.com/wp-content/uploads/contact_ir.jpg
+[11] https://glue-si.com/wp-content/uploads/contact_other.png
+[12] https://glue-si.com/wp-content/uploads/head-corporate.jpg
+[13] https://glue-si.com/wp-content/uploads/contact_emergency.jpg
+[14] https://glue-si.com/wp-content/uploads/top-global-hrs.jpg
+[15] https://glue-si.com/contact/
+[16] https://glue-si.com/wp-content/uploads/global-hrs_banner-01.jpg
+[17] https://glue-si.com/company/
+[18] https://glue-si.com/products/
+[19] https://glue-si.com/csr/
+[20] https://recruit.glue-si.com/
+[21] https://glue-si.com/company/#company-greeting
+[22] https://glue-si.com/products/system/
+[23] https://glue-si.com/effort/
+[24] https://glue-si.com/business/
+[25] https://glue-si.com/company/#company-philosophy
+[26] https://glue-si.com/products/#resident
+[27] https://glue-si.com/effort/sdgs/
+[28] https://glue-si.com/company/#company-overview
+[29] https://glue-si.com/products/#entrusted
+[30] https://glue-si.com/effort/compliance/
+[31] https://glue-si.com/company/#company-history
+[32] https://glue-si.com/products/#skills
+[33] https://glue-si.com/contact/contact-system/
+[34] https://glue-si.com/effort/anti-bribery/
+[35] https://glue-si.com/company/#company-chart
+[36] https://glue-si.com/products/#package
+[37] https://glue-si.com/contact/contact-recruit/
+[38] https://glue-si.com/effort/internalcontrol/
+[39] https://glue-si.com/company/#company-access
+[40] https://glue-si.com/products/grandit/
+[41] https://glue-si.com/contact/contact-business/
+[42] https://glue-si.com/company/#company-corporate
+[43] https://glue-si.com/products/googleworkspace/
+[44] https://glue-si.com/effort/privacy/
+[45] https://glue-si.com/contact/contact-freelance/
+[46] https://glue-si.com/company/#company-risk
+[47] https://glue-si.com/products/uregi/
+[48] https://glue-si.com/effort/security/
+[49] https://glue-si.com/contact/contact-googleworkspace/
+[50] https://glue-si.com/products/umsaascloud/
+[51] https://glue-si.com/effort/security/#security-info
+[52] https://glue-si.com/news/
+[53] https://glue-si.com/contact/contact-package/
+[54] https://glue-si.com/products/cap/
+[55] https://glue-si.com/effort/security/#security-quality
+[56] https://glue-si.com/contact/contact-other/
+[57] https://glue-si.com/ir/
+[58] https://glue-si.com/products/#degital-design
+[59] https://glue-si.com/effort/security/#security-environment
+[60] https://glue-si.com/contact/contact-emergency/
+[61] https://glue-si.com/products/#account-manegement
+[62] https://glue-si.com/effort/licensed/
+[63] https://glue-si.com/products/#global-hrs

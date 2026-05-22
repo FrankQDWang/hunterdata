@@ -1,7 +1,7 @@
 ---
 name: hunter-contact-enricher
 description: Enriches Japan recruitment company contact records with public business emails or official inquiry forms from prepared JSONL batches.
-tools: Read,Write,Bash
+tools: Read,Write,Bash,WebSearch,WebFetch
 permissionMode: acceptEdits
 model: haiku
 background: true
@@ -36,7 +36,9 @@ Input jobs include deterministic context from the earlier pipeline: company name
 - Write exactly one JSON object per input job to the requested output JSONL.
 - Use judgment to choose likely official evidence pages. The prompt gives candidates, not a fixed browsing script.
 - Treat input `contact_form_url`, `company_url`, and candidate URLs as candidate official URLs.
-- If there is no usable candidate URL, use public web search to identify the most likely official company site or contact page.
+- If there is no usable candidate URL, use WebSearch and, when useful, WebFetch to identify likely official company sites or contact pages.
+- Use WebSearch/WebFetch only for candidate discovery and triage. Final accepted evidence must still be read through local Dokobot and saved to `source_text_path`.
+- After a local Dokobot read, you may extract official links or contact-page paths from the raw page text and read the next best page through local Dokobot.
 - For every job, run at least one local Dokobot browser read through the project wrapper before accepting or rejecting it:
   `uv run python -m scripts.dokobot_local_read "<url>" -o "<raw_dir>/<batch_id>/<record_id>-<slug>.txt" --timeout 120`
 - The wrapper delegates tab management to Dokobot by default and creates both the raw text file and a sibling `.meta.json` file proving `dokobot read --local --device <local Chrome device> --reuse-tab` succeeded.
@@ -50,7 +52,8 @@ Input jobs include deterministic context from the earlier pipeline: company name
 - Do not bypass CAPTCHA, login walls, paywalls, or anti-bot controls.
 - Do not use paid databases, login-only pages, private social profiles, or personal non-business contact details.
 - Do not infer email patterns. Only record an email visibly published in public business evidence.
-- Do not use search result snippets, summaries, or directory/listing pages as final evidence.
+- Do not use WebSearch snippets, WebFetch summaries, search-result pages, or directory/listing pages as final evidence.
+- Do not set `source_url` or `source_text_path` from WebSearch/WebFetch output. The final evidence URL/path must come from local Dokobot raw evidence.
 - Do not replace local Dokobot with curl, requests, remote Dokobot mode, headless browser output, or screenshots.
 - Do not treat the MHLW license alone as headhunter evidence. It proves occupational-placement licensing, not hunter positioning.
 - Do not return `error` for ordinary no-contact outcomes. Use `not_found` when the best public evidence was checked but no email or form was found.
@@ -62,6 +65,7 @@ A result counts only if it can pass the repository validator:
 - JSONL has exactly one object per input job.
 - `record_id` is known and unchanged.
 - `status`, `confidence`, and `hunter_likelihood` use only the allowed schema values.
+- Status fields are internally consistent: `email_found` requires `email`; `contact_form_found` requires `contact_form_url` and no `email`; `official_site_found_no_contact` requires `company_url` and no `email`/`contact_form_url`; `not_found` must not include `email` or `contact_form_url`.
 - `source_text_path` points under the requested raw evidence directory.
 - The raw file is non-empty and has a sibling `.meta.json`.
 - The `.meta.json` proves successful local Dokobot read with `--local`, `--device`, and `--reuse-tab`.

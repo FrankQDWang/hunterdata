@@ -1,0 +1,33 @@
+{
+  "tool": "dokobot",
+  "mode": "local",
+  "device_id": "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+  "url": "https://www.houjin-bangou.nta.go.jp/search?k=%E3%82%A8%E3%82%B9%E3%83%BB%E3%82%A4%E3%83%BC%E3%83%BB%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3&m=1",
+  "output_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-051/company-1feaf1c3-nta.txt",
+  "meta_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-051/company-1feaf1c3-nta.txt.meta.json",
+  "command": [
+    "dokobot",
+    "read",
+    "--local",
+    "--device",
+    "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+    "--timeout",
+    "120",
+    "-o",
+    "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-051/company-1feaf1c3-nta.txt",
+    "--reuse-tab",
+    "https://www.houjin-bangou.nta.go.jp/search?k=%E3%82%A8%E3%82%B9%E3%83%BB%E3%82%A4%E3%83%BC%E3%83%BB%E3%82%B8%E3%83%A3%E3%83%91%E3%83%B3&m=1"
+  ],
+  "visible_tab": false,
+  "visible_tab_result": null,
+  "preopen_tab": false,
+  "preopen_tab_result": null,
+  "foreground_tab": false,
+  "reuse_tab": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Written to /Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-051/company-1feaf1c3-nta.txt\n",
+  "doko_list_output": "Local:\n  62882f0c-f9f1-49fc-83b4-c0f98b4d9ece  pid 23912, Chrome, ext 0.3.0\n\n  Try: dokobot read --local <url>\n       dokobot read --local --device <id> <url>\n",
+  "started_at": "2026-05-22T02:53:06.011633+00:00",
+  "finished_at": "2026-05-22T02:53:09.421551+00:00"
+}

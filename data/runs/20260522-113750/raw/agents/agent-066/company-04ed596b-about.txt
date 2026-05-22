@@ -1,0 +1,137 @@
+# 会社情報 | クラリスアート - 岩手県盛岡市でシステム開発を行うIT企業です。
+> https://www.clariceart.co.jp/about/
+
+about
+**会社情報**
+---
+[1]
+---
+**— Outline**
+**会社概要**
+---
+商号 クラリスアート株式会社（英文表記： clariceart Co., Ltd.）
+---
+設立年月日 2016年11月11日
+---
+資本金 2,200万円
+---
+役員
+代表取締役 藤村 昌也@専務取締役 藤村 圭介
+---
+取引銀行
+岩手銀行、盛岡信用金庫
+---
+事業内容
+システム開発、システム運用、労働者派遣事業（派03-300071）、有料職業紹介事業（03-ユ-300100）
+---
+会社概要 クラリスアート株式会社 会社案内(PDF) [2]
+---
+従業員数 31名（2025年10月1日現在）
+---
+TEL 019-681-3838
+---
+FAX 019-601-3068
+---
+メールアドレス info@clariceart.co.jp
+---
+本社 〒020-0034 岩手県盛岡市盛岡駅前通15-18 Lavieビル
+---
+TEL 019-681-3838
+---
+FAX 019-601-3068
+---
+所在地
+---
+**— History**
+**沿革**
+---
+2016年11月
+設立
+---
+社員雇用、事業開始 →代表、取締役、社員11名でスタート
+2017年04月
+---
+2018年02月
+盛岡駅前に移転
+---
+2018年06月
+社員数20名突破
+---
+2020年01月
+社員数30名突破
+---
+2020年04月
+新卒採用開始
+---
+2020年11月
+「いわて働き方改革推進運動」参加宣言
+---
+2021年09月
+事業年度変更、9月決算へ
+---
+2022年02月
+CM放映開始（TV、WEB等）
+---
+2022年03月
+「いわて子育てにやさしい企業等」認証取得
+---
+「仕事と介護を両立できる職場環境」認証取得
+---
+2024年09月
+「いわて女性活躍認定企業等（ステップ1）」認定取得
+---
+「ISO/IEC 27001:2022（JIS Q 27001:2023）」認証取得 認証範囲 ・システムの設計、開発、保守、運用 ・Webサービスの企画、開発、運営 ・システムエンジニアリングサービスの提供
+2025年05月
+---
+**— Business**
+**実績**
+
+> 医療機器メーカー工程支援および周辺システム構築 気象情報WEBサイト画面構築 ECモール一元管理システム構築 買取管理システム 宿泊予約管理システム 遺品整理案件管理システム構築（詳細はこちら [3]）
+事業実績
+---
+[4]
+
+本社 〒020-0034 岩手県盛岡市盛岡駅前通15-18 Lavieビル
+
+TEL 019-681-3838
+FAX 019-601-3068
+---
+クラリスアート株式会社
+---
+PAGES
+TOP  [5]
+会社情報  [6]
+採用情報  [7]
+職業紹介事業  [8]
+お問い合わせ  [9]
+個人情報保護方針  [10]
+情報セキュリティ基本方針  [11]
+---
+CONTENTS
+お知らせ  [12]
+数字で見るクラリスアート  [13]
+社員インタビュー  [14]
+デスクツアー  [15]
+CM  [16]
+---
+[17]
+---
+© 2023-2026 clariceart All rights reserved.
+
+[1] https://www.clariceart.co.jp/images/loading_logo.svg
+[2] https://storage.googleapis.com/ca-corpsite-storage/cms/_6f8abea169/_6f8abea169.pdf
+[3] https://www.clariceart.co.jp/introduction
+[4] https://www.clariceart.co.jp/images/site_logo.svg
+[5] https://www.clariceart.co.jp/
+[6] https://www.clariceart.co.jp/about
+[7] https://www.clariceart.co.jp/recruit
+[8] https://www.clariceart.co.jp/job_placement
+[9] https://www.clariceart.co.jp/contact/default
+[10] https://www.clariceart.co.jp/privacy
+[11] https://www.clariceart.co.jp/security
+[12] https://www.clariceart.co.jp/news
+[13] https://www.clariceart.co.jp/recruit/#recruit_in-numbers
+[14] https://www.clariceart.co.jp/recruit/#recruit_employee-interview
+[15] https://www.clariceart.co.jp/recruit/#recruit_desk-tour
+[16] https://youtu.be/KZtj3KgKoMk
+[17] https://www.clariceart.co.jp/images/isms_mark.png

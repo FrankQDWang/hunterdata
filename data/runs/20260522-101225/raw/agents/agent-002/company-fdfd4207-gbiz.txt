@@ -1,0 +1,149 @@
+# 有限会社北見マーケットコミュニケーションズ | 3460302000541 | Gビズインフォ
+> https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541
+
+gBizINFO [1] 経済産業省 [2] **ホーム [1]** **Gビズインフォとは [3]** **APIの利用 [4]** **ダウンロード [5]** **よくある質問 [6]** **法人番号付与ツール [7]** **自社プロフィール管理 [8]**
+---
+ホーム [1] 法人プロフィール
+---
+経済産業省が提供する gBizINFO(Gビズインフォ) は、政府保有の法人情報を法人番号に紐づけてデータ整理を行い、２次利用可能なオープンデータとして情報提供するサイトです。
+---
+**有限会社北見マーケットコミュニケーションズ**
+
+**PDF **
+
+ 法人番 [9]
+企業情報一覧
+---
+基本情報  [10] 事業所  [11] 財務  [12] 決算  [13] 特許  [14] 届出・認定  [15] 補助金交付  [16] 調達  [17] 表彰  [18] 職場  [19] 出典元  [20]
+---
+基本情報
+---
+**法人番号**
+3460302000541  法人番号公表サ [9]
+---
+**本店所在地**
+北海道北見市中央三輪８丁目７番地９  法人番号公表サ [9]
+---
+**代表者名**
+---
+**資本金**
+---
+**従業員数**
+---
+**企業規模詳細**
+---
+**事業概要**
+---
+**企業ホームページ**
+---
+**創業年**
+---
+**設立年月日**
+---
+**業種**
+---
+**全省庁統一資格**
+---
+事業所
+---
+財務
+---
+決算
+---
+特許
+> 0件
+
+届出・認定
+> 0件
+
+補助金交付
+> 0件
+---
+調達
+0件
+---
+表彰
+0件
+---
+職場
+---
+出典元
+---
+**Gビズインフォが提供する主な3つのサービス**
+---
+** 法人に関 **
+---
+** 自社 API**
+---
+** 法 ダウン**
+---
+[Column 1]
+[21]
+法人番号、または法人名によって、法人のプロフィールを参照することができます。法人種別や本社所在地等、各種の条件によっても検索が可能です。
+
+[Column 2]
+[22]
+
+[Column 3]
+[23]
+
+---
+REST APIにより法人情報を取得することができます。
+---
+法人基本情報、法人活動情報をCSV形式、PDF形式、JSON形式でダウンロードできます。
+---
+**法人情報を検索する [1]**
+---
+**REST APIを利用する [4]**
+---
+**データをダウンロードする [5]**
+---
+**本サイトのご案内**
+---
+お知らせ [24]
+メンテナンス情報 [25]
+データダッシュボード [26]
+出典元 [27]
+活用事例 [28]
+---
+利用規約 [29]
+プライバシーポリシー [30]
+アクセシビリティ [31]
+サイトマップ [32]
+---
+**経済産業省（法人番号：4000012090001）**
+---
+Copyright Ministry of Economy, Trade and Industry. All Rights Reserved.
+
+[1] https://info.gbiz.go.jp/hojin/Top
+[2] https://www.meti.go.jp/
+[3] https://content.info.gbiz.go.jp/about/index.html
+[4] https://content.info.gbiz.go.jp/api/index.html
+[5] https://info.gbiz.go.jp/hojin/DownloadTop
+[6] https://help.info.gbiz.go.jp/hc/ja
+[7] https://content.info.gbiz.go.jp/tools/nayose/index.html
+[8] https://info.gbiz.go.jp/profile/
+[9] https://www.houjin-bangou.nta.go.jp/
+[10] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#profile
+[11] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#office
+[12] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#finance
+[13] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#result
+[14] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#patent
+[15] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#certify
+[16] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#subsidy
+[17] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#procurement
+[18] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#award
+[19] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#workplace
+[20] https://info.gbiz.go.jp/hojin/ichiran?hojinBango=3460302000541#source
+[21] https://info.gbiz.go.jp/hojin/common/images/about-img1.png
+[22] https://info.gbiz.go.jp/hojin/common/images/about-img2.png
+[23] https://info.gbiz.go.jp/hojin/common/images/about-img3.png
+[24] https://help.info.gbiz.go.jp/hc/ja/sections/4574660767518
+[25] https://help.info.gbiz.go.jp/hc/ja/sections/4793595222174
+[26] https://info.gbiz.go.jp/hojin/dashboard
+[27] https://help.info.gbiz.go.jp/hc/ja/articles/4795050523806
+[28] https://help.info.gbiz.go.jp/hc/ja/sections/4804142427038
+[29] https://help.info.gbiz.go.jp/hc/ja/articles/4795140981406
+[30] https://help.info.gbiz.go.jp/hc/ja/articles/4795141062686
+[31] https://help.info.gbiz.go.jp/hc/ja/articles/4966872107294
+[32] https://content.info.gbiz.go.jp/sitemap/index.html

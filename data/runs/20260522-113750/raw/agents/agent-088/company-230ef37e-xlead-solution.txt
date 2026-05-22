@@ -1,0 +1,222 @@
+# 事業紹介 | 株式会社 クロスリード
+> https://www.xlead.co.jp/solution/
+
+**SOLUTION**
+**事業紹介**
+---
+[1]
+---
+**DX推進事業**
+Microsoft Power Platformを中心としたDX推進、ローコード開発のご提案をいたします。
+DX推進サポートサービス「groWiz」は、 スタポート・オーダーメイド・テクニカルサポートの4つのサービスで、Microsoft Power Platformを活用した業務のデジタル化を導入から運用まで幅広くサポート致します。
+**groWizを見る [2]**
+---
+[3]
+---
+[4]
+---
+**システムインテグレーション**
+---
+当社事業のコアとなるサービスであり、法人・社会基盤、公共など多種多様なシステム構築をトータルでサポート致します。
+---
+[5]
+**製造業・流通・サービス**
+行程管理システム／ピッキングシステム販売管理システム／在庫管理システム
+数多くのシステム導入を通じて得たノウハウにより、お客様の業務形態に合わせPKG提案の他、更なる効率化に向け個別開発も行います。
+---
+[6]
+**社会基盤**
+LIFE LINE 関連システム／メディア関連システム
+運輸、情報通信、メディア、エネルギー業界などのシステム構築支援をご提供しています。専用機器の制御、業務システムの構築など高度化するお客様ニーズに対応致します。
+---
+[7]
+**文教**
+授業収録配信・学習支援システム
+講義やセミナー内容を動画として配信を行い、自宅からインターネット経由で受講が可能となリます。また授業科目管理や学習状況確認機能などにより、教員が生徒の受講状況を管理する事も可能です。
+---
+[8]
+**業種共通**
+勤怠管理システム／人事管理システム給与システム
+従業員の出退勤時間を記録する事により、残業を含めた労働時間の管理の効率化を図ります。また集計結果を給与システムヘ連携する事も可能です。社員の個人情報や、異動、評価情報を収集、一元管理を行うことにより、人事部門の業務効率化を図り、勤怠データを元にした毎月の給与計算や、年末調整等の業務の効率化を図ります。
+---
+**インフラ系**
+サーバ構築／ネットワーク構築
+顧客システムの開発や、パッケージ導入に伴うサーバ環境の構築を行います。また、最新のネットワーク機器や技術を用い、社内セキュリティを考慮したネットワーク環境の構築を行います。
+---
+**分析**
+BI(Business Intelligence)ソリューション
+様々なBlシステムの導入実績により、お客様へ最適なシステムのご提案、導入のご支援を致します。
+---
+[9]
+---
+**コンサルティング**
+---
+幅広い業種業態のシステム構築で培った知見と経験を活かし、地方自治体様や企業様に戦略的な情報活用を提案します。
+---
+[Column 1]
+[10]
+**業務コンサル**
+調達支援、業務効率化支援の豊富な実績により、現状に合わせた最善のコンサルティングを行います。
+
+[Column 2]
+[11]
+**セキュリティ研修**
+職員様向けに最新の状況に合わせたセキュリティ研修を実施致します。
+
+---
+**技術者情報**
+---
+C
+---
+[Column 1]
+開発言語
+
+[Column 2]
+[12]
+
+---
+C++
+---
+Java
+---
+PHP
+---
+PERL
+---
+Python
+---
+COBOL
+---
+HTML
+---
+XML/XSL/DTD
+---
+PL/SQL
+---
+Visual Basic 6.0以前
+---
+Visual Basic.NET
+---
+Visual C++ 6.0以前
+---
+Visual C++.NET
+---
+[13]
+
+資格保持者
+[14]
+---
+C#
+---
+Pro*C
+---
+DB
+ORACLE
+SQL Server
+Access
+PostgreSQL
+MySQL
+---
+PMP (ProjectManagementProfessional)
+---
+第1種・第2種・基本情報処理技術者
+---
+ソフトウェア開発技術者
+---
+応用情報技術者
+---
+プロジェクトマネージャ
+---
+情報セキュリティアドミニストレータ
+---
+情報セキュリテイマネジメント
+---
+データベーススペシャリスト
+---
+ネットワークスペシャリスト
+---
+情報セキュリティスペシャリスト
+---
+エンベッドシステムスペシャリスト
+---
+ORACLE MASTER Gold
+---
+ORACLE MASTER Silver
+---
+ORACLE MASTER Bronze
+---
+**販売事業**
+
+お客様のご要望に応じて最適な機器、ソフトウェア等をご提案させていただきます。
+
+[15]
+取扱品目・商品
+---
+[Column 1]
+株式会社 クロスリード
+宮城県仙台市青葉区本町2-15-1ルナール仙台13階
+
+[Column 2]
+採用TOP [16]
+クロスリードで働く人 [17]
+新卒採用 [18]
+キャリア採用 [19]
+
+---
+TOP [20]
+---
+事業紹介 [21]
+---
+会社概要 [22]
+---
+理念と行動 [23]
+---
+アライアンスパートナー [24]
+---
+個人情報保護方針 [25]
+---
+品質方針 [26]
+---
+サステナビリティ基本方針 [27]
+---
+[28]
+---
+マテリアリティ [29]
+---
+お問い合わせ [30]
+---
+お知らせ一覧 [31]
+---
+© 株式会社クロスリード All rights reserved.
+
+[1] https://www.xlead.co.jp/growiz/img/growiz_min.png
+[2] https://www.xlead.co.jp/growiz/
+[3] https://www.xlead.co.jp/img/common/bnr_bp.jpg
+[4] https://www.xlead.co.jp/img/newsletter/bnr.png
+[5] https://www.xlead.co.jp/img/common/ico-s-seizo.svg
+[6] https://www.xlead.co.jp/img/common/ico-s-lifeline.svg
+[7] https://www.xlead.co.jp/img/common/ico-s-bunkyo.svg
+[8] https://www.xlead.co.jp/img/common/ico-s-common.svg
+[9] https://www.xlead.co.jp/img/common/ico-s-infra.svg
+[10] https://www.xlead.co.jp/img/common/ico-s-consulting.svg
+[11] https://www.xlead.co.jp/img/common/ico-s-security.svg
+[12] https://www.xlead.co.jp/img/solution/engineer_photo1.jpg
+[13] https://www.xlead.co.jp/img/solution/engineer_photo2.jpg
+[14] https://www.xlead.co.jp/img/solution/engineer_photo3.jpg
+[15] https://www.xlead.co.jp/img/solution/sale_photo1.jpg
+[16] https://www.xlead.co.jp/recruit/
+[17] https://www.xlead.co.jp/recruit/person/
+[18] https://www.xlead.co.jp/recruit/graduate/
+[19] https://www.xlead.co.jp/recruit/career/
+[20] https://www.xlead.co.jp/
+[21] https://www.xlead.co.jp/solution/
+[22] https://www.xlead.co.jp/company/
+[23] https://www.xlead.co.jp/policy/
+[24] https://www.xlead.co.jp/partner/
+[25] https://www.xlead.co.jp/policy/privacy/
+[26] https://www.xlead.co.jp/policy/quality/
+[27] https://www.xcat.co.jp/ja/sustainability/policy.html
+[28] https://www.xlead.co.jp/img/common/11820725_200_jp.png
+[29] https://www.xcat.co.jp/ja/sustainability/materiality.html
+[30] https://www.xlead.co.jp/contact/
+[31] https://www.xlead.co.jp/news/

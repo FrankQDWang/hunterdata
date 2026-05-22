@@ -424,6 +424,107 @@ def test_merge_agent_results_rejects_invalid_hunter_likelihood(tmp_path):
         )
 
 
+def test_merge_agent_results_rejects_official_site_no_contact_with_contact_form(tmp_path):
+    base_csv = tmp_path / "base.csv"
+    result_dir = tmp_path / "results"
+    result_dir.mkdir()
+    raw_dir = tmp_path / "raw"
+    raw_file = _write_raw(raw_dir, "agent-001", "known.txt")
+    write_csv(base_csv, [enriched_row("known")])
+    result = _agent_result("known", raw_file)
+    result["status"] = "official_site_found_no_contact"
+    result["contact_form_url"] = "https://sample.co.jp/contact/"
+    (result_dir / "agent-results.jsonl").write_text(
+        json.dumps(result, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="official_site_found_no_contact"):
+        merge_agent_results(
+            base_csv=base_csv,
+            result_dir=result_dir,
+            raw_dir=raw_dir,
+            output_csv=tmp_path / "out.csv",
+            zh_output_csv=tmp_path / "out_zh.csv",
+        )
+
+
+def test_merge_agent_results_rejects_not_found_with_contact_form(tmp_path):
+    base_csv = tmp_path / "base.csv"
+    result_dir = tmp_path / "results"
+    result_dir.mkdir()
+    raw_dir = tmp_path / "raw"
+    raw_file = _write_raw(raw_dir, "agent-001", "known.txt")
+    write_csv(base_csv, [enriched_row("known")])
+    result = _agent_result("known", raw_file)
+    result["status"] = "not_found"
+    result["source_url"] = ""
+    result["contact_form_url"] = "https://sample.co.jp/contact/"
+    (result_dir / "agent-results.jsonl").write_text(
+        json.dumps(result, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="not_found"):
+        merge_agent_results(
+            base_csv=base_csv,
+            result_dir=result_dir,
+            raw_dir=raw_dir,
+            output_csv=tmp_path / "out.csv",
+            zh_output_csv=tmp_path / "out_zh.csv",
+        )
+
+
+def test_merge_agent_results_rejects_contact_form_status_without_contact_form(tmp_path):
+    base_csv = tmp_path / "base.csv"
+    result_dir = tmp_path / "results"
+    result_dir.mkdir()
+    raw_dir = tmp_path / "raw"
+    raw_file = _write_raw(raw_dir, "agent-001", "known.txt")
+    write_csv(base_csv, [enriched_row("known")])
+    result = _agent_result("known", raw_file)
+    result["status"] = "contact_form_found"
+    result["contact_form_url"] = ""
+    (result_dir / "agent-results.jsonl").write_text(
+        json.dumps(result, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="contact_form_found"):
+        merge_agent_results(
+            base_csv=base_csv,
+            result_dir=result_dir,
+            raw_dir=raw_dir,
+            output_csv=tmp_path / "out.csv",
+            zh_output_csv=tmp_path / "out_zh.csv",
+        )
+
+
+def test_merge_agent_results_rejects_email_status_without_email(tmp_path):
+    base_csv = tmp_path / "base.csv"
+    result_dir = tmp_path / "results"
+    result_dir.mkdir()
+    raw_dir = tmp_path / "raw"
+    raw_file = _write_raw(raw_dir, "agent-001", "known.txt")
+    write_csv(base_csv, [enriched_row("known")])
+    result = _agent_result("known", raw_file)
+    result["status"] = "email_found"
+    result["email"] = ""
+    (result_dir / "agent-results.jsonl").write_text(
+        json.dumps(result, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="email_found"):
+        merge_agent_results(
+            base_csv=base_csv,
+            result_dir=result_dir,
+            raw_dir=raw_dir,
+            output_csv=tmp_path / "out.csv",
+            zh_output_csv=tmp_path / "out_zh.csv",
+        )
+
+
 def test_merge_agent_results_rejects_missing_raw_evidence(tmp_path):
     base_csv = tmp_path / "base.csv"
     result_dir = tmp_path / "results"

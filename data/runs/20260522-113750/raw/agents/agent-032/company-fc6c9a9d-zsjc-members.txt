@@ -1,0 +1,10 @@
+# CakePHP: the rapid development php framework: Errors
+> https://www.zsjc.or.jp/member/
+
+CakePHP: the rapid development php framework [1]
+---
+Not Found
+---
+**Error: ** The requested address**'/member'** was not found on this server.
+
+[1] http://cakephp.org/

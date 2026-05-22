@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="google-site-verification" content="-ZmO8oDuPT3s4_JVsIl6aPy9KAylC-PnDdLZUQxtP20">
+<meta http-equiv="content-language" content="ja-JP">
+<meta charset="utf-8">
+<meta name="description" content="株式会社グラン・メディコ　お問い合わせ">
+<meta name="keywords" content="グラン・メディコ,翔嶺館 グループ,お問い合わせ">
+<link rel="canonical" href="https://www.shoureikan.jp/g-medico/contact.html">
+<title>翔嶺館グループ 株式会社グラン・メディコ | お問い合わせ</title>
+<script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/header_footer.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-102945829-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+	<link href="css/import.css" rel="stylesheet">
+	<link href="css/subpage/contact.css" rel="stylesheet">
+	<link href="css/exvalidation.css" rel="stylesheet">
+</head>
+
+<body id="body_html">
+	<div id="container">
+		<div id="body">
+			<div id="main_contents">
+				<div class="main_contents_wrap">
+					<h2>お問い合わせ</h2>
+					<p>　ご相談やお問い合わせについて、お電話のほか下記メールフォームよりお問い合わせいただくことが可能です。状況によりご返信にお時間いただく場合がありますので、予めご了承下さい。<br /> 　各講座の申込用紙をご希望の方は、「件名」に「申込用紙請求」、 「お問い合わせ内容」に受講希望の講座名をご入力いただきますよう お願い申し上げます。 <br /> ※申込用紙を送付するため、郵便番号・住所・電話番号も必ず入力してください。</p>
+					<p>　お問い合わせ内容を入力後、メールを送信していただくと自動返信メールが届きますのでご確認ください。</p>
+					<p> 　迷惑メール対策等でドメイン指定受信を設定されている場合に、メールが正しく受信できない場合がございます。弊社からのメールが受信できない場合は、以下のドメインを受信できるように設定変更をお願い申し上げます。
+					<b><span>「@shoureikan.jp」</b></span></p>
+					<form action="cgi-bin/mail.cgi" method="post" id="mail_form">
+						<table border="0" cellspacing="0" cellpadding="0" id="mail_form">
+
+						<tr>
+							<th>フリガナ</th>
+							<td><input id="kana" name="kana" type="text" size="40" />
+								<span class="required">※必須</span></td>
+						</tr>
+							<tr>
+								<th>お名前</th>
+								<td><input id="name" name="name" type="text" size="40" />
+									<span class="required">※必須</span></td>
+							</tr>
+							<tr>
+								<th>郵便番号</th>
+								<td><input id="zip" name="zip" type="text" size="30" /> （半角・ハイフンも入力ください）
+								</td>
+							</tr>
+							<tr>
+								<th>ご住所</th>
+								<td><input id="address" name="address" type="text" size="60" /></td>
+							</tr>
+							<tr>
+								<th>お電話番号</th>
+								<td><input id="tel" name="tel" type="text" size="40" /><br /> （半角・ハイフンも入力ください）
+								</td>
+							</tr>
+							<tr>
+								<th>E-Mailアドレス</th>
+								<td><input id="email" name="email" type="text" size="60" /><br /> （半角）
+									<span class="required">※必須</span></td>
+							</tr>
+							<tr>
+								<th>E-Mailアドレス（確認）</th>
+								<td><input id="reemail" name="reemail" type="text" size="60" /><br /> （半角）
+									<span class="required">※必須</span></td>
+							</tr>
+							<tr>
+								<th>件　　　名</th>
+								<td><input id="subject" name="subject" type="text" size="60" /></td>
+							</tr>
+							<tr>
+								<th>お問い合わせ・内容</th>
+								<td><textarea name="inquiry" id="inquiry" cols="55" rows="15"></textarea>
+									<span class="required">※必須</span></td>
+							</tr>
+							<tr>
+								<th>&nbsp;</th>
+								<td><input name="submit" type="submit" id="submit" value="内容確認" disabled="disable"/>
+									<!--<input name="reset" type="reset" id="reset" value="リセット" />--></td>
+							</tr>
+						</table>
+
+						<input type="hidden" name="DIVISION" value="ADMIN" />
+						<input type="hidden" name="MODE" value="CONF" />
+					</form>
+					<p class="mt_2em">弊社の個人情報の取り扱いについては<a href="privacy.html">こちら</a>をご覧下さい。</p>
+					<!---------------------------------------------------------------->
+											<label>
+									        <input id="check" type="checkbox" onclick="checkValue(this)">
+									        同意します
+									    </label>
+
+									    <!-- 初期状態では押せないbutton -->
+									    <!--<input id="submit" type="submit" value="押せない" disabled="disabled">-->
+
+
+									    <script type="text/javascript">
+
+									       /* buttonのdisable属性を書き換える */
+									       function checkValue(check){
+									           var btn = document.getElementById('submit');
+
+									           if (check.checked) {
+									               btn.value = '内容確認';
+									               btn.removeAttribute('disabled');
+									           } else {
+									               btn.value = '内容確認';
+									               btn.setAttribute('disabled', 'disabled');
+									           }
+									       }
+									   </script>
+					<!---------------------------------------------------------------->
+				</div>
+			</div>
+
+			<div id="side_bar">
+				<h3>お問い合わせ<br /><span class="subheader">COMPANY PROFILE</span></h3>
+				<ul>
+					<li><a href="contact.html">メールフォーム</a></li>
+					<li><a href="privacy.html">個人情報の取り扱い</a></li>
+					<li><a href="index.html">トップページ</a></li>
+				</ul>
+				<p class="contact_tel"><img src="images/common/contact.png" width="200" height="84" /></p>
+				<p>
+					<a href="http://www.shoureikan.jp/wordpress/"><img src="images/common/btn_blog.png" width="200" height="84" /></a>
+				</p>
+			</div>
+
+			<br class="clear" />
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/exvalidation.js"></script>
+	<script type="text/javascript" src="js/exchecker-ja.js"></script>
+	<script type="text/javascript">
+		var validation = $("form")
+			.exValidation({
+				rules: {
+					name: "chkrequired",
+					tel: "chktel",
+					email: "chkrequired chkemail chkhankaku",
+					reemail: "chkrequired chkemail chkhankaku chkretype-email",
+					inquiry: "chkrequired"
+				},
+				stepValidation: true,
+				errFocus: true,
+				errTipCloseBtn: false
+			});
+	</script>
+
+</body>
+
+</html>
+

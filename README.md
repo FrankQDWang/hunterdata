@@ -82,6 +82,8 @@ For Claude Code Desktop, open the Claude Desktop app's Code tab, choose this rep
 
 On another machine:
 
+For non-technical operators: after downloading/cloning this repository, you must open or enter the `hunterdata` project folder before using this workflow. The project slash command `/hunter-contact-backfill` exists inside this repository under `.claude/commands/`, so Claude Code can only see it when the current working folder is this project folder.
+
 ```bash
 git clone <repo-url>
 cd hunterdata
@@ -107,8 +109,11 @@ Then run:
 Desktop Code path:
 - Open Claude Desktop.
 - Switch to the Code tab.
-- Open this repository folder.
+- Open this repository folder, usually named `hunterdata`.
+- Make sure the Code tab's current project/folder is the cloned `hunterdata` folder before typing any slash command.
 - Confirm the project slash command is available, then run `/hunter-contact-backfill`.
+
+If `/hunter-contact-backfill` is not shown or cannot be run, first check that Claude Code Desktop opened the cloned `hunterdata` project folder. Opening a parent folder, another folder, or normal Claude Desktop Chat/Cowork will not load this repository's project slash command.
 
 Each run updates tracked resumable data under `data/manifest/`, `data/raw/`, `data/runs/`, `data/processed/`, and the two root export CSVs. After a successful partial run, commit and push those data changes together with any code/prompt changes so the next operator can continue from the same `record_id` boundary.
 
@@ -243,10 +248,10 @@ The subagent result JSONL must include `hunter_likelihood` and `hunter_likelihoo
 
 Prompt boundaries:
 - `/hunter-contact-backfill` is a strong-process runbook. It owns batch size, active-agent slots, static-stream monitoring, retry/quarantine decisions, and merge gates.
-- `hunter-contact-enricher` is exploratory within strict boundaries. It chooses the best public official evidence page, but it must not edit CSVs, infer email patterns, submit forms, use paid/login-only/private sources, or use search snippets/directories as final evidence.
-- The validator, not the subagent summary, decides completion. Accepted agent results need schema-valid JSONL, local Dokobot raw evidence, Dokobot metadata, same-company identity evidence, and a source URL matching the raw Dokobot metadata site.
+- `hunter-contact-enricher` is exploratory within strict boundaries. It can use WebSearch/WebFetch only to discover candidate official pages, then must use local Dokobot raw evidence for the final accepted source. It must not edit CSVs, infer email patterns, submit forms, use paid/login-only/private sources, or use search snippets/directories as final evidence.
+- The validator, not the subagent summary, decides completion. Accepted agent results need schema-valid JSONL, status/field consistency, local Dokobot raw evidence, Dokobot metadata, same-company identity evidence, and a source URL matching the raw Dokobot metadata site.
 
-Agent completion is strict. A result is not complete merely because a JSONL line exists. The validator checks schema, raw local Dokobot evidence, Dokobot metadata, and same-company evidence. `not_found` is accepted when the raw evidence proves the exact company was checked. `error`, wrong-company evidence, invalid JSON, or missing raw evidence should be recorded with `--record-agent-failure`; the helper archives the bad result, resets the result file, and either creates a retry prompt or quarantines the batch after the attempt limit.
+Agent completion is strict. A result is not complete merely because a JSONL line exists. The validator checks schema, status/field consistency, raw local Dokobot evidence, Dokobot metadata, and same-company evidence. `not_found` is accepted when the raw evidence proves the exact company was checked and does not include email/form fields. `error`, wrong-company evidence, invalid JSON, inconsistent status fields, or missing raw evidence should be recorded with `--record-agent-failure`; the helper archives the bad result, resets the result file, and either creates a retry prompt or quarantines the batch after the attempt limit.
 
 The subagent must use:
 

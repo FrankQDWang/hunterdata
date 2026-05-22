@@ -27,10 +27,14 @@ def test_hunter_contact_enricher_prompt_declares_exploration_boundaries():
     assert "Non-goals" in prompt
     assert "Acceptance criteria" in prompt
     assert "Do not infer email patterns" in prompt
-    assert "Do not use search result snippets" in prompt
+    assert "Do not use WebSearch snippets" in prompt
     assert "Do not treat the MHLW license alone as headhunter evidence" in prompt
     assert "source_url must match the Dokobot metadata URL" in prompt
+    assert "Status fields are internally consistent" in prompt
     assert "model: haiku" in prompt
+    assert "tools: Read,Write,Bash,WebSearch,WebFetch" in prompt
+    assert "Use WebSearch/WebFetch only for candidate discovery and triage" in prompt
+    assert "The final evidence URL/path must come from local Dokobot raw evidence" in prompt
 
 
 def test_readme_documents_clean_baseline_and_desktop_limits():
@@ -47,6 +51,9 @@ def test_readme_documents_clean_baseline_and_desktop_limits():
     assert "python3 scripts/hunter_preflight.py" in readme
     assert "Dokobot Chrome plugin/device connection" in readme
     assert "model: haiku" in readme
+    assert "WebSearch/WebFetch only to discover candidate official pages" in readme
+    assert "local Dokobot raw evidence for the final accepted source" in readme
+    assert "status/field consistency" in readme
 
 
 def test_gitignore_tracks_resumable_business_data():

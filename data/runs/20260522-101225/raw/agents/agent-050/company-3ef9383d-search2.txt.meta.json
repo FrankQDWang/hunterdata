@@ -1,0 +1,33 @@
+{
+  "tool": "dokobot",
+  "mode": "local",
+  "device_id": "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+  "url": "https://www.google.com/search?q=%E5%9D%82%E5%8F%A3%E7%9C%9E%E4%B8%80+%E4%BA%BA%E8%B2%A1%E6%B4%BE%E9%81%A3+%E5%87%BD%E9%A4%A8&hl=ja",
+  "output_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-050/company-3ef9383d-search2.txt",
+  "meta_path": "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-050/company-3ef9383d-search2.txt.meta.json",
+  "command": [
+    "dokobot",
+    "read",
+    "--local",
+    "--device",
+    "62882f0c-f9f1-49fc-83b4-c0f98b4d9ece",
+    "--timeout",
+    "120",
+    "-o",
+    "/Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-050/company-3ef9383d-search2.txt",
+    "--reuse-tab",
+    "https://www.google.com/search?q=%E5%9D%82%E5%8F%A3%E7%9C%9E%E4%B8%80+%E4%BA%BA%E8%B2%A1%E6%B4%BE%E9%81%A3+%E5%87%BD%E9%A4%A8&hl=ja"
+  ],
+  "visible_tab": false,
+  "visible_tab_result": null,
+  "preopen_tab": false,
+  "preopen_tab_result": null,
+  "foreground_tab": false,
+  "reuse_tab": true,
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "Written to /Users/frankqdwang/MLE/hunterdata/data/runs/20260522-101225/raw/agents/agent-050/company-3ef9383d-search2.txt\n",
+  "doko_list_output": "Local:\n  62882f0c-f9f1-49fc-83b4-c0f98b4d9ece  pid 23912, Chrome, ext 0.3.0\n\n  Try: dokobot read --local <url>\n       dokobot read --local --device <id> <url>\n",
+  "started_at": "2026-05-22T02:51:33.432714+00:00",
+  "finished_at": "2026-05-22T02:51:38.942520+00:00"
+}

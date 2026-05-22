@@ -1,0 +1,178 @@
+# クラリスアート - 岩手県盛岡市でシステム開発を行うIT企業です。
+> https://www.clariceart.co.jp/
+
+**【クラリスアート株式会社】CM 30秒Ver. [1]**
+---
+クラリスアート株式会社 [2]
+---
+[Column 1]
+前往平台观看： [1]
+
+[Column 2]
+[3]
+[4]
+
+[Column 3]
+未来をちょっと幸せに
+
+---
+ITによって人々の暮らしに 優しさを注ぎ込む
+特に力を入れているのは、ＧＩＳ（地理情報システム）を使ったシステムの開発です。 みなさんの生活を少しでも豊かになるように情報技術を用いて社会に貢献していきます。
+『人との繋がりを大切にし 共に成長しよう』
+
+今後とも一層のご支援を賜りますよう心からお願い申しあげます。
+---
+当社の主な事業は、システム開発・システムオペレーション・労働者派遣事業を主軸とした情報サービスの提供です。
+---
+地方だからこそ、人と人とのつながりを大切にしなくては機会も生まれません。 システム開発・人材派遣等を通じてお客様の成長が私達の成長、地域への貢献を掲げて事業を行ってまいりました。
+---
+つながりを持てた方々に対して『ありがとう』の心をもち、 その技術で様々な方面へ貢献していくという思いを強く持っております。
+---
+企業のIT化がますます高度になるなか、クラウドや仮想化によるインフラの統合や効率化など、 ニーズが高度化し求められるICTの技術はますます高まっています。 そのような中、社員と共に人間として成長できる環境と技術の研鑽に努め、一人一人が高い技術を提供できるように努力していきます。
+---
+**— service**
+
+**事業内容**
+
+[5]
+[6]
+[7]
+[8]
+
+-SYSTEM DEVELOPMENT-
+-SYSTEM OPERATION-
+-WORKER DISPATCH-
+-JOB PLACEMENT-
+
+システム開発
+システムオペレーション
+労働者派遣事業
+職業紹介事業
+
+業務システムを中心に、システム設計からプログラム開発、導入支援、サポートまでお客様の価値を高めるためのシステムを開発していきます。 既存システムの改修、保守などもご検討のお客様も柔軟に対応いたします、ご相談ください。
+システムやサービスを安定的に利用できるよう、技術者が運用・操作を行います。 システムの改修や保守に対応できる会社をお探しの際はお問い合わせください。
+お客様に最適な技術者を提案し、システム全般に関わる設計から開発、テスト、運用まで支援します。 クライアントのニーズに沿って、コンピュータのシステムを設計します。 業務系、情報系といったシステム分野別に、ネットワーク、OSなどの基本技術が異なるため、それぞれのスキルや業務知識を持ったスタッフが対応いたします。
+クラリスアートでは全国各地の派遣会社やメーカーと業務提携をしております。 全国数ある7,000件以上のお仕事の中からあなたのご希望をお伺いした上で、 弊社スタッフがピッタリのお仕事をご紹介させて頂きます。 まずはお気軽にお問い合わせください。
+
+詳細はこちら [9]
+
+労働者派遣法第23条第5項に基づく情報提供について(PDF) [10]
+---
+> **— BUSINESS & SKILLS**
+> **実績**
+[11]
+> [12]
+
+**宿泊施設K様**
+> **買取専門 金のクマ様**
+施設予約からチェックイン／チェックアウトのほか、施設利用請求事務をサポートします。 既存システムの課題であった、チェックイン／チェックアウトの煩雑さを解消するため履歴を縦覧しチェックアウト時の精算に繋げることや、チェックイン簡略化に向けたリピーターへのＱＲコード発行を行うことなど、利用ニーズにマッチするよう構築しました。
+> 商品の買取／販売管理および店舗の収支報告資料作成事務をサポートします。 表計算ソフトでフィルタやソート機能を駆使した煩雑な事務を解消し、報告書作成業務の負荷軽減を実現するよう構築しました。
+
+> [13]
+
+> 特殊清掃、遺品管理サービスの提供に必要となる見積書、業務請負契約書作成業務をサポートします。 タブレットで各書類を作成できるほか、書類の作成フローを明確にすることで案件情報の管理が容易になるよう構築しました。
+> 詳細はこちら [14]
+
+> 弊社では、多種多様なお客様のご要望に対し、それぞれに適した技術でお応えし続けています。
+---
+[15]
+---
+**— NEWS**
+**お知らせ**
+
+[16]
+2025.05.20
+[17]
+2025.05.20
+[18]
+2024.09.26
+
+**代表/専務取締役インタビューを掲載しました [19]**
+**ISMS認証を取得いたしました [20]**
+**いわて女性活躍認定企業等に認定いただきました [21]**
+
+「採用情報」に、代表と専務取締役のインタビュー動画を掲載いたしました。 仕事で大変だったことや採用についての考え、新事業や会社の今後のビジョンなど…  [19]
+クラリスアート株式会社（本社：岩手県盛岡市、代表取締役：藤村 昌也）は、2025年5月16日付で情報セキュリティマネジメントシステム（ISMS）の国際規格である「ISO/IEC  [20]
+クラリスアートは、この度「いわて女性活躍認定企業等（ステップ1）」に認定いただきました！ [21]
+
+楽しい動画になってます。是非ご覧ください！ [19]
+「いわて女性活躍認定企業等」とは： [21]
+**採用情報**
+**会社情報**
+**会社情報**
+
+View More >> [22]
+---
+**— COMMERCIAL**
+**CM**
+---
+クラリスアート株式会社
+本社 〒020-0034 岩手県盛岡市盛岡駅前通15-18 Lavieビル
+
+TEL 019-681-3838
+FAX 019-601-3068
+---
+PAGES
+> CONTENTS
+TOP  [23]
+> お知らせ  [22]
+会社情報  [24]
+> 数字で見るクラリスアート  [25]
+採用情報  [26]
+> 社員インタビュー  [27]
+職業紹介事業  [9]
+> デスクツアー  [28]
+お問い合わせ  [29]
+> CM  [30]
+個人情報保護方針  [31]
+情報セキュリティ基本方針  [32]
+---
+**— recruit**
+**採用情報**
+
+クラリスアートでは一緒に働くメンバーを募集しています✨
+View More >>  [26]
+---
+[33]
+---
+© 2023-2026 clariceart All rights reserved.
+---
+[34]
+---
+[35]
+
+[1] https://www.youtube.com/watch?v=KZtj3KgKoMk
+[2] https://www.youtube.com/channel/UCkS1nVCEnxK20d9eSK_1R7A
+[3] https://www.clariceart.co.jp/images/loading_logo.svg
+[4] https://www.clariceart.co.jp/images/site_logo.svg
+[5] https://www.clariceart.co.jp/images/system_development.png
+[6] https://www.clariceart.co.jp/images/system_operation.png
+[7] https://www.clariceart.co.jp/images/worker_dispatch.png
+[8] https://www.clariceart.co.jp/images/job_placement.svg
+[9] https://www.clariceart.co.jp/job_placement
+[10] https://storage.googleapis.com/ca-corpsite-storage/cms/202510_49a2d67f71/202510_49a2d67f71.pdf
+[11] https://www.clariceart.co.jp/images/reservation.png
+[12] https://www.clariceart.co.jp/images/purchase.png
+[13] https://www.clariceart.co.jp/images/estate_liquidation.png
+[14] https://www.clariceart.co.jp/introduction
+[15] https://www.clariceart.co.jp/images/business.png
+[16] https://storage.googleapis.com/ca-corpsite-storage/cms/_2a2e22e7d8/_2a2e22e7d8.png
+[17] https://storage.googleapis.com/ca-corpsite-storage/cms/20250520_ba08ffacf9/20250520_ba08ffacf9.png
+[18] https://storage.googleapis.com/ca-corpsite-storage/cms/1_95c066fd5b/1_95c066fd5b.png
+[19] https://www.clariceart.co.jp/news/20
+[20] https://www.clariceart.co.jp/news/19
+[21] https://www.clariceart.co.jp/news/17
+[22] https://www.clariceart.co.jp/news
+[23] https://www.clariceart.co.jp/
+[24] https://www.clariceart.co.jp/about
+[25] https://www.clariceart.co.jp/recruit/#recruit_in-numbers
+[26] https://www.clariceart.co.jp/recruit
+[27] https://www.clariceart.co.jp/recruit/#recruit_employee-interview
+[28] https://www.clariceart.co.jp/recruit/#recruit_desk-tour
+[29] https://www.clariceart.co.jp/contact/default
+[30] https://youtu.be/KZtj3KgKoMk
+[31] https://www.clariceart.co.jp/privacy
+[32] https://www.clariceart.co.jp/security
+[33] https://www.clariceart.co.jp/images/problem-solving1.png
+[34] https://www.clariceart.co.jp/images/problem-solving2.png
+[35] https://www.clariceart.co.jp/images/isms_mark.png

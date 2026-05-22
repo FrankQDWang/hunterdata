@@ -1,0 +1,68 @@
+# 株式会社ケイズ
+> https://ks0826.com/
+
+[1]
+---
+[2]
+---
+**ここにしかない縁がある**
+---
+**NEWS**
+
+2025.07.17
+> お知らせ [3]
+
+ケイズで親睦会を行いました [4]
+
+**お知らせ一覧 [5]**
+
+2025.07.16
+> お知らせ [3]
+
+ホームページをリニューアルしました [6]
+---
+**JOB LIST [7]**
+**求人情報 [7]**
+
+ケイズではチームとして一緒に働く仲間を募集しています [7]
+---
+**CONTACT [8]**
+**お問い合わせ [8]**
+
+詳しい内容やご相談などお問い合わせはこちらからどうぞ [8]
+---
+[9]
+---
+**私たちについて [10]**
+ごあいさつ [11]
+理念 [12]
+会社概要 [13]
+---
+**事業内容 [14]**
+労働者派遣事業・有料職業紹介 [14]
+業務請負・建築・土木・内装工事 [15]
+一般清掃業・定期清掃業 [16]
+---
+**求人情報 [7]**
+**お問い合わせ [8]**
+**個人情報保護方針 [17]**
+---
+© K's. All Right Reserved.
+
+[1] https://ks0826.com/sys/wp-content/themes/keiz/img/header_main_pc.jpg
+[2] https://ks0826.com/sys/wp-content/themes/keiz/img/logo_black.svg
+[3] https://ks0826.com/category/information
+[4] https://ks0826.com/information/20250717/255
+[5] https://ks0826.com/news
+[6] https://ks0826.com/information/20250716/171
+[7] https://ks0826.com/joblist
+[8] https://ks0826.com/contact
+[9] https://ks0826.com/sys/wp-content/themes/keiz/img/logo_white.svg
+[10] https://ks0826.com/aboutus
+[11] https://ks0826.com/aboutus#message
+[12] https://ks0826.com/aboutus#philosophy
+[13] https://ks0826.com/aboutus#company
+[14] https://ks0826.com/service-dispatch
+[15] https://ks0826.com/service-outsourcing
+[16] https://ks0826.com/service-cleaning
+[17] https://ks0826.com/privacypolicy

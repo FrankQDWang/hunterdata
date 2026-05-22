@@ -1,0 +1,32 @@
+# 有限会社　大裕 | お問合せ
+> https://ikedon-jp.secure-web.jp/contact
+
+**有限会社 大裕 [1]**
+ホーム [2] 組織概要 [3] 店舗紹介 [4] 新着情報 [5] お問合せ [6]
+---
+**お問合せ**
+---
+*は必須項目です。
+---
+お名前
+---
+会社名
+---
+電話番号
+---
+Eメール
+---
+件名
+---
+メッセージ
+---
+お客様から御入力いただきました個人情報は、お問い合わせ内容に関するご対応のため担当よりご連絡させていただく場合にのみ使用し、その他の目的には一切使用いたしません。
+---
+ホーム [2] 組織概要 [3] 店舗紹介 [4] 新着情報 [5] お問合せ [6]
+
+[1] https://ikedon-jp.secure-web.jp/
+[2] http://ikedon.jp/
+[3] http://ikedon.jp/page/organization
+[4] http://ikedon.jp/items
+[5] http://ikedon.jp/whatsnew
+[6] https://ikedon-jp.secure-web.jp/contact

@@ -1,0 +1,20 @@
+# エラー｜国税庁法人番号公表サイト(Error | NTA-CNPS)
+> https://www.houjin-bangou.nta.go.jp/henkorireki-web-trans/pages/index.html?corpNumber=2430001067092
+
+社会保障・税番号制度(Social Security and Tax Number System)
+---
+**国税庁法人番号公表サイト**
+---
+**(National Tax Agency Corporate Number Publication Site)**
+---
+**ページが見つかりません (The page cannot be found.)**
+---
+お探しのページが見つかりません。
+---
+The page searched by you cannot be found.
+---
+閉じる(close) [1]
+---
+Copyright(c)国税庁(Copyright(c) National Tax Agency Japan)
+
+[1] https://www.houjin-bangou.nta.go.jp/henkorireki-web-trans/pages/index.html?corpNumber=2430001067092#

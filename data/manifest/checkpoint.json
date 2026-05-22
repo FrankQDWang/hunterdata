@@ -1,0 +1,11 @@
+{
+  "done": false,
+  "page_number": 10,
+  "records": 200,
+  "total_count": 34066,
+  "updated_at": "2026-05-22T11:39:25+08:00",
+  "next_page_number": 11,
+  "next_detail_offset": 0,
+  "full_manifest_done": false,
+  "limit_reached": true
+}

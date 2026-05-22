@@ -1,0 +1,56 @@
+{
+  "agent-014": {
+    "archived_result": "data/runs/20260522-101225/agents/failed_results/agent-014-attempt-002-results.jsonl",
+    "attempts": 2,
+    "last_error": "agent result for company-a77dfeed does not prove same company in raw evidence: expected company name, phone, license number, or known company domain",
+    "max_attempts": 3,
+    "retry_prompt_path": "data/runs/20260522-101225/agents/retry_prompts/agent-014-attempt-003.md",
+    "status": "retry",
+    "updated_at": "2026-05-22T10:28:37+08:00"
+  },
+  "agent-017": {
+    "archived_result": "data/runs/20260522-101225/agents/failed_results/agent-017-attempt-001-results.jsonl",
+    "attempts": 1,
+    "last_error": "agent result for company-7106e213 does not prove same company in raw evidence: expected company name, phone, license number, or known company domain",
+    "max_attempts": 3,
+    "retry_prompt_path": "data/runs/20260522-101225/agents/retry_prompts/agent-017-attempt-002.md",
+    "status": "retry",
+    "updated_at": "2026-05-22T10:25:03+08:00"
+  },
+  "agent-029": {
+    "archived_result": "data/runs/20260522-101225/agents/failed_results/agent-029-attempt-001-results.jsonl",
+    "attempts": 1,
+    "last_error": "agent result for company-ff8b1207 does not prove same company in raw evidence: expected company name, phone, license number, or known company domain",
+    "max_attempts": 3,
+    "retry_prompt_path": "data/runs/20260522-101225/agents/retry_prompts/agent-029-attempt-002.md",
+    "status": "retry",
+    "updated_at": "2026-05-22T10:37:27+08:00"
+  },
+  "agent-030": {
+    "archived_result": "data/runs/20260522-101225/agents/failed_results/agent-030-attempt-001-results.jsonl",
+    "attempts": 1,
+    "last_error": "agent result for company-36e5f022 does not prove same company in raw evidence",
+    "max_attempts": 3,
+    "retry_prompt_path": "data/runs/20260522-101225/agents/retry_prompts/agent-030-attempt-002.md",
+    "status": "retry",
+    "updated_at": "2026-05-22T10:40:19+08:00"
+  },
+  "agent-066": {
+    "archived_result": "data/runs/20260522-101225/agents/failed_results/agent-066-attempt-001-results.jsonl",
+    "attempts": 1,
+    "last_error": "agent result for company-301b26e5 has invalid status: form_found",
+    "max_attempts": 3,
+    "retry_prompt_path": "data/runs/20260522-101225/agents/retry_prompts/agent-066-attempt-002.md",
+    "status": "retry",
+    "updated_at": "2026-05-22T11:04:12+08:00"
+  },
+  "agent-073": {
+    "archived_result": "data/runs/20260522-101225/agents/failed_results/agent-073-attempt-001-results.jsonl",
+    "attempts": 1,
+    "last_error": "does not prove same company in raw evidence",
+    "max_attempts": 3,
+    "retry_prompt_path": "data/runs/20260522-101225/agents/retry_prompts/agent-073-attempt-002.md",
+    "status": "retry",
+    "updated_at": "2026-05-22T11:12:59+08:00"
+  }
+}

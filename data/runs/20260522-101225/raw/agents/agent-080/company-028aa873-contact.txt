@@ -1,0 +1,58 @@
+# お問い合わせ - 株式会社ケイズ
+> https://ks0826.com/contact
+
+[1]
+---
+**CONTACT**
+**お問い合わせ**
+---
+法人名
+---
+氏名 必須
+---
+電話番号 必須
+---
+メールアドレス必須
+---
+お問い合わせ先株式会社ケイズ
+---
+種別
+---
+お問い合わせ内容
+---
+> **JOB LIST [2]**
+> **CONTACT [3]**
+> **求人情報 [2]**
+> **お問い合わせ [3]**
+
+> ケイズではチームとして一緒に働く仲間を募集しています [2]
+> 詳しい内容やご相談などお問い合わせはこちらからどうぞ [3]
+
+[4]
+**私たちについて [5]**
+> **事業内容 [6]**
+> **求人情報 [2]**
+
+ごあいさつ [7]
+> 労働者派遣事業・有料職業紹介 [6]
+> **お問い合わせ [3]**
+理念 [8]
+> 業務請負・建築・土木・内装工事 [9]
+> **個人情報保護方針 [10]**
+会社概要 [11]
+> 一般清掃業・定期清掃業 [12]
+
+> © K's. All Right Reserved.
+
+[1] https://ks0826.com/sys/wp-content/themes/keiz/img/logo_black.svg
+[2] https://ks0826.com/joblist
+[3] https://ks0826.com/contact
+[4] https://ks0826.com/sys/wp-content/themes/keiz/img/logo_white.svg
+[5] https://ks0826.com/aboutus
+[6] https://ks0826.com/service-dispatch
+[7] https://ks0826.com/aboutus#message
+[8] https://ks0826.com/aboutus#philosophy
+[9] https://ks0826.com/service-outsourcing
+[10] https://ks0826.com/privacypolicy
+[11] https://ks0826.com/aboutus#company
+[12] https://ks0826.com/service-cleaning

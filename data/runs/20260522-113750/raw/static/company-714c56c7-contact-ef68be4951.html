@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="jp">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CR3GT368RT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CR3GT368RT');
+</script>
+<meta charset="utf-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<title>お問い合わせ｜株式会社ジュリアン</title>
+<meta name="author" content="ジュリアン" />
+<meta name="Keywords" content="太陽光発電事業,賃貸事業,ジュリアン" />
+<meta name="Description" content="当社は、太陽光発電事業や賃貸事業を通して地域の未来をよりよくす為のサービスを提供したい。" />
+<link href="css/reset.css" rel="stylesheet" type="text/css">
+<link href="css/base.css" rel="stylesheet" type="text/css">
+<link href="css/sub.css" rel="stylesheet" type="text/css">
+<link href="css/sub_sp.css" rel="stylesheet" type="text/css">
+<link href="css/print.css" rel="stylesheet" type="text/css">
+<link href="css/validationEngine.jquery.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Suranna" rel="stylesheet">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/languages/jquery.validationEngine-ja.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+if(!navigator.userAgent.match(/(iPhone|iPad|Android)/)){
+jQuery(document).ready(function(){
+   jQuery("#messageform").validationEngine();
+});
+}
+
+$(function() {
+    $('.navToggle').click(function() {
+        $(this).toggleClass('active');
+
+        if ($(this).hasClass('active')) {
+            $('.global_nav').addClass('active');
+        } else {
+            $('.global_nav').removeClass('active');
+        }
+    });
+});
+
+</script>
+<!--
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+':35729/livereload.js?snipver=2"></' + 'script>')</script>-->
+</head>
+<body class="className">
+<div id="wrapper">
+<div class="container_header_contact_bg">
+<header>
+<div class="header_area">
+<div class="logo">
+<h1><a href="index.html"><img src="images/common/logo.svg" alt="株式会社ジュリアン" class="logo_pc"><img src="images/common/logo_sp.svg" alt="株式会社ジュリアン" class="logo_sp"></a></h1>
+<!--/logo--></div>
+<div class="navToggle">
+<span></span><span></span><span></span><span>menu</span>
+</div>
+<nav class="global_nav">
+<ul>
+<li class="h_u_line"><a href="index.html">ホーム</a></li><li class="h_u_line"><a href="service.html"><span class="g_nav_on">事業紹介</span></a></li>
+<li class="h_u_line"><a href="company.html">会社情報</a></li>
+<li class="h_u_line nav_pc"><a href="inquiry.html"><span class="g_nav_on"><img src="images/common/mail_icon.png" alt="" class="mail_icon">お問い合わせ</span></a></li>
+<li class="h_u_line_e_on"><span class="navi_e_on"><img src="images/common/mail_icon.png" alt="" class="mail_icon">お問い合わせ</span></li>
+</ul>
+</div><!--/header_area-->
+<div class="p_title_box_c">
+<h2 class="p_title_box-h2">CONTACT</h2>
+<p class="p_title_box-p">お問い合わせ</p>
+<!--/p_title_box--></div>
+<!--/header--></header>
+<h2 class="p_title_box-h2_sp">CONTACT</h2>
+<p class="p_title_box-p_sp">お問い合わせ</p>
+<!--/container_header_bg--></div>
+
+<div class="contents">
+<div class="contents_print">
+<div class="flow">
+<div class="flow_01">
+<ul>
+<li class="step_sp_on">内容の入力<br /><span class="setp01">Step01</span></li>
+<li class="setp02 step_sp_off">入力内容の確認<br /><span class="setp01">Step02</span></li>
+<li class="setp03 step_sp_off">送信完了<br /><span class="setp01">Step03</span></li>
+</ul>
+</div>
+</div>
+<form action="inquiry_confirmation.php" method="post" name="form1" id="messageform">
+<input type='hidden' name='acc_flag' value='1'>
+<dl>
+<dt class="dt01"><img src="images/sub/contact/people.jpg">お名前<span class="required01">必須</span></dt>
+<dd class="dd01"><input type="text" id="name" name="name" value="" class="validate[required]"></dd>
+
+<dt class="dt01"><img src="images/sub/contact/mail.jpg">メールアドレス<span class="required02">必須</span></dt>
+<dd class="dd01"><input type="email" id="mail" name="mail" class="validate[required,custom[email]"></dd>
+
+<dt class="dt01"><img src="images/sub/contact/phone.jpg">電話番号<span class="any01">任意</span></dt>
+<dd class="dd01"><input type="tel" id="tel" name="tel" value="" class="int"></dd>
+
+<dt class="dt01"><img src="images/sub/contact/add.jpg">会社名<span class="any02">任意</span></dt>
+<dd class="dd01"><input type="company" id="company" name="company" value="" class="int"></dd>
+
+<dt class="dt02"><img src="images/sub/contact/pencil.jpg">お問合せ内容<span class="required03">必須</span></dt>
+<dd class="dd02"><textarea id="contents" name="contents" cols="40" rows="5" class="validate[required]"></textarea></dd>
+</dl>
+<p id="form_submit"><input type="submit" id="submit_button" value="送信内容確認" /></p>
+</form>
+<!--/contents_print--></div>
+<!--/contents--></div>
+<footer>
+<div class="footer-area">
+
+<div class="footer-address">
+<p class="logo_footer"><img src="images/common/logo.svg" alt="株式会社ジュリアン"></p>
+<p>株式会社ジュリアン</p>
+<p>〒023-0003</p>
+<p>岩手県奥州市水沢佐倉河字後樋41-1</p>
+<p>TEL:0197-22-6568&nbsp;&nbsp;&nbsp;FAX:0197-22-6645</p>
+<!--/footer-address--></div>
+
+<div class="footer-link">
+<ul class="footer-link__left">
+<li><a href="index.html"><span class="sp">ホーム</span></a></li>
+<li><a href="service.html"><span class="sp">事業紹介</span></a></li>
+<li><a href="company.html"><span class="sp">会社情報</span></a></li>
+<li class="li_sp-e"><a href="inquiry.html"><span class="sp">お問い合わせ</span></a></li>
+</ul>
+<!--/footer-link--></div>
+
+<!--/<footer-area>--></div>
+
+<div class="footer_copyright">
+<p class="footer_copyright_txt">Copyright © 2018 JULIAN  Ltd. All rights reserved.</p>
+<!--/footer_copyright>--></div><!--/<footer>--></footer>
+<!--/wrapper--></div>
+</body>
+</html>

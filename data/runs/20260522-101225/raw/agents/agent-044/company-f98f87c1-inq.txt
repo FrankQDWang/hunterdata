@@ -1,0 +1,61 @@
+# お問い合わせ | 北日本産業株式会社
+> https://career-work.jp/inq/index.html
+
+北日本産業株式会社 [1]
+個人情報保護方針 [2]
+
+[3]
+[4]
+[5]
+[6]
+[7]
+[8]
+---
+ホーム [1] お問い合わせ
+---
+[9]
+---
+必須マークの項目は必ず入力してください。
+---
+**お問い合わせフォーム**
+---
+**氏名** 必須
+例：北日本 太郎
+---
+**ふりがな** 必須
+例：きたにほん たろう（ひらがなで入力してください。）
+---
+**E-Mail** 必須
+確認のため、もう一度入力してください。
+---
+[10]
+---
+必須
+**お問い合わせ内容**
+---
+100文字以内
+---
+「個人情報保護方針 [2]」に同意する
+---
+[11]
+---
+**北日本産業株式会社** 〒050-0074 室蘭市中島町4丁目7番14号 TEL(0143)43-1950
+ホーム [1] 企業情報 [12] 事業内容 [13] 採用情報 [14] 社内広報 [15] お問い合わせ [16]
+Copyright © 2014 北日本産業株式会社. All rights reserved.
+
+[1] https://career-work.jp/index.html
+[2] https://career-work.jp/policy/index.html
+[3] https://career-work.jp/common/btn_home_off.png
+[4] https://career-work.jp/common/btn_company_off.png
+[5] https://career-work.jp/common/btn_business_off.png
+[6] https://career-work.jp/common/btn_recruit_on.png
+[7] https://career-work.jp/common/btn_public_on.png
+[8] https://career-work.jp/common/btn_inq_on.png
+[9] https://career-work.jp/inq/images/title.png
+[10] https://career-work.jp/common/pagetop.png
+[11] https://career-work.jp/common/btn_back_off.png
+[12] https://career-work.jp/company/index.html
+[13] https://career-work.jp/business/index.html
+[14] https://career-work.jp/recruit/index.html
+[15] https://career-work.jp/public/index.html
+[16] https://career-work.jp/inq/index.html
