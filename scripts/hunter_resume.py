@@ -8,6 +8,10 @@ from typing import Sequence
 from scripts.contact_schema import FIELDNAMES
 from scripts.enrich_contacts import ENRICHED_FIELDNAMES, write_chinese_csv, write_enriched_csv
 from scripts.mhlw_manifest import append_next_mhlw_records
+from scripts.qa_report import build_master_report, has_critical_failures
+
+
+ACCEPTED_HUNTER_LIKELIHOODS = {"high", "medium"}
 
 
 def prepare_next_batch(
@@ -102,6 +106,8 @@ def upsert_master_and_export(
     master_csv: Path = Path("data/processed/master.csv"),
     root_csv: Path = Path("hunter_contacts.csv"),
     master_zh_csv: Path = Path("data/processed/master_zh.csv"),
+    all_root_csv: Path = Path("mhlw_placement_contacts_all.csv"),
+    master_qa_path: Path = Path("data/processed/master_qa_report.md"),
 ) -> list[dict[str, str]]:
     existing = [normalize_enriched_row(row) for row in _load_csv(master_csv)] if master_csv.exists() else []
     incoming = [normalize_enriched_row(row) for row in _load_csv(batch_csv)]
@@ -113,10 +119,26 @@ def upsert_master_and_export(
             order.append(record_id)
         by_id[record_id] = row
     merged = [by_id[record_id] for record_id in order]
+    report = build_master_report(merged)
+    master_qa_path.parent.mkdir(parents=True, exist_ok=True)
+    master_qa_path.write_text(report, encoding="utf-8")
+    if has_critical_failures(report):
+        raise ValueError(f"master QA report contains critical validation failures: {master_qa_path}")
+
+    accepted = accepted_hunter_rows(merged)
     write_enriched_csv(merged, master_csv)
     write_chinese_csv(merged, master_zh_csv)
-    write_chinese_csv(merged, root_csv)
+    write_chinese_csv(merged, all_root_csv)
+    write_chinese_csv(accepted, root_csv)
     return merged
+
+
+def accepted_hunter_rows(rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    return [
+        row
+        for row in rows
+        if row.get("hunter_likelihood", "").strip() in ACCEPTED_HUNTER_LIKELIHOODS
+    ]
 
 
 def normalize_enriched_row(row: dict[str, str]) -> dict[str, str]:
@@ -169,6 +191,8 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     upsert.add_argument("--master-csv", type=Path, default=Path("data/processed/master.csv"))
     upsert.add_argument("--master-zh-csv", type=Path, default=Path("data/processed/master_zh.csv"))
     upsert.add_argument("--root-csv", type=Path, default=Path("hunter_contacts.csv"))
+    upsert.add_argument("--all-root-csv", type=Path, default=Path("mhlw_placement_contacts_all.csv"))
+    upsert.add_argument("--master-qa-path", type=Path, default=Path("data/processed/master_qa_report.md"))
     return parser.parse_args(argv)
 
 
@@ -195,8 +219,12 @@ def main() -> None:
             master_csv=args.master_csv,
             root_csv=args.root_csv,
             master_zh_csv=args.master_zh_csv,
+            all_root_csv=args.all_root_csv,
+            master_qa_path=args.master_qa_path,
         )
         print(args.master_csv)
+        print(args.master_qa_path)
+        print(args.all_root_csv)
         print(args.root_csv)
         print(f"rows={len(rows)}")
 

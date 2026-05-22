@@ -1,9 +1,13 @@
 # Spec: Japan Headhunter Contact Research Dataset
 
 Generated: 2026-05-21
-Status: Draft
+Status: Superseded
 Owner: Codex
 Linked plan: ../plans/2026-05-21-japan-headhunter-contact-research.md
+
+Superseded by: `2026-05-21-resumable-hunter-contact-pipeline.md` and the repository `README.md`.
+
+Note: this document describes the first 100-row prototype that produced `japan_headhunters_*` files. The current production workflow is the resumable `/hunter-contact-backfill` pipeline, which writes `data/processed/master.csv`, `hunter_contacts.csv`, and `mhlw_placement_contacts_all.csv`.
 
 ## Goal
 

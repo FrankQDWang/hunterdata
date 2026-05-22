@@ -3,11 +3,13 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import asdict, dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Literal, Sequence
 from urllib.parse import urlparse
@@ -47,6 +49,33 @@ STATUS_RANK = {
     "error": 0,
 }
 CONFIDENCE_RANK = {"high": 3, "medium": 2, "low": 1, "": 0}
+CORPORATE_TERMS = [
+    "株式会社",
+    "有限会社",
+    "合同会社",
+    "合資会社",
+    "合名会社",
+    "一般社団法人",
+    "一般財団法人",
+    "公益社団法人",
+    "公益財団法人",
+    "社会福祉法人",
+    "医療法人",
+    "学校法人",
+    "宗教法人",
+    "kabushikigaisha",
+    "kabushiki",
+    "kaisha",
+    "k.k.",
+    "kk",
+    "co.,ltd.",
+    "co.ltd.",
+    "co ltd",
+    "ltd.",
+    "inc.",
+    "corp.",
+    "company",
+]
 
 
 @dataclass(frozen=True)
@@ -331,9 +360,9 @@ def validate_agent_raw_evidence(
     *,
     raw_dir: Path,
     require_raw: bool,
-) -> None:
+) -> Path | None:
     if not require_raw or result["status"] == "error":
-        return
+        return None
     source_text_path = result["source_text_path"]
     if not source_text_path:
         raise ValueError(f"agent result for {result['record_id']} must include source_text_path")
@@ -362,6 +391,262 @@ def validate_agent_raw_evidence(
         raise ValueError(f"agent result for {result['record_id']} metadata does not prove successful local Dokobot read: {meta_path}")
     if "--local" not in command or "--device" not in command or "--reuse-tab" not in command:
         raise ValueError(f"agent result for {result['record_id']} metadata does not prove local Dokobot reuse-tab use: {meta_path}")
+    return resolved
+
+
+def validate_agent_semantic_evidence(result: dict[str, str], job: dict[str, Any], raw_path: Path | None) -> None:
+    if raw_path is None:
+        return
+    raw_text = raw_path.read_text(encoding="utf-8", errors="replace")
+    meta_path = raw_path.with_name(f"{raw_path.name}.meta.json")
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    evidence_url = str(meta.get("url") or result.get("source_url") or result.get("company_url") or "")
+
+    signals = []
+    if _raw_text_contains_company(raw_text, str(job.get("company_name", ""))):
+        signals.append("company_name")
+    if _digits(job.get("phone", "")) and _digits(job.get("phone", "")) in _digits(raw_text):
+        signals.append("phone")
+    if _license_matches(raw_text, str(job.get("license_number", ""))):
+        signals.append("license_number")
+    if _same_site_url(evidence_url, str(job.get("company_url", ""))):
+        signals.append("company_url_domain")
+    if result.get("source_url") and _same_site_url(str(result.get("source_url", "")), str(job.get("company_url", ""))):
+        signals.append("source_url_domain")
+    if result.get("company_url") and _same_site_url(str(result.get("company_url", "")), str(job.get("company_url", ""))):
+        signals.append("result_company_url_domain")
+
+    if not signals:
+        raise ValueError(
+            f"agent result for {result['record_id']} does not prove same company in raw evidence: "
+            "expected company name, phone, license number, or known company domain"
+        )
+
+
+def _raw_text_contains_company(raw_text: str, company_name: str) -> bool:
+    tokens = _company_identity_tokens(company_name)
+    haystack = _compact_identity_text(raw_text)
+    return any(token in haystack for token in tokens)
+
+
+def _company_identity_tokens(company_name: str) -> list[str]:
+    compact = _compact_identity_text(company_name)
+    for term in CORPORATE_TERMS:
+        compact = compact.replace(_compact_identity_text(term), " ")
+    tokens = [token for token in re.split(r"[^0-9a-zぁ-んァ-ン一-龥ー]+", compact) if _useful_identity_token(token)]
+    squashed = re.sub(r"\s+", "", compact)
+    if _useful_identity_token(squashed):
+        tokens.append(squashed)
+    return sorted(set(tokens), key=len, reverse=True)
+
+
+def _compact_identity_text(value: str) -> str:
+    return re.sub(r"\s+", "", value.casefold().replace("　", " "))
+
+
+def _useful_identity_token(token: str) -> bool:
+    if not token:
+        return False
+    if token in {_compact_identity_text(term) for term in CORPORATE_TERMS}:
+        return False
+    return len(token) >= 2 if re.search(r"[ぁ-んァ-ン一-龥ー]", token) else len(token) >= 3
+
+
+def _digits(value: str) -> str:
+    return re.sub(r"\D+", "", value or "")
+
+
+def _license_matches(raw_text: str, license_number: str) -> bool:
+    if not license_number:
+        return False
+    return _compact_identity_text(license_number) in _compact_identity_text(raw_text)
+
+
+def _same_site_url(left: str, right: str) -> bool:
+    left_host = urlparse(left).netloc.casefold()
+    right_host = urlparse(right).netloc.casefold()
+    if not left_host or not right_host:
+        return False
+    return left_host == right_host or left_host.endswith(f".{right_host}") or right_host.endswith(f".{left_host}")
+
+
+def validate_agent_batch_result(
+    batch: AgentBatch,
+    *,
+    raw_dir: Path,
+    require_raw: bool = True,
+) -> None:
+    expected_jobs = batch_jobs_by_record_id(batch)
+    expected = set(expected_jobs)
+    if not expected:
+        return
+    if not batch.result_path.exists():
+        raise ValueError(f"{batch.batch_id} result file does not exist: {batch.result_path}")
+
+    seen: set[str] = set()
+    errors: list[str] = []
+    for line_number, line in enumerate(batch.result_path.read_text(encoding="utf-8").splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            result = validate_agent_result(json.loads(line), expected)
+            if result["status"] == "error":
+                raise ValueError(f"agent result for {result['record_id']} returned error status")
+            raw_path = validate_agent_raw_evidence(result, raw_dir=raw_dir, require_raw=require_raw)
+            validate_agent_semantic_evidence(result, expected_jobs[result["record_id"]], raw_path)
+        except Exception as exc:
+            errors.append(f"{batch.result_path}:{line_number}: {exc}")
+            continue
+        seen.add(result["record_id"])
+
+    missing = expected - seen
+    if missing:
+        errors.append(f"{batch.batch_id} missing expected record_id values: {', '.join(sorted(missing))}")
+    if errors:
+        raise ValueError("; ".join(errors))
+
+
+def batch_jobs_by_record_id(batch: AgentBatch) -> dict[str, dict[str, Any]]:
+    jobs = {}
+    for line in batch.job_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        item = json.loads(line)
+        record_id = str(item.get("record_id", "")).strip()
+        if record_id:
+            jobs[record_id] = item
+    return jobs
+
+
+def record_agent_validation_failure(
+    *,
+    agent_dir: Path,
+    batch_id: str,
+    failure_reason: str,
+    max_attempts: int = 3,
+) -> dict[str, Any]:
+    batches = {batch.batch_id: batch for batch in load_agent_batches(agent_dir)}
+    batch = batches.get(batch_id)
+    if batch is None:
+        raise ValueError(f"unknown agent batch: {batch_id}")
+
+    state_path = agent_dir / "retry_state.json"
+    state = _load_retry_state(state_path)
+    entry = dict(state.get(batch_id, {}))
+    attempts = int(entry.get("attempts") or 0) + 1
+    now = datetime.now().astimezone().isoformat(timespec="seconds")
+
+    archived_result = _archive_agent_result(batch, attempts, agent_dir=agent_dir)
+    if attempts >= max_attempts:
+        entry.update(
+            {
+                "status": "quarantined",
+                "attempts": attempts,
+                "max_attempts": max_attempts,
+                "last_error": failure_reason,
+                "updated_at": now,
+                "archived_result": archived_result,
+            }
+        )
+        state[batch_id] = entry
+        _write_retry_state(state_path, state)
+        _append_quarantine(agent_dir, batch=batch, entry=entry)
+        return {"status": "quarantined", "batch_id": batch_id, **entry}
+
+    retry_prompt_path = _write_retry_prompt(
+        agent_dir=agent_dir,
+        batch=batch,
+        next_attempt=attempts + 1,
+        failure_reason=failure_reason,
+    )
+    entry.update(
+        {
+            "status": "retry",
+            "attempts": attempts,
+            "max_attempts": max_attempts,
+            "last_error": failure_reason,
+            "updated_at": now,
+            "archived_result": archived_result,
+            "retry_prompt_path": str(retry_prompt_path),
+        }
+    )
+    state[batch_id] = entry
+    _write_retry_state(state_path, state)
+    return {"status": "retry", "batch_id": batch_id, **entry}
+
+
+def quarantined_batch_ids(agent_dir: Path) -> set[str]:
+    state = _load_retry_state(agent_dir / "retry_state.json")
+    return {batch_id for batch_id, entry in state.items() if entry.get("status") == "quarantined"}
+
+
+def _load_retry_state(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    try:
+        loaded = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    return loaded if isinstance(loaded, dict) else {}
+
+
+def _write_retry_state(path: Path, state: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def _archive_agent_result(batch: AgentBatch, attempts: int, *, agent_dir: Path) -> str:
+    failed_dir = agent_dir / "failed_results"
+    failed_dir.mkdir(parents=True, exist_ok=True)
+    archive_path = failed_dir / f"{batch.batch_id}-attempt-{attempts:03d}-results.jsonl"
+    if batch.result_path.exists() and batch.result_path.stat().st_size > 0:
+        batch.result_path.replace(archive_path)
+    else:
+        archive_path.write_text("", encoding="utf-8")
+    batch.result_path.parent.mkdir(parents=True, exist_ok=True)
+    batch.result_path.write_text("", encoding="utf-8")
+    return str(archive_path)
+
+
+def _write_retry_prompt(
+    *,
+    agent_dir: Path,
+    batch: AgentBatch,
+    next_attempt: int,
+    failure_reason: str,
+) -> Path:
+    retry_dir = agent_dir / "retry_prompts"
+    retry_dir.mkdir(parents=True, exist_ok=True)
+    retry_prompt_path = retry_dir / f"{batch.batch_id}-attempt-{next_attempt:03d}.md"
+    original_prompt = batch.prompt_path.read_text(encoding="utf-8") if batch.prompt_path.exists() else ""
+    retry_prompt_path.write_text(
+        "\n".join(
+            [
+                "Retry this hunter-contact-enricher job.",
+                "",
+                f"Previous validation failure: {failure_reason}",
+                "",
+                "Do not repeat the failed evidence path unless it clearly proves the exact company.",
+                "Write the corrected JSONL to the same output path required by the original prompt.",
+                "",
+                original_prompt,
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return retry_prompt_path
+
+
+def _append_quarantine(agent_dir: Path, *, batch: AgentBatch, entry: dict[str, Any]) -> None:
+    path = agent_dir / "quarantine.jsonl"
+    record = {
+        "batch_id": batch.batch_id,
+        "job_path": str(batch.job_path),
+        "result_path": str(batch.result_path),
+        **entry,
+    }
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(record, ensure_ascii=False, sort_keys=False) + "\n")
 
 
 def stream_static_enrichment_and_queue(args: argparse.Namespace) -> None:
@@ -529,13 +814,26 @@ def load_agent_batches(agent_dir: Path) -> list[AgentBatch]:
     return batches
 
 
-def validate_agent_batches_complete(agent_dir: Path) -> None:
+def validate_agent_batches_complete(
+    agent_dir: Path,
+    *,
+    raw_dir: Path = Path("data/raw/claude_agents"),
+    require_raw: bool = True,
+) -> None:
     batches = load_agent_batches(agent_dir)
     if not batches:
         return
-    incomplete = [batch.batch_id for batch in batches if not agent_batch_complete(batch)]
+    quarantined = quarantined_batch_ids(agent_dir)
+    incomplete = []
+    for batch in batches:
+        if batch.batch_id in quarantined:
+            continue
+        try:
+            validate_agent_batch_result(batch, raw_dir=raw_dir, require_raw=require_raw)
+        except ValueError as exc:
+            incomplete.append(f"{batch.batch_id} ({exc})")
     if incomplete:
-        raise ValueError(f"Incomplete agent result batches: {', '.join(incomplete)}")
+        raise ValueError(f"Incomplete agent result batches: {'; '.join(incomplete)}")
 
 
 def batch_expected_record_ids(batch: AgentBatch) -> set[str]:
@@ -560,17 +858,39 @@ def batch_result_record_ids(batch: AgentBatch) -> set[str]:
     return {record_id for record_id in record_ids if record_id}
 
 
-def agent_batch_complete(batch: AgentBatch) -> bool:
-    expected = batch_expected_record_ids(batch)
-    return expected <= batch_result_record_ids(batch)
+def agent_batch_complete(
+    batch: AgentBatch,
+    *,
+    raw_dir: Path | None = None,
+    require_raw: bool = True,
+) -> bool:
+    if raw_dir is None:
+        expected = batch_expected_record_ids(batch)
+        return expected <= batch_result_record_ids(batch)
+    try:
+        validate_agent_batch_result(batch, raw_dir=raw_dir, require_raw=require_raw)
+    except ValueError:
+        return False
+    return True
 
 
-def wait_for_agent_results(*, batches: list[AgentBatch], timeout_seconds: int, poll_seconds: float) -> None:
+def wait_for_agent_results(
+    *,
+    batches: list[AgentBatch],
+    timeout_seconds: int,
+    poll_seconds: float,
+    raw_dir: Path | None = None,
+    require_raw: bool = True,
+) -> None:
     if not batches:
         return
     deadline = time.monotonic() + timeout_seconds
     while True:
-        incomplete = [batch.batch_id for batch in batches if not agent_batch_complete(batch)]
+        incomplete = [
+            batch.batch_id
+            for batch in batches
+            if not agent_batch_complete(batch, raw_dir=raw_dir, require_raw=require_raw)
+        ]
         if not incomplete:
             return
         if time.monotonic() >= deadline:
@@ -674,6 +994,11 @@ def launch_claude_background_batches(
 def run_workflow(args: argparse.Namespace) -> None:
     base_csv = args.base_csv
     if args.refresh_mhlw or not base_csv.exists():
+        if not args.legacy_prototype_workflow:
+            raise SystemExit(
+                "Legacy prototype workflow is disabled by default. Use Claude Code /hunter-contact-backfill, "
+                "or pass --legacy-prototype-workflow for the old japan_headhunters_* flow."
+            )
         collect_from_mhlw(
             target_count=args.target_count,
             raw_dir=args.mhlw_raw_dir,
@@ -733,6 +1058,8 @@ def run_workflow(args: argparse.Namespace) -> None:
             return
         wait_for_agent_results(
             batches=batches,
+            raw_dir=args.agent_raw_dir,
+            require_raw=not args.allow_missing_agent_raw,
             timeout_seconds=args.wait_timeout_seconds,
             poll_seconds=args.poll_seconds,
         )
@@ -771,6 +1098,12 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--mhlw-only", action="store_true")
     parser.add_argument("--stream-static-queue", action="store_true")
     parser.add_argument("--merge-only", action="store_true")
+    parser.add_argument("--validate-agent-results", action="store_true")
+    parser.add_argument("--validate-agent-batch", default="")
+    parser.add_argument("--record-agent-failure", default="")
+    parser.add_argument("--failure-reason", default="")
+    parser.add_argument("--max-agent-attempts", type=int, default=3)
+    parser.add_argument("--legacy-prototype-workflow", action="store_true")
     parser.add_argument("--refresh-mhlw", action="store_true")
     parser.add_argument("--refresh-static", action="store_true")
     parser.add_argument("--non-strict-merge", action="store_true")
@@ -804,6 +1137,35 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    if args.record_agent_failure:
+        outcome = record_agent_validation_failure(
+            agent_dir=args.agent_dir,
+            batch_id=args.record_agent_failure,
+            failure_reason=args.failure_reason or "agent validation failed",
+            max_attempts=args.max_agent_attempts,
+        )
+        print(json.dumps(outcome, ensure_ascii=False, sort_keys=True))
+        return
+    if args.validate_agent_batch:
+        batches = {batch.batch_id: batch for batch in load_agent_batches(args.agent_dir)}
+        batch = batches.get(args.validate_agent_batch)
+        if batch is None:
+            raise SystemExit(f"unknown agent batch: {args.validate_agent_batch}")
+        validate_agent_batch_result(
+            batch,
+            raw_dir=args.agent_raw_dir,
+            require_raw=not args.allow_missing_agent_raw,
+        )
+        print(f"agent_batch_valid {args.validate_agent_batch}")
+        return
+    if args.validate_agent_results:
+        validate_agent_batches_complete(
+            args.agent_dir,
+            raw_dir=args.agent_raw_dir,
+            require_raw=not args.allow_missing_agent_raw,
+        )
+        print("agent_results_valid")
+        return
     if args.mhlw_only:
         collect_from_mhlw(
             target_count=args.target_count,
@@ -817,7 +1179,11 @@ def main() -> None:
         return
     if args.merge_only:
         if not args.allow_incomplete_agent_results:
-            validate_agent_batches_complete(args.agent_dir)
+            validate_agent_batches_complete(
+                args.agent_dir,
+                raw_dir=args.agent_raw_dir,
+                require_raw=not args.allow_missing_agent_raw,
+            )
         merged = merge_agent_results(
             base_csv=args.static_csv,
             result_dir=args.agent_dir / "results",

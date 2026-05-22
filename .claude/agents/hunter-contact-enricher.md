@@ -30,6 +30,7 @@ Rules:
 - The wrapper delegates tab management to Dokobot by default and creates both the raw text file and a sibling `.meta.json` file proving `dokobot read --local --device <local Chrome device> --reuse-tab` succeeded.
 - Do not use remote Dokobot mode and do not replace this with curl, requests, or headless browser output.
 - Only accept a page if it is clearly the same company by company name, phone, license context, or official branding.
+- The merge validator rejects evidence that does not prove the exact same company. Your raw Dokobot page should contain at least one strong identity signal: company name token, phone number, MHLW license number, or the known official company domain.
 - Record the public source URL where the email/form/company URL was confirmed.
 - Set `source_text_path` to the raw text file created by `scripts.dokobot_local_read`.
 - For Japanese companies, a confirmed `お問い合わせ` form is acceptable when no public email is available.
@@ -40,6 +41,7 @@ Rules:
   - `exclude`: official/public evidence mainly indicates non-headhunter verticals such as nursing/care, childcare, dispatch/temp staffing, specified skilled worker, technical intern, cleaning, driving, security, housekeeper, event serving, or part-time staffing.
 - Write `hunter_likelihood_reason` as one short evidence-based reason, ideally naming the strongest keyword or exclusion signal.
 - Write the result JSON line immediately once you have enough evidence for a valid status. Do not do optional extra reads after a confirmed email/form/site/no-contact decision.
+- Do not return `error` for ordinary no-contact outcomes. Use `not_found` when you searched/read the best public evidence but no email or form was found. Use `error` only for tool/runtime failure that should be retried by the main orchestrator.
 - Keep the search bounded and judgment-led. Use your own reasoning to choose likely official evidence pages; stop when the best public evidence supports a clear result.
 
 Return schema, one JSON object per line:

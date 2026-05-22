@@ -1,5 +1,7 @@
 # Japan Headhunter Contact Research Dataset Implementation Plan
 
+> **Status:** Superseded historical prototype plan. The current production workflow is specified by `docs/superpowers/specs/2026-05-21-resumable-hunter-contact-pipeline.md` and operated through Claude Code `/hunter-contact-backfill`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build a reproducible local workflow that collects 100 source-traceable Japan recruitment/headhunter contact records using MHLW verification, public company pages, and Dokobot reads.

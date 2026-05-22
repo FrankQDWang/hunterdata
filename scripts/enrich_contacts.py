@@ -34,7 +34,7 @@ CHINESE_HEADERS = [
     ("phone", "电话"),
     ("contact_form_url", "联系表单链接"),
     ("company_url", "公司官网"),
-    ("source_url", "联系方式来源URL"),
+    ("source_url", "基础来源URL"),
     ("mhlw_source_url", "厚生劳动省来源URL"),
     ("license_number", "许可证号"),
     ("license_type", "许可类型"),
@@ -48,8 +48,8 @@ CHINESE_HEADERS = [
     ("confidence", "可信度"),
     ("source_accessed_at", "来源访问时间"),
     ("notes", "备注"),
-    ("email_source_url", "邮箱或表单来源URL"),
-    ("email_source_text_path", "邮箱或表单原始页面路径"),
+    ("email_source_url", "邮箱或表单证据URL"),
+    ("email_source_text_path", "邮箱或表单证据原始路径"),
     ("enrichment_status", "邮箱补充状态"),
 ]
 

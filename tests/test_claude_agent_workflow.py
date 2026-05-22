@@ -13,8 +13,10 @@ from scripts.claude_agent_workflow import (
     launch_claude_background_batches,
     merge_agent_results,
     parse_args,
+    record_agent_validation_failure,
     run_workflow,
     stream_static_enrichment_and_queue,
+    validate_agent_batch_result,
     validate_agent_batches_complete,
     wait_for_agent_results,
     write_agent_batches,
@@ -146,8 +148,11 @@ def test_build_claude_background_command_uses_bg_not_print_mode(tmp_path):
 
 
 def test_run_workflow_can_limit_agent_jobs_for_real_smoke_tests(tmp_path, monkeypatch):
+    base_csv = tmp_path / "base.csv"
     static_csv = tmp_path / "static.csv"
-    write_csv(static_csv, [enriched_row("a"), enriched_row("b"), enriched_row("c")])
+    rows = [enriched_row("a"), enriched_row("b"), enriched_row("c")]
+    write_csv(base_csv, rows)
+    write_csv(static_csv, rows)
     monkeypatch.setattr(
         "scripts.claude_agent_workflow.build_agent_jobs",
         lambda rows, *, when, candidate_limit: [
@@ -158,6 +163,8 @@ def test_run_workflow_can_limit_agent_jobs_for_real_smoke_tests(tmp_path, monkey
     )
     args = parse_args(
         [
+            "--base-csv",
+            str(base_csv),
             "--static-csv",
             str(static_csv),
             "--agent-dir",
@@ -176,6 +183,22 @@ def test_run_workflow_can_limit_agent_jobs_for_real_smoke_tests(tmp_path, monkey
     queue_lines = (tmp_path / "agents" / "agent_queue.jsonl").read_text(encoding="utf-8").splitlines()
     assert len(queue_lines) == 1
     assert json.loads(queue_lines[0])["record_id"] == "a"
+
+
+def test_run_workflow_blocks_legacy_prototype_defaults_without_explicit_flag(tmp_path):
+    args = parse_args(
+        [
+            "--base-csv",
+            str(tmp_path / "missing.csv"),
+            "--static-csv",
+            str(tmp_path / "missing-static.csv"),
+            "--claude-mode",
+            "prompt-files",
+        ]
+    )
+
+    with pytest.raises(SystemExit, match="Legacy prototype workflow is disabled"):
+        run_workflow(args)
 
 
 def test_stream_static_enrichment_queues_unresolved_rows_immediately(tmp_path, monkeypatch):
@@ -419,6 +442,7 @@ def test_merge_agent_results_rejects_unknown_record_id(tmp_path):
 
 def test_agent_batch_complete_requires_every_record_id(tmp_path):
     jobs = build_agent_jobs([enriched_row("a"), enriched_row("b")], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
     batch = write_agent_batches(
         jobs,
         agents=1,
@@ -426,21 +450,182 @@ def test_agent_batch_complete_requires_every_record_id(tmp_path):
         prompt_dir=tmp_path / "prompts",
         result_dir=tmp_path / "results",
         log_dir=tmp_path / "logs",
-        raw_dir=tmp_path / "raw",
+        raw_dir=raw_dir,
+    )[0]
+
+    batch.result_path.write_text(json.dumps(_agent_result("a", _write_raw(raw_dir, "agent-001", "a.txt"))) + "\n", encoding="utf-8")
+
+    assert not agent_batch_complete(batch, raw_dir=raw_dir)
+
+    batch.result_path.write_text(
+        json.dumps(_agent_result("a", _write_raw(raw_dir, "agent-001", "a.txt"))) + "\n"
+        + json.dumps(_agent_result("b", _write_raw(raw_dir, "agent-001", "b.txt"))) + "\n",
+        encoding="utf-8",
+    )
+
+    assert agent_batch_complete(batch, raw_dir=raw_dir)
+    validate_agent_batch_result(batch, raw_dir=raw_dir)
+    wait_for_agent_results(batches=[batch], raw_dir=raw_dir, timeout_seconds=1, poll_seconds=0.01)
+
+
+def test_agent_batch_complete_accepts_not_found_with_same_company_evidence(tmp_path):
+    jobs = build_agent_jobs([enriched_row("a")], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "batches",
+        prompt_dir=tmp_path / "prompts",
+        result_dir=tmp_path / "results",
+        log_dir=tmp_path / "logs",
+        raw_dir=raw_dir,
+    )[0]
+    raw_file = _write_raw(raw_dir, "agent-001", "a.txt")
+    result = _agent_result("a", raw_file)
+    result["status"] = "not_found"
+    result["source_url"] = ""
+    batch.result_path.write_text(json.dumps(result, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    assert agent_batch_complete(batch, raw_dir=raw_dir)
+    validate_agent_batch_result(batch, raw_dir=raw_dir)
+
+
+def test_agent_batch_complete_rejects_invalid_schema_even_when_record_id_is_present(tmp_path):
+    jobs = build_agent_jobs([enriched_row("a")], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "batches",
+        prompt_dir=tmp_path / "prompts",
+        result_dir=tmp_path / "results",
+        log_dir=tmp_path / "logs",
+        raw_dir=raw_dir,
     )[0]
 
     batch.result_path.write_text(json.dumps({"record_id": "a", "status": "not_found"}) + "\n", encoding="utf-8")
 
-    assert not agent_batch_complete(batch)
+    assert not agent_batch_complete(batch, raw_dir=raw_dir)
+    with pytest.raises(ValueError, match="hunter_likelihood"):
+        validate_agent_batch_result(batch, raw_dir=raw_dir)
 
+
+def test_agent_batch_complete_rejects_wrong_company_evidence(tmp_path):
+    jobs = build_agent_jobs([enriched_row("a")], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "batches",
+        prompt_dir=tmp_path / "prompts",
+        result_dir=tmp_path / "results",
+        log_dir=tmp_path / "logs",
+        raw_dir=raw_dir,
+    )[0]
+    raw_file = _write_raw(
+        raw_dir,
+        "agent-001",
+        "a.txt",
+        text="Wrong Company official page 06-9999-9999",
+        url="https://wrong.example/contact/",
+    )
+    result = _agent_result("a", raw_file)
+    result["company_url"] = "https://wrong.example/"
+    result["source_url"] = "https://wrong.example/contact/"
+    batch.result_path.write_text(json.dumps(result, ensure_ascii=False) + "\n", encoding="utf-8")
+
+    assert not agent_batch_complete(batch, raw_dir=raw_dir)
+    with pytest.raises(ValueError, match="does not prove same company"):
+        validate_agent_batch_result(batch, raw_dir=raw_dir)
+
+
+def test_agent_batch_complete_rejects_error_status_for_retry(tmp_path):
+    jobs = build_agent_jobs([enriched_row("a")], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "batches",
+        prompt_dir=tmp_path / "prompts",
+        result_dir=tmp_path / "results",
+        log_dir=tmp_path / "logs",
+        raw_dir=raw_dir,
+    )[0]
     batch.result_path.write_text(
-        json.dumps({"record_id": "a", "status": "not_found"}) + "\n"
-        + json.dumps({"record_id": "b", "status": "not_found"}) + "\n",
+        json.dumps(
+            {
+                "record_id": "a",
+                "status": "error",
+                "confidence": "low",
+                "hunter_likelihood": "low",
+                "hunter_likelihood_reason": "Tool failed.",
+                "notes": "dokobot timeout",
+            }
+        )
+        + "\n",
         encoding="utf-8",
     )
 
-    assert agent_batch_complete(batch)
-    wait_for_agent_results(batches=[batch], timeout_seconds=1, poll_seconds=0.01)
+    assert not agent_batch_complete(batch, raw_dir=raw_dir)
+    with pytest.raises(ValueError, match="returned error status"):
+        validate_agent_batch_result(batch, raw_dir=raw_dir)
+
+
+def test_record_agent_validation_failure_archives_bad_result_and_creates_retry_prompt(tmp_path):
+    jobs = build_agent_jobs([enriched_row("a")], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "agents" / "batches",
+        prompt_dir=tmp_path / "agents" / "prompts",
+        result_dir=tmp_path / "agents" / "results",
+        log_dir=tmp_path / "agents" / "logs",
+        raw_dir=raw_dir,
+    )[0]
+    batch.result_path.write_text("bad json\n", encoding="utf-8")
+
+    outcome = record_agent_validation_failure(
+        agent_dir=tmp_path / "agents",
+        batch_id="agent-001",
+        failure_reason="invalid json",
+        max_attempts=3,
+    )
+
+    assert outcome["status"] == "retry"
+    assert outcome["attempts"] == 1
+    assert batch.result_path.read_text(encoding="utf-8") == ""
+    assert (tmp_path / "agents" / "failed_results" / "agent-001-attempt-001-results.jsonl").exists()
+    retry_prompt = tmp_path / "agents" / "retry_prompts" / "agent-001-attempt-002.md"
+    assert retry_prompt.exists()
+    assert "invalid json" in retry_prompt.read_text(encoding="utf-8")
+
+
+def test_quarantined_agent_batch_counts_complete_and_preserves_static_row(tmp_path):
+    jobs = build_agent_jobs([enriched_row("a")], candidate_provider=lambda row: [])
+    raw_dir = tmp_path / "raw"
+    batch = write_agent_batches(
+        jobs,
+        agents=1,
+        batch_dir=tmp_path / "agents" / "batches",
+        prompt_dir=tmp_path / "agents" / "prompts",
+        result_dir=tmp_path / "agents" / "results",
+        log_dir=tmp_path / "agents" / "logs",
+        raw_dir=raw_dir,
+    )[0]
+    batch.result_path.write_text("bad json\n", encoding="utf-8")
+
+    outcome = record_agent_validation_failure(
+        agent_dir=tmp_path / "agents",
+        batch_id="agent-001",
+        failure_reason="semantic mismatch",
+        max_attempts=1,
+    )
+
+    assert outcome["status"] == "quarantined"
+    assert (tmp_path / "agents" / "quarantine.jsonl").exists()
+    assert batch.result_path.read_text(encoding="utf-8") == ""
+    validate_agent_batches_complete(tmp_path / "agents", raw_dir=raw_dir)
 
 
 def test_validate_agent_batches_complete_rejects_incomplete_results(tmp_path):
@@ -456,4 +641,47 @@ def test_validate_agent_batches_complete_rejects_incomplete_results(tmp_path):
     )
 
     with pytest.raises(ValueError, match="Incomplete agent result batches"):
-        validate_agent_batches_complete(tmp_path)
+        validate_agent_batches_complete(tmp_path, raw_dir=tmp_path / "raw")
+
+
+def _write_raw(
+    raw_dir,
+    batch_id,
+    name,
+    *,
+    text="株式会社 サンプル official evidence 03-1234-5678 13-ユ-010101",
+    url="https://sample.co.jp/",
+):
+    raw_file = raw_dir / batch_id / name
+    raw_file.parent.mkdir(parents=True, exist_ok=True)
+    raw_file.write_text(text, encoding="utf-8")
+    raw_file.with_name(f"{raw_file.name}.meta.json").write_text(
+        json.dumps(
+            {
+                "tool": "dokobot",
+                "mode": "local",
+                "returncode": 0,
+                "url": url,
+                "command": ["dokobot", "read", "--local", "--device", "local-device", "--reuse-tab"],
+            }
+        ),
+        encoding="utf-8",
+    )
+    return raw_file
+
+
+def _agent_result(record_id, raw_file):
+    return {
+        "record_id": record_id,
+        "company_name": "株式会社 サンプル",
+        "email": "",
+        "contact_form_url": "",
+        "company_url": "https://sample.co.jp/",
+        "source_url": "https://sample.co.jp/",
+        "source_text_path": str(raw_file),
+        "status": "official_site_found_no_contact",
+        "confidence": "low",
+        "hunter_likelihood": "low",
+        "hunter_likelihood_reason": "No explicit headhunter signal found.",
+        "notes": "official site checked",
+    }

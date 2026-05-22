@@ -86,9 +86,15 @@ This process updates:
 - Maintain an in-memory set of active batch IDs.
 - Dispatch only prompt files that are ready, not already active, and not already complete.
 - Active count must never exceed 5.
-- When an active agent writes its expected JSONL result and its referenced `source_text_path` plus `.meta.json` exist under `${RUN_DIR}/raw/agents/`, remove it from active and dispatch the next ready prompt.
-- If an active agent is killed, retries, or returns no result, keep the slot occupied until you retry or mark it failed explicitly. Do not silently advance.
-- Close/recycle each finished subagent after validating its result and raw evidence, then dispatch the next queued prompt if available.
+- When an active agent writes its expected JSONL result, validate that exact batch before freeing the slot:
+  `uv run python -m scripts.claude_agent_workflow --validate-agent-batch <agent-NNN> --agent-dir "${RUN_DIR}/agents" --agent-raw-dir "${RUN_DIR}/raw/agents"`
+- Validation includes schema, raw local Dokobot metadata, and same-company evidence checks. A valid `not_found` is acceptable only when its raw evidence still proves the exact company by company name, phone, license number, or known official domain.
+- If validation fails, record the failure before retrying:
+  `uv run python -m scripts.claude_agent_workflow --record-agent-failure <agent-NNN> --failure-reason "<validator error>" --agent-dir "${RUN_DIR}/agents" --max-agent-attempts 3`
+- If that command returns `"status": "retry"`, dispatch the returned `retry_prompt_path` for the same active slot. It has already archived the bad result and reset the expected result file.
+- If that command returns `"status": "quarantined"`, close that subagent, release the slot, and continue. Quarantined rows keep their static/MHLW result in the final merge instead of using bad agent evidence.
+- If an active agent is killed, retries, or returns no result, keep the slot occupied until you retry or quarantine it explicitly. Do not silently advance.
+- Close/recycle each finished subagent only after validating its result and raw evidence, or after it is quarantined, then dispatch the next queued prompt if available.
 
 When dispatching an agent, keep the prompt minimal. Give it the prompt file and the goal; let the subagent decide how to search:
 
@@ -113,7 +119,8 @@ tail -n 20 "${RUN_DIR}/static-stream.log"
 Continue until:
 - `${RUN_DIR}/agents/stream_state.json` says `"done": true`
 - every prompt in `${RUN_DIR}/agents/prompts/` has a matching non-empty result JSONL
-- every non-error result has local Dokobot raw evidence and metadata
+- every expected agent batch either passes validation or is listed as quarantined:
+  `uv run python -m scripts.claude_agent_workflow --validate-agent-results --agent-dir "${RUN_DIR}/agents" --agent-raw-dir "${RUN_DIR}/raw/agents"`
 
 5. Merge the batch and update the master output:
 
@@ -132,17 +139,21 @@ uv run python -m scripts.hunter_resume upsert-master \
   --batch-csv "${RUN_DIR}/final.csv" \
   --master-csv data/processed/master.csv \
   --master-zh-csv data/processed/master_zh.csv \
-  --root-csv hunter_contacts.csv
+  --root-csv hunter_contacts.csv \
+  --all-root-csv mhlw_placement_contacts_all.csv \
+  --master-qa-path data/processed/master_qa_report.md
 
 uv run python -m pytest -q
 ```
 
 Final human-facing output:
-- `hunter_contacts.csv`
+- `hunter_contacts.csv`: accepted hunter-likelihood rows only (`high`/`medium`).
+- `mhlw_placement_contacts_all.csv`: all processed MHLW paid occupational-placement rows, including `low` and `exclude`.
 
 Machine/debug outputs:
 - `data/processed/master.csv`
 - `data/processed/master_zh.csv`
+- `data/processed/master_qa_report.md`
 - `data/manifest/mhlw_manifest.csv`
 - `data/manifest/checkpoint.json`
 - `${RUN_DIR}/batch.csv`
@@ -151,3 +162,7 @@ Machine/debug outputs:
 - `${RUN_DIR}/qa_report.md`
 - `${RUN_DIR}/agents/`
 - `${RUN_DIR}/raw/`
+- `${RUN_DIR}/agents/retry_state.json`
+- `${RUN_DIR}/agents/quarantine.jsonl`
+- `${RUN_DIR}/agents/failed_results/`
+- `${RUN_DIR}/agents/retry_prompts/`
